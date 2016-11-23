@@ -93,6 +93,7 @@ First we need to compile our `JRXML` file into a `JASPER` binary file. We just h
 
 ```python
 import os
+import pyjasper
 
 def compiling():
 	input = os.path.dirname(os.path.abspath(__file__)) + '/exemples/hello_world.jrxml'	
@@ -108,6 +109,7 @@ Now lets process the report that we compile before:
 
 ```python
 import os
+import pyjasper
 
 def processing():
 	input = os.path.dirname(os.path.abspath(__file__)) + '/exemples/hello_world.jrxml'
@@ -126,6 +128,7 @@ Querying the jasper file to examine parameters available in the given jasper rep
 
 ```python
 import os
+import pyjasper
 
 def listingParameters():
 	input = os.path.dirname(os.path.abspath(__file__)) + '/exemples/hello_world_params.jrxml'
@@ -177,6 +180,7 @@ See how easy it is to generate a report with a source an XML file:
 
 ```python
 import os
+import pyjasper
 
 def xmlToPdf():	
 	input = os.path.dirname(os.path.abspath(__file__)) + '/exemples/CancelAck.jrxml'
@@ -203,6 +207,7 @@ See how easy it is to generate a report with a source an JSON file:
 
 ```python
 import os
+import pyjasper
 
 def jsonToPdf():	
 	input = os.path.dirname(os.path.abspath(__file__)) + '/exemples/json.jrxml'
