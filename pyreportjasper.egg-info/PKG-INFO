@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: pyreportjasper
+Version: 0.1.0
+Summary: This package aims to be a solution to compile and process JasperReports (.jrxml & .jasper files).
+Home-page: https://github.com/jadsonbr/pyreport
+Author: Jadson Bonfim Ribeiro
+Author-email: jadsonbr@outlook.com.br
+License: MIT License
+Description: UNKNOWN
+Keywords: report jasper python relatorio
+Platform: UNKNOWN
