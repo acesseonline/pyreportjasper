@@ -84,40 +84,40 @@ class JasperPy:
         if len(db_connection) > 0:
             command += ' -t ' + db_connection['driver']
 
-            if db_connection['username']:
+            if db_connection.has_key('username'):
                 command += " -u " + db_connection['username']
 
-            if db_connection['password'] and not db_connection['password']:
+            if db_connection.has_key('password') :
                 command += ' -p ' + db_connection['password']
 
-            if db_connection['host'] and not db_connection['host']:
+            if db_connection.has_key('host')
                 command += ' -H ' + db_connection['host']
 
-            if db_connection['database'] and not db_connection['database']:
+            if db_connection.has_key('database'):
                 command += ' -n ' + db_connection['database']
 
-            if db_connection['port'] and not db_connection['port']:
+            if db_connection.has_key('port'):
                 command += ' --db-port ' + db_connection['port']
 
-            if db_connection['jdbc_driver'] and not db_connection['jdbc_driver']:
+            if db_connection.has_key('jdbc_driver'):
                 command += ' --db-driver ' + db_connection['jdbc_driver']
 
-            if db_connection['jdbc_url'] and not db_connection['jdbc_url']:
+            if db_connection.has_key('jdbc_url'):
                 command += ' --db-url ' + db_connection['jdbc_url']
 
-            if db_connection['jdbc_dir'] and not db_connection['jdbc_dir']:
+            if db_connection.has_key('jdbc_dir'):
                 command += ' --jdbc-dir ' + db_connection['jdbc_dir']
 
-            if db_connection['db_sid'] and not db_connection['db_sid']:
+            if db_connection.has_key('db_sid'):
                 command += ' --db-sid ' + db_connection['db_sid']
 
-            if db_connection['xml_xpath']:
+            if db_connection.has_key('xml_xpath'):
                 command += ' --xml-xpath ' + db_connection['xml_xpath']
 
-            if db_connection['data_file']:
+            if db_connection.has_key('data_file'):
                 command += ' --data-file ' + db_connection['data_file']
 
-            if db_connection['json_query']:
+            if db_connection.has_key('json_query'):
                 command += ' --json-query ' + db_connection['json_query']
 
         self.redirect_output = redirect_output

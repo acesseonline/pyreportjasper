@@ -1,0 +1,547 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"js",
+				"json_query\tstatement"
+			],
+			[
+				"dat",
+				"dataFile\tstatement"
+			],
+			[
+				"ex",
+				"execute\tfunction"
+			],
+			[
+				"xm",
+				"xmlXpath\tstatement"
+			],
+			[
+				"da",
+				"dataFile\tstatement"
+			],
+			[
+				"for",
+				"for\tFor Loop"
+			],
+			[
+				"li",
+				"listingParameters"
+			],
+			[
+				"in",
+				"input\tstatement"
+			],
+			[
+				"th",
+				"the_command\tstatement"
+			],
+			[
+				"e",
+				"execute\tfunction"
+			],
+			[
+				"exe",
+				"execute"
+			],
+			[
+				"py",
+				"pyjasper\tmodule"
+			],
+			[
+				"No",
+				"None\tkeyword"
+			],
+			[
+				"fo",
+				"for\tFor Loop"
+			],
+			[
+				"form",
+				"format\tparam"
+			],
+			[
+				"is",
+				"isinstance\tfunction"
+			],
+			[
+				"forma",
+				"formats"
+			],
+			[
+				"re",
+				"resource_dir\tparam"
+			],
+			[
+				"en",
+				"enable_cors\tfunction"
+			],
+			[
+				"lo",
+				"logging\tmodule"
+			],
+			[
+				"rou",
+				"route\tfunction"
+			],
+			[
+				"err",
+				"error\tfunction"
+			],
+			[
+				"se",
+				"setup_routing"
+			],
+			[
+				"ho",
+				"hook\tstatement"
+			],
+			[
+				"bre",
+				"beaker"
+			],
+			[
+				"htt",
+				"HTTPError\tclass"
+			],
+			[
+				"ins",
+				"instrumentos"
+			],
+			[
+				"php",
+				"phpinfo"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Project.sublime-project",
+			"settings":
+			{
+				"buffer_size": 319,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 232.0,
+		"last_filter": "pyt",
+		"selected_items":
+		[
+			[
+				"pyt",
+				"Set Syntax: Python"
+			],
+			[
+				"pas",
+				"Set Syntax: Pascal"
+			],
+			[
+				"py",
+				"Set Syntax: Python"
+			],
+			[
+				"canc",
+				"Build: Cancel"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"pyth",
+				"Build With: Python"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"re",
+				"Package Control: Remove Package"
+			],
+			[
+				"",
+				"Package Control: Install Package"
+			],
+			[
+				"sql",
+				"Set Syntax: SQL"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Install Package Control"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			]
+		],
+		"width": 485.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/var/www/html/pyreport",
+		"/var/www/html/pyreport/pyjasper",
+		"/var/www/html/pyreport/pyjasper/test"
+	],
+	"file_history":
+	[
+		"/var/www/html/pyreport/.gitignore",
+		"/var/www/html/pyreport/MANIFEST.in",
+		"/var/www/html/pyreport/setup.py",
+		"/var/www/html/pyreport/pyjasper/test/report.py",
+		"/var/www/html/pyreport/README.md",
+		"/var/www/html/pyreport/pyjasper/jasperpy.py",
+		"/media/jadson/JadsonBR/phpjasper/README.md",
+		"/var/www/html/pyreport/pyreportjasper.egg-info/SOURCES.txt",
+		"/var/www/html/pyreport/setup.cfg",
+		"/var/www/html/pyreport/pyjasper/MANIFEST.in",
+		"/var/www/html/pyreport/pyreportjasper.egg-info/top_level.txt",
+		"/var/www/html/pyreport/LICENSE",
+		"/var/www/html/pyreport/test/.gitignore",
+		"/var/www/html/pyreport/pyjasper/.gitignore",
+		"/var/www/html/pyreport/jasperstarter/.gitignore",
+		"/var/www/html/pyreport/test/report.py",
+		"/var/www/html/pyreport/pyjasper/__init__.py",
+		"/var/www/html/pyreport/test/Project.sublime-project",
+		"/var/www/html/pyreport/test/__init__.py",
+		"/var/www/html/api-acesseonline/project/.gitignore",
+		"/var/www/html/api-acesseonline/project/routes/rotas.py",
+		"/var/www/html/api-acesseonline/project/routes/.gitignore",
+		"/var/www/html/api-acesseonline/project/controllers/.gitignore",
+		"/var/www/html/api-acesseonline/project/controllers/apicontroller.py",
+		"/var/www/html/api-acesseonline/venv/lib/python3.5/site-packages/bottle.py",
+		"/var/www/html/api-acesseonline/.gitignore",
+		"/var/www/html/api-acesseonline/project/routes/__init__.py",
+		"/var/www/html/api-acesseonline/project/controllers/__init__.py",
+		"/var/www/html/api-acesseonline/project/__init__.py",
+		"/var/www/html/api-acesseonline/runserver.py",
+		"/var/www/html/api-acesseonline/project/routes/routes.py",
+		"/var/www/html/api-acesseonline/project/routes.py",
+		"/var/www/html/api-acesseonline/config.json",
+		"/var/www/html/api-acesseonline/project/api/__init__.py",
+		"/var/www/html/api-acesseonline/Project.sublime-project",
+		"/var/www/html/api-acesseonline/Leia-me.txt",
+		"/var/www/html/OLD-api/.gitignore",
+		"/var/www/html/api-acesseonline/requirements.txt",
+		"/opt/python/bottle/hello.py",
+		"/opt/python/bottle/venv/bin/bottle.py",
+		"/opt/python/bottle/config.json",
+		"/opt/python/bottle/Project.sublime-project",
+		"/home/jadson/.config/sublime-text-3/Packages/User/Anaconda.sublime-settings",
+		"/home/jadson/.config/sublime-text-3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/usr/lib/python3.5/socketserver.py",
+		"/opt/python/estudos/ex1.py",
+		"/home/jadson/.config/sublime-text-3/Packages/User/sftp_servers/CentOS",
+		"/var/www/html/api-acesseonline/composer.json",
+		"/var/www/html/api-acesseonline/readme.md",
+		"/var/www/html/admin/.env",
+		"/var/www/html/api/.env",
+		"/var/www/html/api/tests/UserTest.php",
+		"/var/www/html/api/database/seeds/UsuarioTableSeeder.php",
+		"/var/www/html/api/readme.md",
+		"/var/www/html/api/config/jwt.php",
+		"/var/www/html/api/config/auth.php",
+		"/var/www/html/api/app/Http/routes.php",
+		"/var/www/html/admin/resources/views/partials/header.blade.php",
+		"/var/www/html/admin/public/css/style_1.css",
+		"/var/www/html/admin/public/css/style.css",
+		"/var/www/html/admin/.idea/workspace.xml",
+		"/var/www/html/admin/resources/views/auth/changeemail.blade.php",
+		"/var/www/html/admin/resources/views/auth/changenome.blade.php",
+		"/var/www/html/admin/resources/views/auth/changepswd.blade.php",
+		"/var/www/html/admin/resources/views/auth/login.blade.php",
+		"/var/www/html/admin/resources/views/partials/footer.blade.php",
+		"/var/www/html/admin/config/auth.php",
+		"/var/www/html/admin/storage/logs/laravel.log",
+		"/var/www/html/admin/storage/framework/views/e4889f4a3cde3ae1342ba70efd300d57286436b7.php",
+		"/home/jadson/Downloads/#BACKUP",
+		"/var/www/html/admin/public/css/AdminLTE.css",
+		"/var/www/html/admin/public/css/AdminLTE.min.css",
+		"/var/www/html/admin/public/css/bootstrap.css",
+		"/var/www/html/admin/public/css/bootstrap.css.map",
+		"/var/www/html/admin/public/css/bootstrap.min.css",
+		"/var/www/html/admin/public/js/fullscreen.js",
+		"/var/www/html/admin/public/js/funcoesgerais.js",
+		"/var/www/html/admin/public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js",
+		"/var/www/html/admin/public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js",
+		"/var/www/html/admin/public/plugins/timepicker/bootstrap-timepicker.js",
+		"/var/www/html/admin/public/plugins/timepicker/bootstrap-timepicker.min.js",
+		"/var/www/html/admin/resources/views/auth/loginswitch.blade.php",
+		"/var/www/html/admin/resources/views/auth/passwords/email.blade.php",
+		"/var/www/html/admin/resources/views/auth/passwords/reset.blade.php",
+		"/var/www/html/admin/resources/views/auth/register.blade.php",
+		"/var/www/html/admin/resources/views/cliente/create.blade.php",
+		"/var/www/html/admin/resources/views/cliente/index.blade.php",
+		"/var/www/html/admin/resources/views/liberar_aplicacao/editar.blade.php",
+		"/var/www/html/admin/resources/views/liberar_aplicacao/index.blade.php",
+		"/var/www/html/admin/resources/views/liberar_aplicacao/novo.blade.php",
+		"/var/www/html/admin/resources/views/perfil/index.blade.php",
+		"/var/www/html/admin/resources/views/produto/create.blade.php",
+		"/var/www/html/admin/resources/views/produto/index.blade.php",
+		"/var/www/html/admin/resources/views/usuario/create.blade.php",
+		"/var/www/html/admin/resources/views/usuario/index.blade.php",
+		"/var/www/html/admin/storage/framework/views/098224b17ed0669812cfc3f118c23413a416c424.php",
+		"/var/www/html/admin/storage/framework/views/17e290916c108a906b73d70a575d0fffc58ab69d.php",
+		"/var/www/html/admin/storage/framework/views/1a96bfcfd8b7b2db027c0b5dceda01161743ef0e.php",
+		"/var/www/html/admin/storage/framework/views/6762c3034dc3c555df9fc561236a42d9b1a9ef85.php",
+		"/var/www/html/admin/vendor/laravel/framework/src/Illuminate/Auth/Console/stubs/make/views/auth/login.stub",
+		"/var/www/html/admin/vendor/laravel/framework/src/Illuminate/Auth/Console/stubs/make/views/auth/passwords/email.stub",
+		"/var/www/html/admin/vendor/laravel/framework/src/Illuminate/Auth/Console/stubs/make/views/auth/passwords/reset.stub",
+		"/var/www/html/admin/vendor/laravel/framework/src/Illuminate/Auth/Console/stubs/make/views/auth/register.stub",
+		"/var/www/html/admin/vendor/phpunit/php-code-coverage/src/CodeCoverage/Report/HTML/Renderer/Template/css/bootstrap.min.css",
+		"/var/www/html/admin/resources/views/partials/left_sidebar.blade.php",
+		"/var/www/html/admin/resources/views/layouts/default.blade.php",
+		"/var/www/html/admin/resources/views/home.blade.php",
+		"/home/jadson/Downloads/backup/api.backup",
+		"/var/www/html/admin/storage/framework/views/31aa9ed05a61a320a716bed5c614290dd6cc5dfb.php",
+		"/var/www/html/api/app/Cidade.php",
+		"/var/www/html/api/.env.example",
+		"/var/www/html/admin/resources/views/help.blade.php",
+		"/var/www/html/admin/resources/views/welcome.blade.php",
+		"/var/www/html/admin/app/Http/Controllers/AuthController.php",
+		"/var/www/html/api/composer.json",
+		"/var/www/html/admin/composer.json",
+		"/var/www/html/admin/app/Http/routes.php",
+		"/home/jadson/Downloads/JBR/tables.sql",
+		"/home/jadson/Downloads/JBR/inserts.sql",
+		"/var/www/html/api/database/seeds/ProdutoTableSeeder.php",
+		"/var/www/html/api/database/seeds/UsuarioClienteProdutoTableSeeder.php",
+		"/home/jadson/Downloads/api_backup",
+		"/var/www/html/api/app/Http/Controllers/AuthenticateAppController.php",
+		"/home/jadson/Downloads/index.php",
+		"/opt/chrome-linux/chrome-wrapper"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"/var/www/html/api",
+			"/var/www/html/admin",
+			"/var/www/html/api",
+			"/var/www/html/admin",
+			"/var/www/html/api",
+			"/var/www/html/admin/resources/views",
+			"/var/www/html/api"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"print",
+			"path_executable",
+			"command.join(",
+			"$",
+			"self",
+			". db_connection",
+			"$db_connection",
+			"$command .= ",
+			"if( isset($",
+			"route",
+			"gato_mestre",
+			"copam",
+			"mestre",
+			"Copam",
+			"copam",
+			"gatomestre",
+			"gato mestre",
+			"gato_mestre",
+			"btn-primary",
+			"gato ",
+			"gato",
+			"copam",
+			"gato_mestre",
+			"copam",
+			"gato_mestre",
+			"btn-primary",
+			"widget-blue",
+			"usuario",
+			"gato_mestre",
+			"gato"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"command += ",
+			"super",
+			"+ db_connection",
+			"db_connection",
+			"command.join(",
+			"if ",
+			"gate",
+			"btn-default",
+			"widget-black"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Project.sublime-project",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 319,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								319,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "Project.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 307.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
