@@ -5,7 +5,7 @@ files = ["jasperstarter/*", "test/*"]
 
 setup(
     name='pyreportjasper',
-    version='0.1.2',
+    version='0.1.3',
     url='https://github.com/jadsonbr/pyreport',
     license='MIT License',
     author='Jadson Bonfim Ribeiro',

@@ -30,12 +30,7 @@ class JasperPy:
         else:
             if not os.path.exists(resource_dir):
                 raise NameError('Invalid resource directory.')
-        self.resource_directory = resource_dir
-            
-
-    def __del__(self):
-        class_name = self.__class__.__name__
-        print(class_name, "destroyed")      
+        self.resource_directory = resource_dir  
 
 
     def compile(self,input_file, output_file=False, background=True, redirect_output=True):
