@@ -84,3 +84,5 @@ def jsonToPdf():
 	).execute()
 	print('Result is the file below.')
 	print(output+'.pdf')
+
+jsonToPdf()	

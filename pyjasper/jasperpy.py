@@ -147,7 +147,7 @@ class JasperPy:
             try:
                 output = subprocess.run(self.the_command, shell=True, check=True)
             except subprocess.CalledProcessError as e:
-                print(e.message)
+                print(e.output)
                 raise NameError('Your report has an error and couldn \'t be processed!\ Try to output the command using the function `output();` and run it manually in the console.')
         else:
             raise NameError('Invalid resource directory.')
