@@ -5,7 +5,7 @@ files = ["jasperstarter/*", "test/*"]
 
 setup(
     name='pyreportjasper',
-    version='0.1.1',
+    version='0.1.2',
     url='https://github.com/jadsonbr/pyreport',
     license='MIT License',
     author='Jadson Bonfim Ribeiro',
@@ -15,4 +15,5 @@ setup(
     packages=['pyjasper'],
     install_requires=[],
     package_data = {'package' : files },
+    include_package_data = True
 )
