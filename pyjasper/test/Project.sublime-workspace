@@ -120,10 +120,11 @@
 	"buffers":
 	[
 		{
-			"file": "Project.sublime-project",
+			"file": "/var/www/html/pyreport/setup.py",
 			"settings":
 			{
-				"buffer_size": 319,
+				"buffer_size": 562,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
@@ -217,17 +218,17 @@
 	"expanded_folders":
 	[
 		"/var/www/html/pyreport",
-		"/var/www/html/pyreport/pyjasper",
-		"/var/www/html/pyreport/pyjasper/test"
+		"/var/www/html/pyreport/pyjasper/test",
+		"/var/www/html/pyreport/pyreportjasper.egg-info"
 	],
 	"file_history":
 	[
+		"/var/www/html/pyreport/README.md",
+		"/var/www/html/pyreport/pyjasper/jasperpy.py",
 		"/var/www/html/pyreport/.gitignore",
 		"/var/www/html/pyreport/MANIFEST.in",
 		"/var/www/html/pyreport/setup.py",
 		"/var/www/html/pyreport/pyjasper/test/report.py",
-		"/var/www/html/pyreport/README.md",
-		"/var/www/html/pyreport/pyjasper/jasperpy.py",
 		"/media/jadson/JadsonBR/phpjasper/README.md",
 		"/var/www/html/pyreport/pyreportjasper.egg-info/SOURCES.txt",
 		"/var/www/html/pyreport/setup.cfg",
@@ -432,25 +433,26 @@
 			[
 				{
 					"buffer": 0,
-					"file": "Project.sublime-project",
-					"semi_transient": true,
+					"file": "/var/www/html/pyreport/setup.py",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 319,
+						"buffer_size": 562,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								319,
-								0
+								145,
+								145
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

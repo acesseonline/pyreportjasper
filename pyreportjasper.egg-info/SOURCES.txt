@@ -251,6 +251,7 @@ pyjasper/jasperstarter/lib/xalan-2.6.0.jar
 pyjasper/jasperstarter/lib/xml-apis-1.3.02.jar
 pyjasper/jasperstarter/lib/xml-apis-ext-1.3.04.jar
 pyjasper/test/.gitignore
+pyjasper/test/Project.sublime-workspace
 pyjasper/test/__init__.py
 pyjasper/test/report.py
 pyjasper/test/exemples/CancelAck.jrxml

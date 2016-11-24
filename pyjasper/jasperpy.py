@@ -57,7 +57,7 @@ class JasperPy:
         if (input_file is None) or (not input_file):
             raise NameError('No input file')
 
-        if isinstance(format, list)	:
+        if isinstance(format, list) :
             for key in format:
                 if not key in self.formats:
                     raise NameError('Invalid format!')
@@ -84,40 +84,40 @@ class JasperPy:
         if len(db_connection) > 0:
             command += ' -t ' + db_connection['driver']
 
-            if db_connection.has_key('username'):
+            if 'username' in db_connection:
                 command += " -u " + db_connection['username']
 
-            if db_connection.has_key('password') :
+            if 'password' in db_connection:
                 command += ' -p ' + db_connection['password']
 
-            if db_connection.has_key('host')
+            if 'host' in db_connection:
                 command += ' -H ' + db_connection['host']
 
-            if db_connection.has_key('database'):
+            if 'database' in db_connection:
                 command += ' -n ' + db_connection['database']
 
-            if db_connection.has_key('port'):
+            if 'port' in db_connection:
                 command += ' --db-port ' + db_connection['port']
 
-            if db_connection.has_key('jdbc_driver'):
+            if 'jdbc_driver' in db_connection:
                 command += ' --db-driver ' + db_connection['jdbc_driver']
 
-            if db_connection.has_key('jdbc_url'):
+            if 'jdbc_url' in db_connection:
                 command += ' --db-url ' + db_connection['jdbc_url']
 
-            if db_connection.has_key('jdbc_dir'):
+            if 'jdbc_dir' in db_connection:
                 command += ' --jdbc-dir ' + db_connection['jdbc_dir']
 
-            if db_connection.has_key('db_sid'):
+            if 'db_sid' in db_connection:
                 command += ' --db-sid ' + db_connection['db_sid']
 
-            if db_connection.has_key('xml_xpath'):
+            if 'xml_xpath' in db_connection:
                 command += ' --xml-xpath ' + db_connection['xml_xpath']
 
-            if db_connection.has_key('data_file'):
+            if 'data_file' in db_connection:
                 command += ' --data-file ' + db_connection['data_file']
 
-            if db_connection.has_key('json_query'):
+            if 'json_query' in db_connection:
                 command += ' --json-query ' + db_connection['json_query']
 
         self.redirect_output = redirect_output
