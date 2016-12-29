@@ -48,16 +48,16 @@ class JasperPy:
         return self
 
 
-    def process(self, input_file, output_file=False, format=['pdf'], parameters={}, db_connection={}, locale='pt_BR', background=True, redirect_output=True):
+    def process(self, input_file, output_file=False, format_list=['pdf'], parameters={}, db_connection={}, locale='pt_BR', background=True, redirect_output=True):
         if (input_file is None) or (not input_file):
             raise NameError('No input file')
 
-        if isinstance(format, list) :
-            for key in format:
+        if isinstance(format_list, list) :
+            for key in format_list:
                 if not key in self.formats:
                     raise NameError('Invalid format!')
         else:
-            if not format in self.formats:
+            if not format_list in self.formats:
                 raise NameError('Invalid format!')
 
         command = self.executable if self.windows else self.path_executable +'/'+ self.executable
@@ -66,10 +66,10 @@ class JasperPy:
         command += "\"%s\"" % (input_file)
         if output_file != False:
             command += ' -o ' + "\"%s\"" % (output_file)
-        if isinstance(format, list):
-            command += ' -f '+ "".join(format)
+        if isinstance(format_list, list):
+            command += ' -f '+ "".join(format_list)
         else:
-            command += ' -f '+ "".join(format)
+            command += ' -f '+ "".join(format_list)
 
         if len(parameters) > 0:
             command += ' -P '
