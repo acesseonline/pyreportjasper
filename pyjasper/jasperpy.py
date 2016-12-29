@@ -1,7 +1,9 @@
-
+# -*- coding: utf-8 -*-
 import os
-import string
 import subprocess
+
+FORMATS = ['pdf', 'rtf', 'xls', 'xlsx', 'docx', 'odt', 'ods', 'pptx', 'csv', 'html', 'xhtml', 'xml', 'jrprint']
+EXECUTABLE = 'jasperstarter'
 
 
 class JasperPy:
@@ -10,33 +12,29 @@ class JasperPy:
     E-mail: jadsonbr@outlook.com.br
     """
 
-    executable = 'jasperstarter'
-    path_executable = ''
-    resource_directory = ''
-    windows = False
-    the_command = ''
-    redirect_output = True
-    background = True
-
-    formats = ['pdf', 'rtf', 'xls', 'xlsx', 'docx', 'odt', 'ods', 'pptx', 'csv', 'html', 'xhtml', 'xml', 'jrprint']
-    resource_directory = ''  # Path to report resource dir or jar file
-
     def __init__(self, resource_dir=False):
+
         self.path_executable = os.path.dirname(os.path.abspath(__file__)) + '/jasperstarter/bin'
-        if os.name == 'nt':
-            self.windows = True        
+        self.windows = True if os.name == 'nt' else False
+
+        self.the_command = ''
+        self.redirect_output = True
+        self.background = True
+
         if not resource_dir:
-            self.resource_dir = os.path.dirname(os.path.abspath(__file__)) + '/jasperstarter/bin'            
+            resource_dir = os.path.dirname(os.path.abspath(__file__)) + '/jasperstarter/bin'
         else:
             if not os.path.exists(resource_dir):
-                raise NameError('Invalid resource directory.')
+                raise NameError('Invalid resource directory!')
+
+        # Path to report resource dir or jar file
         self.resource_directory = resource_dir  
 
 
     def compile(self,input_file, output_file=False, background=True, redirect_output=True):
         if (input_file is None) or (not input_file):
             raise NameError('No input file')
-        command = self.executable if self.windows else self.path_executable +'/'+ self.executable
+        command = JasperPy.EXECUTABLE if self.windows else self.path_executable +'/'+ JasperPy.EXECUTABLE
         command += ' compile '
         command += "\"%s\"" % (input_file)
         if output_file != False:
@@ -54,13 +52,13 @@ class JasperPy:
 
         if isinstance(format_list, list) :
             for key in format_list:
-                if not key in self.formats:
+                if not key in JasperPy.FORMATS:
                     raise NameError('Invalid format!')
         else:
-            if not format_list in self.formats:
+            if not format_list in JasperPy.FORMATS:
                 raise NameError('Invalid format!')
 
-        command = self.executable if self.windows else self.path_executable +'/'+ self.executable
+        command = JasperPy.EXECUTABLE if self.windows else self.path_executable +'/'+ JasperPy.EXECUTABLE
         command += " --locale %s" % (locale)       
         command += ' process '
         command += "\"%s\"" % (input_file)
@@ -122,9 +120,9 @@ class JasperPy:
 
 
     def list_parameters(self,input_file):
-        if not input_file :
+        if not input_file:
             raise NameError('No input file')
-        command = executable if self.windows else self.path_executable +'/'+ self.executable
+        command = JasperPy.EXECUTABLE if self.windows else self.path_executable +'/'+ JasperPy.EXECUTABLE
         command += ' list_parameters '
         command += "\"%s\"" % (input_file)
         self.the_command = command
