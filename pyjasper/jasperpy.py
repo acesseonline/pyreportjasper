@@ -2,7 +2,22 @@
 import os
 import subprocess
 
-FORMATS = ['pdf', 'rtf', 'xls', 'xlsx', 'docx', 'odt', 'ods', 'pptx', 'csv', 'html', 'xhtml', 'xml', 'jrprint']
+FORMATS = (
+    'pdf',
+    'rtf',
+    'xls',
+    'xlsx',
+    'docx',
+    'odt',
+    'ods',
+    'pptx',
+    'csv',
+    'html',
+    'xhtml',
+    'xml',
+    'jrprint',
+)
+
 EXECUTABLE = 'jasperstarter'
 
 
@@ -12,17 +27,20 @@ class JasperPy:
     E-mail: jadsonbr@outlook.com.br
     """
 
-    def __init__(self, resource_dir=False):
+    def __init__(self, resource_dir=False, redirect_output=False,
+                 background=False):
 
-        self.path_executable = os.path.dirname(os.path.abspath(__file__)) + '/jasperstarter/bin'
+        self.path_executable = os.path.dirname(os.path.abspath(__file__)) \
+                               + '/jasperstarter/bin'
+
         self.windows = True if os.name == 'nt' else False
-
         self.the_command = ''
-        self.redirect_output = True
-        self.background = True
+        self.redirect_output = redirect_output
+        self.background = background
 
         if not resource_dir:
-            resource_dir = os.path.dirname(os.path.abspath(__file__)) + '/jasperstarter/bin'
+            resource_dir = os.path.dirname(os.path.abspath(__file__)) \
+                           + '/jasperstarter/bin'
         else:
             if not os.path.exists(resource_dir):
                 raise NameError('Invalid resource directory!')
@@ -30,50 +48,62 @@ class JasperPy:
         # Path to report resource dir or jar file
         self.resource_directory = resource_dir  
 
+    def compile(self, input_file, output_file=False, background=True,
+                redirect_output=True):
 
-    def compile(self,input_file, output_file=False, background=True, redirect_output=True):
         if (input_file is None) or (not input_file):
             raise NameError('No input file')
-        command = JasperPy.EXECUTABLE if self.windows else self.path_executable +'/'+ JasperPy.EXECUTABLE
+
+        command = JasperPy.EXECUTABLE if self.windows \
+            else self.path_executable + '/' + JasperPy.EXECUTABLE
+
         command += ' compile '
-        command += "\"%s\"" % (input_file)
-        if output_file != False:
-            command += ' -o ' + "\"%s\"" % (output_file)
+        command += "\"%s\"" % input_file
+
+        if output_file is not False:
+            command += ' -o ' + "\"%s\"" % output_file
 
         self.redirect_output = redirect_output
         self.background = background
         self.the_command = command
+
         return self
 
+    def process(self, input_file, output_file=False, format_list=['pdf'],
+                parameters={}, db_connection={}, locale='pt_BR',
+                background=True, redirect_output=True):
 
-    def process(self, input_file, output_file=False, format_list=['pdf'], parameters={}, db_connection={}, locale='pt_BR', background=True, redirect_output=True):
         if (input_file is None) or (not input_file):
             raise NameError('No input file')
 
-        if isinstance(format_list, list) :
-            for key in format_list:
-                if not key in JasperPy.FORMATS:
-                    raise NameError('Invalid format!')
+        if isinstance(format_list, list):
+            if any([key not in JasperPy.FORMAT for key in format_list]):
+                raise NameError('Invalid format!')
         else:
-            if not format_list in JasperPy.FORMATS:
+            if format_list not in JasperPy.FORMATS:
                 raise NameError('Invalid format!')
 
-        command = JasperPy.EXECUTABLE if self.windows else self.path_executable +'/'+ JasperPy.EXECUTABLE
-        command += " --locale %s" % (locale)       
+        command = JasperPy.EXECUTABLE if self.windows \
+            else self.path_executable + '/' + JasperPy.EXECUTABLE
+
+        command += " --locale %s" % locale
         command += ' process '
-        command += "\"%s\"" % (input_file)
-        if output_file != False:
-            command += ' -o ' + "\"%s\"" % (output_file)
+        command += "\"%s\"" % input_file
+
+        if output_file is not False:
+            command += ' -o ' + "\"%s\"" % output_file
+
         if isinstance(format_list, list):
-            command += ' -f '+ "".join(format_list)
+            command += ' -f ' + "".join(format_list)
         else:
-            command += ' -f '+ "".join(format_list)
+            command += ' -f ' + "".join(format_list)
 
         if len(parameters) > 0:
             command += ' -P '
             for key, value in parameters.items():
                 param = key + '="' + value + '" '
                 command += " " + param + " "
+
         if len(db_connection) > 0:
             command += ' -t ' + db_connection['driver']
 
@@ -118,32 +148,38 @@ class JasperPy:
         self.the_command = command
         return self
 
-
-    def list_parameters(self,input_file):
+    def list_parameters(self, input_file):
         if not input_file:
             raise NameError('No input file')
-        command = JasperPy.EXECUTABLE if self.windows else self.path_executable +'/'+ JasperPy.EXECUTABLE
-        command += ' list_parameters '
-        command += "\"%s\"" % (input_file)
-        self.the_command = command
-        return self
 
+        command = JasperPy.EXECUTABLE if self.windows \
+            else self.path_executable + '/' + JasperPy.EXECUTABLE
+        command += ' list_parameters '
+        command += "\"%s\"" % input_file
+        self.the_command = command
+
+        return self
 
     def output(self):
         return self.the_command
 
+    def execute(self, run_as_user=False):
 
-    def execute(self,run_as_user=False):
-        if (run_as_user != False) and (not self.windows) :
-            self.the_command = 'su -u ' + run_as_user + " -c \"" + self.the_command + "\""
+        if (run_as_user is not False) and (not self.windows):
+            self.the_command = 'su -u ' + run_as_user + " -c \"" + \
+                               self.the_command + "\""
+
         if os.path.isdir(self.path_executable):
             try:
-                output = subprocess.run(self.the_command, shell=True, check=True)
+                output = subprocess.run(
+                    self.the_command, shell=True, check=True)
             except subprocess.CalledProcessError as e:
                 print(e.output)
-                raise NameError('Your report has an error and couldn \'t be processed!\ Try to output the command using the function `output();` and run it manually in the console.')
+                raise NameError('Your report has an error and couldn '
+                                '\'t be processed!\ Try to output the command '
+                                'using the function `output();` and run it '
+                                'manually in the console.')
         else:
             raise NameError('Invalid resource directory.')
 
         return output
-
