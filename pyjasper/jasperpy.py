@@ -34,7 +34,7 @@ class JasperPy:
                                + '/jasperstarter/bin'
 
         self.windows = True if os.name == 'nt' else False
-        self.the_command = ''
+        self._command = ''
         self.redirect_output = redirect_output
         self.background = background
 
@@ -65,7 +65,7 @@ class JasperPy:
 
         self.redirect_output = redirect_output
         self.background = background
-        self.the_command = command
+        self._command = command
 
         return self
 
@@ -141,7 +141,7 @@ class JasperPy:
 
         self.redirect_output = redirect_output
         self.background = background
-        self.the_command = command
+        self._command = command
         return self
 
     def list_parameters(self, input_file):
@@ -152,25 +152,26 @@ class JasperPy:
             else self.path_executable + '/' + EXECUTABLE
         command += ' list_parameters '
         command += "\"%s\"" % input_file
-        self.the_command = command
+        self._command = command
 
         return self
 
-    def output(self):
-        return self.the_command
+    @property
+    def command(self):
+        return self._command
 
     def execute(self, run_as_user=False):
 
         if (run_as_user is not False) and (not self.windows):
-            self.the_command = 'su -u ' + run_as_user + " -c \"" + \
-                               self.the_command + "\""
+            self._command = 'su -u ' + run_as_user + " -c \"" + \
+                               self.command + "\""
 
         if os.path.isdir(self.path_executable):
             try:
                 output = subprocess.run(
-                    self.the_command, shell=True, check=True)
+                    self.command, shell=True, check=True)
             except AttributeError:
-                output = subprocess.check_call(self.the_command, shell=True)
+                output = subprocess.check_call(self.command, shell=True)
             except subprocess.CalledProcessError as e:
                 print(e.output)
                 raise NameError('Your report has an error and couldn '
