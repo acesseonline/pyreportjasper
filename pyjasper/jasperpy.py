@@ -67,7 +67,7 @@ class JasperPy:
         self.background = background
         self._command = command
 
-        return self
+        return self.execute()
 
     def process(self, input_file, output_file=False, format_list=['pdf'],
                 parameters={}, db_connection={}, locale='pt_BR',
@@ -142,7 +142,7 @@ class JasperPy:
         self.redirect_output = redirect_output
         self.background = background
         self._command = command
-        return self
+        return self.execute()
 
     def list_parameters(self, input_file):
         if not input_file:
@@ -154,7 +154,7 @@ class JasperPy:
         command += "\"%s\"" % input_file
         self._command = command
 
-        return self
+        return self.execute()
 
     @property
     def command(self):
