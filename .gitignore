@@ -68,3 +68,4 @@ target/
 .idea
 /htmlcov
 main.py
+*.sublime-workspace
