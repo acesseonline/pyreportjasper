@@ -11,9 +11,10 @@ setup(
     author='Jadson Bonfim Ribeiro',
     author_email='jadsonbr@outlook.com.br',
     keywords='report jasper python relatorio',
-    description=u'This package aims to be a solution to compile and process JasperReports (.jrxml & .jasper files).',
+    description=u'This package aims to be a solution to compile and process '
+                u'JasperReports (.jrxml & .jasper files).',
     packages=['pyjasper'],
     install_requires=[],
-    package_data = {'package' : files },
-    include_package_data = True
+    package_data={'package': files},
+    include_package_data=True,
 )
