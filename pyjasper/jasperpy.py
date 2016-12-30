@@ -54,8 +54,8 @@ class JasperPy:
         if (input_file is None) or (not input_file):
             raise NameError('No input file')
 
-        command = JasperPy.EXECUTABLE if self.windows \
-            else self.path_executable + '/' + JasperPy.EXECUTABLE
+        command = EXECUTABLE if self.windows \
+            else self.path_executable + '/' + EXECUTABLE
 
         command += ' compile '
         command += "\"%s\"" % input_file
@@ -77,14 +77,13 @@ class JasperPy:
             raise NameError('No input file')
 
         if isinstance(format_list, list):
-            if any([key not in JasperPy.FORMAT for key in format_list]):
+            if any([key not in FORMATS for key in format_list]):
                 raise NameError('Invalid format!')
         else:
-            if format_list not in JasperPy.FORMATS:
-                raise NameError('Invalid format!')
+            raise NameError('Invalid format!')
 
-        command = JasperPy.EXECUTABLE if self.windows \
-            else self.path_executable + '/' + JasperPy.EXECUTABLE
+        command = EXECUTABLE if self.windows \
+            else self.path_executable + '/' + EXECUTABLE
 
         command += " --locale %s" % locale
         command += ' process '
@@ -93,10 +92,7 @@ class JasperPy:
         if output_file is not False:
             command += ' -o ' + "\"%s\"" % output_file
 
-        if isinstance(format_list, list):
-            command += ' -f ' + "".join(format_list)
-        else:
-            command += ' -f ' + "".join(format_list)
+        command += ' -f ' + ' '.join(format_list)
 
         if len(parameters) > 0:
             command += ' -P '
@@ -152,8 +148,8 @@ class JasperPy:
         if not input_file:
             raise NameError('No input file')
 
-        command = JasperPy.EXECUTABLE if self.windows \
-            else self.path_executable + '/' + JasperPy.EXECUTABLE
+        command = EXECUTABLE if self.windows \
+            else self.path_executable + '/' + EXECUTABLE
         command += ' list_parameters '
         command += "\"%s\"" % input_file
         self.the_command = command
@@ -173,6 +169,8 @@ class JasperPy:
             try:
                 output = subprocess.run(
                     self.the_command, shell=True, check=True)
+            except AttributeError:
+                output = subprocess.check_call(self.the_command, shell=True)
             except subprocess.CalledProcessError as e:
                 print(e.output)
                 raise NameError('Your report has an error and couldn '
