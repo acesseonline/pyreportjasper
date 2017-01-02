@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import subprocess
+import logging
 
 FORMATS = (
     'pdf',
@@ -19,6 +20,9 @@ FORMATS = (
 )
 
 EXECUTABLE = 'jasperstarter'
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 class JasperPy:
@@ -51,8 +55,8 @@ class JasperPy:
     def compile(self, input_file, output_file=False, background=True,
                 redirect_output=True):
 
-        if (input_file is None) or (not input_file):
-            raise NameError('No input file')
+        if not input_file:
+            raise NameError('No input file!')
 
         command = EXECUTABLE if self.windows \
             else self.path_executable + '/' + EXECUTABLE
@@ -60,7 +64,7 @@ class JasperPy:
         command += ' compile '
         command += "\"%s\"" % input_file
 
-        if output_file is not False:
+        if output_file:
             command += ' -o ' + "\"%s\"" % output_file
 
         self.redirect_output = redirect_output
@@ -73,8 +77,8 @@ class JasperPy:
                 parameters={}, db_connection={}, locale='pt_BR',
                 background=True, redirect_output=True):
 
-        if (input_file is None) or (not input_file):
-            raise NameError('No input file')
+        if not input_file:
+            raise NameError('No input file!')
 
         if isinstance(format_list, list):
             if any([key not in FORMATS for key in format_list]):
@@ -89,7 +93,7 @@ class JasperPy:
         command += ' process '
         command += "\"%s\"" % input_file
 
-        if output_file is not False:
+        if output_file:
             command += ' -o ' + "\"%s\"" % output_file
 
         command += ' -f ' + ' '.join(format_list)
@@ -142,11 +146,13 @@ class JasperPy:
         self.redirect_output = redirect_output
         self.background = background
         self._command = command
+
         return self.execute()
 
     def list_parameters(self, input_file):
+
         if not input_file:
-            raise NameError('No input file')
+            raise NameError('No input file!')
 
         command = EXECUTABLE if self.windows \
             else self.path_executable + '/' + EXECUTABLE
@@ -162,7 +168,7 @@ class JasperPy:
 
     def execute(self, run_as_user=False):
 
-        if (run_as_user is not False) and (not self.windows):
+        if run_as_user and (not self.windows):
             self._command = 'su -u ' + run_as_user + " -c \"" + \
                                self.command + "\""
 
@@ -173,12 +179,12 @@ class JasperPy:
             except AttributeError:
                 output = subprocess.check_call(self.command, shell=True)
             except subprocess.CalledProcessError as e:
-                print(e.output)
+                logger.exception(e.message)
                 raise NameError('Your report has an error and couldn '
                                 '\'t be processed!\ Try to output the command '
-                                'using the function `output();` and run it '
-                                'manually in the console.')
+                                'using the attribute `command;` and run it '
+                                'manually in the console!')
         else:
-            raise NameError('Invalid resource directory.')
+            raise NameError('Invalid resource directory!')
 
         return output
