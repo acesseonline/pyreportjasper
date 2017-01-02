@@ -6,56 +6,45 @@ from pyjasper.jasperpy import JasperPy
 
 class TestJasperPy(TestCase):
 
+    def setUp(self):
+        self.input_file = os.path.dirname(os.path.abspath(__file__)) \
+                     + '/examples/hello_world.jrxml'
+
+        self.jasper = JasperPy()
+
     def test_compile(self):
-
-        input_file = os.path.dirname(os.path.abspath(__file__)) \
-                + '/examples/hello_world.jrxml'
-
-        jasper = JasperPy()
-        self.assertRaises(NameError, jasper.compile, False)
-        self.assertEqual(jasper.compile(input_file), 0)
+        self.assertRaises(NameError, self.jasper.compile, False)
+        self.assertEqual(self.jasper.compile(self.input_file), 0)
 
     def test_process(self):
-
-        input_file = os.path.dirname(os.path.abspath(__file__)) \
-                     + '/examples/hello_world.jrxml'
-
-        jasper = JasperPy()
-        self.assertRaises(NameError, jasper.process, False)
+        self.assertRaises(NameError, self.jasper.process, False)
 
         kwargs = {
-            'input_file': input_file,
+            'input_file': self.input_file,
             'format_list': 'pdf'
         }
-        self.assertRaises(NameError, jasper.process, **kwargs)
+        self.assertRaises(NameError, self.jasper.process, **kwargs)
 
         kwargs = {
-            'input_file': input_file,
+            'input_file': self.input_file,
             'format_list': 5
         }
-        self.assertRaises(NameError, jasper.process, **kwargs)
+        self.assertRaises(NameError, self.jasper.process, **kwargs)
 
         kwargs = {
-            'input_file': input_file,
+            'input_file': self.input_file,
             'format_list': ['mp3']
         }
-        self.assertRaises(NameError, jasper.process, **kwargs)
+        self.assertRaises(NameError, self.jasper.process, **kwargs)
 
-        self.assertEqual(jasper.process(input_file), 0)
+        self.assertEqual(self.jasper.process(self.input_file), 0)
 
     def test_list_parameters(self):
-
-        input_file = os.path.dirname(os.path.abspath(__file__)) \
-                     + '/examples/hello_world.jrxml'
-
-        jasper = JasperPy()
-        self.assertRaises(NameError, jasper.list_parameters, False)
-        self.assertEqual(jasper.list_parameters(input_file), 0)
+        self.assertRaises(NameError, self.jasper.list_parameters, False)
+        self.assertEqual(self.jasper.list_parameters(self.input_file), 0)
 
     def test_execute(self):
+        self.assertEqual(self.jasper.execute(), 0)
 
-        jasper = JasperPy()
-        self.assertEqual(jasper.execute(), 0)
-
-        jasper.path_executable = ''
-        self.assertRaises(NameError, jasper.execute, False)
+        self.jasper.path_executable = ''
+        self.assertRaises(NameError, self.jasper.execute, False)
