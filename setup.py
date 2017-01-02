@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from setuptools import setup
+from setuptools import setup, find_packages
 
 files = ["jasperstarter/*", "test/*"]
 
@@ -13,8 +13,12 @@ setup(
     keywords='report jasper python relatorio',
     description=u'This package aims to be a solution to compile and process '
                 u'JasperReports (.jrxml & .jasper files).',
-    packages=['pyjasper'],
-    install_requires=[],
-    package_data={'package': files},
+    packages=find_packages(),
+    install_requires=[
+    ],
+    test_suite='test',
+    package_data={
+        'package': files,
+    },
     include_package_data=True,
 )
