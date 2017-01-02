@@ -84,7 +84,7 @@ class JasperPy:
             if any([key not in FORMATS for key in format_list]):
                 raise NameError('Invalid format!')
         else:
-            raise NameError('Invalid format!')
+            raise NameError("'format_list' value is not list!")
 
         command = EXECUTABLE if self.windows \
             else self.path_executable + '/' + EXECUTABLE
