@@ -67,5 +67,7 @@ target/
 
 .idea
 /htmlcov
-main.py
+main.pygst
+
 *.sublime-workspace
+pyreportjasper.egg-info/
