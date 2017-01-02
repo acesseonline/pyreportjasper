@@ -50,7 +50,7 @@ class JasperPy:
                 raise NameError('Invalid resource directory!')
 
         # Path to report resource dir or jar file
-        self.resource_directory = resource_dir  
+        self.resource_directory = resource_dir
 
     def compile(self, input_file, output_file=False, background=True,
                 redirect_output=True):
