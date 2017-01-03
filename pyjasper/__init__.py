@@ -12,4 +12,3 @@ __copyright__ = 'Copyright 2017 Jadson Bonfim Ribeiro'
 
 # Version synonym
 VERSION = __version__
-
