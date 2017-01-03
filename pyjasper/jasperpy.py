@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+# The MIT License (MIT)
+#
+# Copyright (c) 2017 Jadson Bonfim Ribeiro <jadsonbr@outlook.com.br>
+#
+
 import os
 import subprocess
 import logging
@@ -26,10 +31,6 @@ logger = logging.getLogger(__name__)
 
 
 class JasperPy:
-    """
-    Author: Jadson Bonfim Ribeiro
-    E-mail: jadsonbr@outlook.com.br
-    """
 
     def __init__(self, resource_dir=False, redirect_output=False,
                  background=False):
@@ -175,7 +176,7 @@ class JasperPy:
         if os.path.isdir(self.path_executable):
             try:
                 output = subprocess.run(
-                    self.command, shell=True, check=True)
+                    self.command, shell=True, check=True).returncode
             except AttributeError:
                 output = subprocess.check_call(self.command, shell=True)
             except subprocess.CalledProcessError as e:
