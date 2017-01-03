@@ -1,4 +1,11 @@
 # Reports for Python, with JasperReports.
+[![Build Status](https://travis-ci.org/multidadosti-erp/pyreport.svg?branch=feature%2Fpyjasper_adjust)](https://travis-ci.org/multidadosti-erp/pyreport)
+[![Coverage Status](https://coveralls.io/repos/github/multidadosti-erp/pyreport/badge.svg?branch=master)](https://coveralls.io/github/multidadosti-erp/pyreport?branch=master)
+[![Code Health](https://landscape.io/github/multidadosti-erp/pyreport/master/landscape.svg?style=flat)](https://landscape.io/github/multidadosti-erp/pyreport/master)
+[![PyPI](https://img.shields.io/pypi/status/pyreportjasper.svg?maxAge=2592000)]()
+[![PyPI](https://img.shields.io/pypi/v/pyreportjasper.svg?maxAge=2592000)](https://pypi.python.org/pypi/pyreportjasper)
+[![PyPI](https://img.shields.io/pypi/pyversions/pyreportjasper.svg?maxAge=2592000)]()
+[![PyPI](https://img.shields.io/pypi/l/pyreportjasper.svg)](https://github.com/multidadosti-erp/pyreport/blob/master/LICENSE)
 
 **Is using Linux servers?**
 
@@ -71,12 +78,12 @@ Now run the `java -version` again and check if the output is ok.
 
 ##Installation
 
-Install [PyPI](https://pypi.python.org/pypi) if you don't have it.
+Install [PyPI](https://pypi.python.org/pypi/pyreportjasper) if you don't have it.
 ```
 pip install pyreportjasper
 ```
 
-and thats it.
+and that's it.
 
 ##Examples
 
@@ -255,9 +262,14 @@ def json_to_pdf():
     print('Result is the file below.')
     print(output + '.pdf')
 ```
+
 ###Tests
 
-All tests are in in the `pyjasper/test/report.py` 
+All tests are in in the `test` directory. To run them
+
+```
+python setup.py test
+```
 
 ###MySQL
 
@@ -273,17 +285,9 @@ Depends on the complexity, amount of data and the resources of your machine (let
 
 I have a report that generates a *Invoice* with a DB connection, images and multiple pages and it takes about **3/4 seconds** to process. I suggest that you use a worker to generate the reports in the background.
 
-##Thanks
-
-Thanks to [Cenote GmbH](http://www.cenote.de/) for the [JasperStarter](http://jasperstarter.sourceforge.net/) tool.
-
 ##Questions?
 
 Open a [Issue](https://github.com/jadsonbr/pyreport/issues) 
-
-##License
-
-MIT
 
 ##Contribute
 
@@ -292,3 +296,7 @@ Contribute to the community Python, feel free to contribute, make a fork!!
 ### Contributors
 
 * Michell Stuttgart <michellstut@gmail.com>
+
+##Thanks
+
+Thanks to [Cenote GmbH](http://www.cenote.de/) for the [JasperStarter](http://jasperstarter.sourceforge.net/) tool.
