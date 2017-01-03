@@ -1,4 +1,3 @@
 recursive-include pyjasper/jasperstarter *
-recursive-include pyjasper/test *
 
 global-exclude *.sublime-project

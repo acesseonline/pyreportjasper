@@ -1,4 +1,8 @@
 # Reports for Python, with JasperReports.
+[![Build Status](https://travis-ci.org/multidadosti-erp/pyreport.svg?branch=feature%2Fpyjasper_adjust)](https://travis-ci.org/multidadosti-erp/pyreport)
+[![Coverage Status](https://coveralls.io/repos/github/multidadosti-erp/pyreport/badge.svg?branch=feature%2Fpyjasper_adjust)](https://coveralls.io/github/multidadosti-erp/pyreport?branch=feature%2Fpyjasper_adjust)
+[![Code Health](https://landscape.io/github/multidadosti-erp/pyreport/feature/pyjasper_adjust/landscape.svg?style=flat)](https://landscape.io/github/multidadosti-erp/pyreport/feature/pyjasper_adjust)
+[![PyPI](https://img.shields.io/pypi/l/pyreportjasper.svg)](https://github.com/multidadosti-erp/pyreport/blob/master/LICENSE)
 
 **Is using Linux servers?**
 
@@ -71,19 +75,19 @@ Now run the `java -version` again and check if the output is ok.
 
 ##Installation
 
-Install [PyPI](https://pypi.python.org/pypi) if you don't have it.
+Install [PyPI](https://pypi.python.org/pypi/pyreportjasper) if you don't have it.
 ```
 pip install pyreportjasper
 ```
 
-and thats it.
+and that's it.
 
 ##Examples
 
 ###The *Hello World* example.
 
 Go to the examples directory in the root of the package 
-Open the `test/exemples/hello_world.jrxml` file with Jaspersoft Studio or with your favorite text editor and take a look at the source code.
+Open the `test/examples/hello_world.jrxml` file with Jaspersoft Studio or with your favorite text editor and take a look at the source code.
 
 #### Compiling
 
@@ -96,9 +100,11 @@ import os
 import pyjasper
 
 def compiling():
-	input = os.path.dirname(os.path.abspath(__file__)) + '/exemples/hello_world.jrxml'	
-	jasper = pyjasper.JasperPy()
-	jasper.compile(input).execute()
+    input_file = os.path.dirname(os.path.abspath(__file__)) + \
+                 '/examples/hello_world.jrxml'
+    jasper = pyjasper.JasperPy()
+    jasper.compile(input_file).execute()
+
 ```
 
 This commando will compile the `hello_world.jrxml` source file to a `hello_world.jasper` file.
@@ -112,10 +118,13 @@ import os
 import pyjasper
 
 def processing():
-	input = os.path.dirname(os.path.abspath(__file__)) + '/exemples/hello_world.jrxml'
-	output = os.path.dirname(os.path.abspath(__file__)) + '/output/exemples'
-	jasper = pyjasper.JasperPy()
-	jasper.process(input, output, ["pdf","rtf"]).execute()
+    input_file = os.path.dirname(os.path.abspath(__file__)) + \
+                 '/examples/hello_world.jrxml'
+    output = os.path.dirname(os.path.abspath(__file__)) + '/output/examples'
+    jasper = pyjasper.JasperPy()
+    jasper.process(
+        input_file, output=output, format_list=["pdf", "rtf"]).execute()
+
 ```
 
 Now check the examples folder! :) Great right? You now have 2 files, `hello_world.pdf` and `hello_world.rtf`.
@@ -130,11 +139,13 @@ Querying the jasper file to examine parameters available in the given jasper rep
 import os
 import pyjasper
 
-def listingParameters():
-	input = os.path.dirname(os.path.abspath(__file__)) + '/exemples/hello_world_params.jrxml'
-	jasper = pyjasper.JasperPy()
-	output = jasper.list_parameters(input).execute()	
-	print(output)
+def listing_parameters():
+    input_file = os.path.dirname(os.path.abspath(__file__)) + \
+                 '/examples/hello_world_params.jrxml'
+    jasper = pyjasper.JasperPy()
+    output = jasper.list_parameters(input_file).execute()
+    print(output)
+
 ```
 
 ###Advanced example - using a database
@@ -146,27 +157,29 @@ import os
 from platform import python_version
 import pyjasper
 
-def advancedExampleUsingDatabase():	
-	input = os.path.dirname(os.path.abspath(__file__)) + '/exemples/hello_world.jrxml'
-	output = os.path.dirname(os.path.abspath(__file__)) + '/output/exemples'
-	con = {
-        'driver' : 'postgres',
-        'username' : 'DB_USERNAME',
-        'password' : 'DB_PASSWORD',
-        'host' : 'DB_HOST',
-        'database' : 'DB_DATABASE',
-        'schema' : 'DB_SCHEMA',
-        'port' : '5432'		
-	}
-	jasper = pyjasper.JasperPy()
-	jasper.process(
-		input,
-		output,
-		["pdf", "rtf", "xml"],
-		{'python_version': python_version()},
-		con,
-		'pt_BR' # LOCALE Ex.:(en_US, de_GE)
-	).execute()	
+def advanced_example_using_database():
+    input_file = os.path.dirname(os.path.abspath(__file__)) + \
+                 '/examples/hello_world.jrxml'
+    output = os.path.dirname(os.path.abspath(__file__)) + '/output/examples'
+    con = {
+        'driver': 'postgres',
+        'username': 'DB_USERNAME',
+        'password': 'DB_PASSWORD',
+        'host': 'DB_HOST',
+        'database': 'DB_DATABASE',
+        'schema': 'DB_SCHEMA',
+        'port': '5432'
+    }
+    jasper = pyjasper.JasperPy()
+    jasper.process(
+        input_file,
+        output=output,
+        format_list=["pdf", "rtf", "xml"],
+        parameters={'python_version': python_version()},
+        db_connection=con,
+        locale='pt_BR'  # LOCALE Ex.:(en_US, de_GE)
+    ).execute()
+
 ```
 
 **Note 2:**
@@ -182,23 +195,33 @@ See how easy it is to generate a report with a source an XML file:
 import os
 import pyjasper
 
-def xmlToPdf():	
-	input = os.path.dirname(os.path.abspath(__file__)) + '/exemples/CancelAck.jrxml'
-	output = os.path.dirname(os.path.abspath(__file__)) + '/output/_CancelAck'
-	dataFile = os.path.dirname(os.path.abspath(__file__)) + '/exemples/CancelAck.xml'
-	drive = 'xml'
-	xmlXpath = '/CancelResponse/CancelResult/ID'
-	jasper = pyjasper.JasperPy()
-	jasper.process(
-		input,
-		output,
-		["pdf"],
-		{},
-		{'data_file':dataFile, 'driver':drive, 'xml_xpath':xmlXpath},
-		'pt_BR' # LOCALE Ex.:(en_US, de_GE)
-	).execute()	
-	print('Result is the file below.')
-	print(output+'.pdf')
+def xml_to_pdf():
+    input_file = os.path.dirname(os.path.abspath(__file__)) + \
+                 '/examples/CancelAck.jrxml'
+
+    output = os.path.dirname(os.path.abspath(__file__)) + '/output/_CancelAck'
+
+    data_file = os.path.dirname(os.path.abspath(__file__)) + \
+        '/examples/CancelAck.xml'
+
+    jasper = pyjasper.JasperPy()
+
+    jasper.process(
+        input_file,
+        output=output,
+        format_list=["pdf"],
+        parameters={},
+        db_connection={
+            'data_file': data_file,
+            'driver': 'xml',
+            'xml_xpath': '/CancelResponse/CancelResult/ID',
+        },
+        locale='pt_BR'  # LOCALE Ex.:(en_US, de_GE)
+    ).execute()
+
+    print('Result is the file below.')
+    print(output + '.pdf')
+    
 ```
 
 ###Reports from a JSON File
@@ -209,26 +232,41 @@ See how easy it is to generate a report with a source an JSON file:
 import os
 import pyjasper
 
-def jsonToPdf():	
-	input = os.path.dirname(os.path.abspath(__file__)) + '/exemples/json.jrxml'
-	output = os.path.dirname(os.path.abspath(__file__)) + '/output/_Contacts'
-	json_query = 'contacts.person'
-	dataFile = os.path.dirname(os.path.abspath(__file__)) + '/exemples/contacts.json'
-	jasper = pyjasper.JasperPy()
-	jasper.process(
-		input,
-		output,
-		["pdf"],
-		{},
-		{'data_file':dataFile, 'driver':'json', 'json_query':json_query},
-		'pt_BR' # LOCALE Ex.:(en_US, de_GE)
-	).execute()
-	print('Result is the file below.')
-	print(output+'.pdf')
+def json_to_pdf():
+    input_file = os.path.dirname(os.path.abspath(__file__)) + \
+                 '/examples/json.jrxml'
+
+    output = os.path.dirname(os.path.abspath(__file__)) + '/output/_Contacts'
+    json_query = 'contacts.person'
+
+    data_file = os.path.dirname(os.path.abspath(__file__)) + \
+        '/examples/contacts.json'
+
+    jasper = pyjasper.JasperPy()
+    jasper.process(
+        input_file,
+        output=output,
+        format_list=["pdf"],
+        parameters={},
+        db_connection={
+            'data_file': data_file,
+            'driver': 'json',
+            'json_query': json_query,
+        },
+        locale='pt_BR'  # LOCALE Ex.:(en_US, de_GE)
+    ).execute()
+
+    print('Result is the file below.')
+    print(output + '.pdf')
 ```
+
 ###Tests
 
-All tests are in in the `pyjasper/test/report.py` 
+All tests are in in the `test` directory. To run them
+
+```
+python setup.py test
+```
 
 ###MySQL
 
@@ -244,18 +282,18 @@ Depends on the complexity, amount of data and the resources of your machine (let
 
 I have a report that generates a *Invoice* with a DB connection, images and multiple pages and it takes about **3/4 seconds** to process. I suggest that you use a worker to generate the reports in the background.
 
-##Thanks
-
-Thanks to [Cenote GmbH](http://www.cenote.de/) for the [JasperStarter](http://jasperstarter.sourceforge.net/) tool.
-
 ##Questions?
 
 Open a [Issue](https://github.com/jadsonbr/pyreport/issues) 
 
-##License
-
-MIT
-
 ##Contribute
 
 Contribute to the community Python, feel free to contribute, make a fork!!
+
+### Contributors
+
+* Michell Stuttgart <michellstut@gmail.com>
+
+##Thanks
+
+Thanks to [Cenote GmbH](http://www.cenote.de/) for the [JasperStarter](http://jasperstarter.sourceforge.net/) tool.
