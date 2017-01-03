@@ -1,7 +1,7 @@
 # Reports for Python, with JasperReports.
 [![Build Status](https://travis-ci.org/multidadosti-erp/pyreport.svg?branch=feature%2Fpyjasper_adjust)](https://travis-ci.org/multidadosti-erp/pyreport)
-[![Coverage Status](https://coveralls.io/repos/github/multidadosti-erp/pyreport/badge.svg?branch=master)](https://coveralls.io/github/multidadosti-erp/pyreport?branch=master)
-[![Code Health](https://landscape.io/github/multidadosti-erp/pyreport/master/landscape.svg?style=flat)](https://landscape.io/github/multidadosti-erp/pyreport/master)
+[![Coverage Status](https://coveralls.io/repos/github/multidadosti-erp/pyreport/badge.svg?branch=feature%2Fpyjasper_adjust)](https://coveralls.io/github/multidadosti-erp/pyreport?branch=feature%2Fpyjasper_adjust)
+[![Code Health](https://landscape.io/github/multidadosti-erp/pyreport/feature/pyjasper_adjust/landscape.svg?style=flat)](https://landscape.io/github/multidadosti-erp/pyreport/feature/pyjasper_adjust)
 [![PyPI](https://img.shields.io/pypi/l/pyreportjasper.svg)](https://github.com/multidadosti-erp/pyreport/blob/master/LICENSE)
 
 **Is using Linux servers?**
