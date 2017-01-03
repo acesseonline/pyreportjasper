@@ -2,9 +2,6 @@
 [![Build Status](https://travis-ci.org/multidadosti-erp/pyreport.svg?branch=feature%2Fpyjasper_adjust)](https://travis-ci.org/multidadosti-erp/pyreport)
 [![Coverage Status](https://coveralls.io/repos/github/multidadosti-erp/pyreport/badge.svg?branch=master)](https://coveralls.io/github/multidadosti-erp/pyreport?branch=master)
 [![Code Health](https://landscape.io/github/multidadosti-erp/pyreport/master/landscape.svg?style=flat)](https://landscape.io/github/multidadosti-erp/pyreport/master)
-[![PyPI](https://img.shields.io/pypi/status/pyreportjasper.svg?maxAge=2592000)]()
-[![PyPI](https://img.shields.io/pypi/v/pyreportjasper.svg?maxAge=2592000)](https://pypi.python.org/pypi/pyreportjasper)
-[![PyPI](https://img.shields.io/pypi/pyversions/pyreportjasper.svg?maxAge=2592000)]()
 [![PyPI](https://img.shields.io/pypi/l/pyreportjasper.svg)](https://github.com/multidadosti-erp/pyreport/blob/master/LICENSE)
 
 **Is using Linux servers?**
