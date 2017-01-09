@@ -7,6 +7,8 @@
 import os
 import subprocess
 import logging
+import re
+import xml.etree.ElementTree as ET
 
 FORMATS = (
     'pdf',
@@ -150,18 +152,28 @@ class JasperPy:
 
         return self.execute()
 
-    def list_parameters(self, input_file):
+    @staticmethod
+    def list_parameters(input_xml):
 
-        if not input_file:
+        if not input_xml:
             raise NameError('No input file!')
 
-        command = EXECUTABLE if self.windows \
-            else self.path_executable + '/' + EXECUTABLE
-        command += ' list_parameters '
-        command += "\"%s\"" % input_file
-        self._command = command
+        f = open(input_xml, 'rb')
+        f_content = f.read()
+        f.close()
+        xmlstring = re.sub(' xmlns="[^"]+"', '', f_content, count=1)
 
-        return self.execute()
+        param_dic = {}
+        tree = ET.fromstring(xmlstring)
+        for item in tree.findall(
+                'parameter'):
+            if item.get('name'):
+                param_dic.update({item.get('name'): [item.get('class')]})
+            if list(item):
+                param_dic[item.get('name')].append(list(item)[0].text)
+            else:
+                param_dic[item.get('name')].append('')
+        return param_dic
 
     @property
     def command(self):
