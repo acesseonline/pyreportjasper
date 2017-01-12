@@ -103,7 +103,7 @@ def compiling():
     input_file = os.path.dirname(os.path.abspath(__file__)) + \
                  '/examples/hello_world.jrxml'
     jasper = pyjasper.JasperPy()
-    jasper.compile(input_file).execute()
+    jasper.compile(input_file)
 
 ```
 
@@ -123,7 +123,7 @@ def processing():
     output = os.path.dirname(os.path.abspath(__file__)) + '/output/examples'
     jasper = pyjasper.JasperPy()
     jasper.process(
-        input_file, output=output, format_list=["pdf", "rtf"]).execute()
+        input_file, output=output, format_list=["pdf", "rtf"])
 
 ```
 
@@ -143,7 +143,7 @@ def listing_parameters():
     input_file = os.path.dirname(os.path.abspath(__file__)) + \
                  '/examples/hello_world_params.jrxml'
     jasper = pyjasper.JasperPy()
-    output = jasper.list_parameters(input_file).execute()
+    output = jasper.list_parameters(input_file)
     print(output)
 
 ```
@@ -178,7 +178,7 @@ def advanced_example_using_database():
         parameters={'python_version': python_version()},
         db_connection=con,
         locale='pt_BR'  # LOCALE Ex.:(en_US, de_GE)
-    ).execute()
+    )
 
 ```
 
@@ -217,7 +217,7 @@ def xml_to_pdf():
             'xml_xpath': '/CancelResponse/CancelResult/ID',
         },
         locale='pt_BR'  # LOCALE Ex.:(en_US, de_GE)
-    ).execute()
+    )
 
     print('Result is the file below.')
     print(output + '.pdf')
@@ -254,7 +254,7 @@ def json_to_pdf():
             'json_query': json_query,
         },
         locale='pt_BR'  # LOCALE Ex.:(en_US, de_GE)
-    ).execute()
+    )
 
     print('Result is the file below.')
     print(output + '.pdf')
