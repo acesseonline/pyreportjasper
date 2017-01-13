@@ -28,7 +28,7 @@ Well, everything. JasperReports is a powerful tool for **reporting** and **BI**.
 
 > The JasperReports Library is the world's most popular open source reporting engine. It is entirely written in Java and it is able to use data coming from any kind of data source and produce pixel-perfect documents that can be viewed, printed or exported in a variety of document formats including HTML, PDF, Excel, OpenOffice and Word.
 
-It is recommended using [Jaspersoft Studio](http://community.jaspersoft.com/project/jaspersoft-studio) to build your reports, connect it to your datasource (ex:JSON, XML, MySQL, POSTGRES), loop thru the results and output it to PDF, XLS, DOC, RTF, ODF, etc.
+It is recommended using [Jaspersoft Studio](http://community.jaspersoft.com/project/jaspersoft-studio) to build your reports, connect it to your datasource (ex:JSON, XML, MySQL, POSTGRES, MSSQL), loop thru the results and output it to PDF, XLS, DOC, RTF, ODF, etc.
 
 *Some examples of what you can do:*
 
@@ -44,6 +44,7 @@ Package to generate reports with [JasperReports 6.3.1](http://community.jasperso
 * Pyhton [subprocess.run()](https://docs.python.org/3/library/subprocess.html) function
 * [optional] [Mysql Connector](http://dev.mysql.com/downloads/connector/j/) (if you want to use database)
 * [optional] [PostgreSQL Connector](https://jdbc.postgresql.org/download.html) (if you want to use database)
+* [optional] [MSSQL Connector](https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774) (if you want to use database)
 * [optional] [Jaspersoft Studio](http://community.jaspersoft.com/project/jaspersoft-studio) (to draw and compile your reports)
 
 ###Java
@@ -177,7 +178,7 @@ def advanced_example_using_database():
         format_list=["pdf", "rtf", "xml"],
         parameters={'python_version': python_version()},
         db_connection=con,
-        locale='pt_BR'  # LOCALE Ex.:(en_US, de_GE)
+        locale='pt_BR'  # LOCALE Ex.:(en, de)
     )
 
 ```
@@ -216,7 +217,7 @@ def xml_to_pdf():
             'driver': 'xml',
             'xml_xpath': '/CancelResponse/CancelResult/ID',
         },
-        locale='pt_BR'  # LOCALE Ex.:(en_US, de_GE)
+        locale='pt_BR'  # LOCALE Ex.:(en, de)
     )
 
     print('Result is the file below.')
@@ -253,7 +254,7 @@ def json_to_pdf():
             'driver': 'json',
             'json_query': json_query,
         },
-        locale='pt_BR'  # LOCALE Ex.:(en_US, de_GE)
+        locale='pt_BR'  # LOCALE Ex.:(en, de)
     )
 
     print('Result is the file below.')
@@ -298,6 +299,7 @@ Contribute to the community Python, feel free to contribute, make a fork!!
 ### Contributors
 
 * Michell Stuttgart <michellstut@gmail.com>
+* Daniel Rodrigues (geekcom) <danielrodrigues-ti@hotmail.com.com>
 
 ##Thanks
 
