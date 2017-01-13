@@ -34,16 +34,13 @@ logger = logging.getLogger(__name__)
 
 class JasperPy:
 
-    def __init__(self, resource_dir=False, redirect_output=False,
-                 background=False):
+    def __init__(self, resource_dir=False):
 
         self.path_executable = os.path.dirname(os.path.abspath(__file__)) \
                                + '/jasperstarter/bin'
 
         self.windows = True if os.name == 'nt' else False
         self._command = ''
-        self.redirect_output = redirect_output
-        self.background = background
 
         if not resource_dir:
             resource_dir = os.path.dirname(os.path.abspath(__file__)) \
@@ -55,8 +52,7 @@ class JasperPy:
         # Path to report resource dir or jar file
         self.resource_directory = resource_dir
 
-    def compile(self, input_file, output_file=False, background=True,
-                redirect_output=True):
+    def compile(self, input_file, output_file=False):
 
         if not input_file:
             raise NameError('No input file!')
@@ -70,15 +66,12 @@ class JasperPy:
         if output_file:
             command += ' -o ' + "\"%s\"" % output_file
 
-        self.redirect_output = redirect_output
-        self.background = background
         self._command = command
 
         return self.execute()
 
     def process(self, input_file, output_file=False, format_list=['pdf'],
-                parameters={}, db_connection={}, locale='pt_BR',
-                background=True, redirect_output=True):
+                parameters={}, db_connection={}, locale='pt_BR'):
 
         if not input_file:
             raise NameError('No input file!')
@@ -146,8 +139,6 @@ class JasperPy:
             if 'json_query' in db_connection:
                 command += ' --json-query ' + db_connection['json_query']
 
-        self.redirect_output = redirect_output
-        self.background = background
         self._command = command
 
         return self.execute()
