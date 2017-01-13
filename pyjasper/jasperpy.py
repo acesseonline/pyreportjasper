@@ -158,7 +158,7 @@ class JasperPy:
         if not input_xml:
             raise NameError('No input file!')
 
-        f = open(input_xml, 'rb')
+        f = open(input_xml, 'r')
         f_content = f.read()
         f.close()
         xmlstring = re.sub(' xmlns="[^"]+"', '', f_content, count=1)

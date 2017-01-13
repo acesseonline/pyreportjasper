@@ -50,7 +50,15 @@ class TestJasperPy(TestCase):
     def test_list_parameters(self):
         self.input_file = 'examples/hello_world_params.jrxml'
         self.assertRaises(NameError, self.jasper.list_parameters, False)
-        self.assertEqual(self.jasper.list_parameters(self.input_file), 0)
+        self.assertEqual(self.jasper.list_parameters(self.input_file),
+                         {
+                             'myString': ['java.lang.String', ''],
+                             'myInt': ['java.lang.Integer', ''],
+                             'myDate': ['java.util.Date', ''],
+                             'myImage': ['java.awt.Image',
+                                         'This is the description'
+                                         ' of parameter myImage']
+                         })
 
     def test_execute(self):
         self.assertEqual(self.jasper.execute(), 0)
