@@ -171,7 +171,6 @@ class JasperPy:
         return self._command
 
     def execute(self, run_as_user=False):
-
         if run_as_user and (not self.windows):
             self._command = 'su -u ' + run_as_user + " -c \"" + \
                                self.command + "\""
