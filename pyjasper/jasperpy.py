@@ -33,7 +33,6 @@ logger = logging.getLogger(__name__)
 
 
 class JasperPy:
-
     def __init__(self, resource_dir=False):
 
         self.path_executable = os.path.dirname(os.path.abspath(__file__)) \
@@ -71,7 +70,13 @@ class JasperPy:
         return self.execute()
 
     def process(self, input_file, output_file=False, format_list=['pdf'],
-                parameters={}, db_connection={}, locale='pt_BR'):
+                parameters=None, db_connection=None, locale='pt_BR'):
+
+        if parameters is None:
+            parameters = {}
+
+        if db_connection is None:
+            db_connection = {}
 
         if not input_file:
             raise NameError('No input file!')
@@ -173,7 +178,7 @@ class JasperPy:
     def execute(self, run_as_user=False):
         if run_as_user and (not self.windows):
             self._command = 'su -u ' + run_as_user + " -c \"" + \
-                               self.command + "\""
+                            self.command + "\""
 
         if os.path.isdir(self.path_executable):
             try:
