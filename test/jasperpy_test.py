@@ -41,6 +41,7 @@ class TestJasperPy(TestCase):
         # test invalid input format
         kwargs = {
             'input_file': self.input_file,
+            'output_file': self.output_dir,
             'format_list': 5
         }
         self.assertRaises(NameError, self.jasper.process, **kwargs)
