@@ -191,6 +191,7 @@ class JasperPy:
                 output = subprocess.check_call(self.command, shell=True)
             except subprocess.CalledProcessError as e:
                 logger.exception(e)
+                print(e)
                 raise NameError('Your report has an error and couldn '
                                 '\'t be processed!\ Try to output the command '
                                 'using the attribute `command;` and run it '
