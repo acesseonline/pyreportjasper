@@ -11,9 +11,9 @@ install:
 
    - pip install coveralls
    - pip install flake8
-   - sudo chmod -R 777 /home/travis/build/jadsonbr/pyreport/pyjasper/
 
 script:
+  - sudo chmod -R 777 /home/travis/build/jadsonbr/pyreport/pyjasper/
   - flake8 pyjasper/
   - coverage run setup.py test
 
