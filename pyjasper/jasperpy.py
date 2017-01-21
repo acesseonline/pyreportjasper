@@ -69,17 +69,17 @@ class JasperPy:
 
         return self.execute()
 
-    def process(self, input_file, output_file=False, format_list=False,
-                parameters=False, db_connection=False, locale='pt_BR'):
+    def process(self, input_file, output_file=False, format_list=['pdf'],
+                parameters={}, db_connection={}, locale='pt_BR'):
 
-        if not format_list:
-            format_list = ['pdf']
-
-        if not parameters:
-            parameters = {}
-
-        if not db_connection:
-            db_connection = {}
+        # if not format_list:
+        #     format_list = ['pdf']
+        #
+        # if not parameters:
+        #     parameters = {}
+        #
+        # if not db_connection:
+        #     db_connection = {}
 
         if not input_file:
             raise NameError('No input file!')
