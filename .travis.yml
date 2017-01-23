@@ -6,6 +6,7 @@ python:
    - "2.7"
    - "3.4"
    - "3.5"
+   - "3.6"
 
 install:
 
@@ -13,7 +14,7 @@ install:
    - pip install flake8
 
 script:
-  - sudo chmod -R 777 /home/travis/build/jadsonbr/pyreport/pyjasper/
+  - sudo apt-get install default-jdk
   - flake8 pyjasper/
   - coverage run setup.py test
 
