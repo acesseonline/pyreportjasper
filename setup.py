@@ -10,7 +10,12 @@ import re
 
 
 def get_version(package):
-
+    """
+    Based in https://github.com/tomchristie/django-rest-framework/blob/
+    971578ca345c3d3bae7fd93b87c41d43483b6f05/setup.py
+    :param package Package name
+    Return package version as listed in `__version__` in `init.py`.
+    """
     init_py = open(os.path.join(package, '__init__.py')).read()
     return re.search("__version__ = ['\"]([^'\"]+)['\"]", init_py).group(1)
 

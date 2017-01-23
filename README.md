@@ -1,12 +1,8 @@
 # Reports for Python, with JasperReports.
-[![Build Status](https://travis-ci.org/jadsonbr/pyreport.svg?branch=master)](https://travis-ci.org/jadsonbr/pyreport)
-[![Coverage Status](https://coveralls.io/repos/github/jadsonbr/pyreport/badge.svg?branch=master)](https://coveralls.io/github/jadsonbr/pyreport?branch=master)
-[![Code Health](https://landscape.io/github/jadsonbr/pyreport/master/landscape.svg?style=flat)](https://landscape.io/github/jadsonbr/pyreport/master)
-[![PyPI](https://img.shields.io/pypi/l/pyreportjasper.svg)](https://github.com/jadsonbr/pyreport/blob/master/LICENSE)
-
-**Language**
-
-[![pt_BR](https://img.shields.io/badge/language-pt__BR-green.svg)](docs/pt_BR/README.md)
+[![Build Status](https://travis-ci.org/multidadosti-erp/pyreport.svg?branch=feature%2Fpyjasper_adjust)](https://travis-ci.org/multidadosti-erp/pyreport)
+[![Coverage Status](https://coveralls.io/repos/github/multidadosti-erp/pyreport/badge.svg?branch=feature%2Fpyjasper_adjust)](https://coveralls.io/github/multidadosti-erp/pyreport?branch=feature%2Fpyjasper_adjust)
+[![Code Health](https://landscape.io/github/multidadosti-erp/pyreport/feature/pyjasper_adjust/landscape.svg?style=flat)](https://landscape.io/github/multidadosti-erp/pyreport/feature/pyjasper_adjust)
+[![PyPI](https://img.shields.io/pypi/l/pyreportjasper.svg)](https://github.com/multidadosti-erp/pyreport/blob/master/LICENSE)
 
 **Is using Linux servers?**
 
@@ -32,7 +28,7 @@ Well, everything. JasperReports is a powerful tool for **reporting** and **BI**.
 
 > The JasperReports Library is the world's most popular open source reporting engine. It is entirely written in Java and it is able to use data coming from any kind of data source and produce pixel-perfect documents that can be viewed, printed or exported in a variety of document formats including HTML, PDF, Excel, OpenOffice and Word.
 
-It is recommended using [Jaspersoft Studio](http://community.jaspersoft.com/project/jaspersoft-studio) to build your reports, connect it to your datasource (ex:JSON, XML, MySQL, POSTGRES, SQL Server), loop thru the results and output it to PDF, XLS, DOC, RTF, ODF, etc.
+It is recommended using [Jaspersoft Studio](http://community.jaspersoft.com/project/jaspersoft-studio) to build your reports, connect it to your datasource (ex:JSON, XML, MySQL, POSTGRES), loop thru the results and output it to PDF, XLS, DOC, RTF, ODF, etc.
 
 *Some examples of what you can do:*
 
@@ -40,38 +36,30 @@ It is recommended using [Jaspersoft Studio](http://community.jaspersoft.com/proj
 * Reports
 * Listings
 
-Package to generate reports with [JasperReports 6.3.1](http://community.jaspersoft.com/project/jasperreports-library) library through [JasperStarter v3.1](https://sourceforge.net/projects/jasperstarter/files/JasperStarter-3.1/) command-line tool.
+Package to generate reports with [JasperReports 6.3.1](http://community.jaspersoft.com/project/jaspersoft-studio/releases) library through [JasperStarter v3](http://jasperstarter.sourceforge.net/) command-line tool.
 
 ##Requirements
 
 * Java JDK 1.8
-* Python [subprocess.run()](https://docs.python.org/3/library/subprocess.html) function
+* Pyhton [subprocess.run()](https://docs.python.org/3/library/subprocess.html) function
+* [optional] [Mysql Connector](http://dev.mysql.com/downloads/connector/j/) (if you want to use database)
+* [optional] [PostgreSQL Connector](https://jdbc.postgresql.org/download.html) (if you want to use database)
+* [optional] [Jaspersoft Studio](http://community.jaspersoft.com/project/jaspersoft-studio) (to draw and compile your reports)
 
-##Optional
-
-* [Mysql JDBC](http://dev.mysql.com/downloads/connector/j/) (if you want to use database)
-* [PostgreSQL JDBC](https://jdbc.postgresql.org/download.html) (if you want to use database)
-* [SQL Server JDBC](https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774) (if you want to use database)
-* [Oracle JDBC](http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html) (if you want to use database)
-* [Jaspersoft Studio](http://community.jaspersoft.com/project/jaspersoft-studio) (to draw and compile your reports)
-
-###Note
-
-* The JDBC driver of your database should be place in the `pyjasper/jasperstarter/jdbc/` directory.
-* Using **pyjasper**, you can also access different types of data sources, including CSV, JDBC, JSON, NoSQL, XML, or your own custom data source.
-
-###Java (JDK and JRE)
+###Java
 
 Check if you already have Java installed:
 
 ```
-$ javac -version
-javac version 1.8.0_101
+$ java -version
+java version "1.8.0_101"
+Java(TM) SE Runtime Environment (build 1.8.0_101-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 25.101-b13, mixed mode)
 ```
 
 If you get:
 
-    command not found: javac
+    command not found: java
 
 Then install it with: (Ubuntu/Debian)
 
@@ -83,7 +71,7 @@ To install on: (centOS/Fedora)
 
 To install on windows visit the link-> [JDK](http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html) and look for the most appropriate version for your system.
 
-Now run the `javac -version` again and check if the output is ok.
+Now run the `java -version` again and check if the output is ok.
 
 ##Installation
 
@@ -279,6 +267,19 @@ All tests are in in the `test` directory. To run them
 ```
 python setup.py test
 ```
+
+###MySQL
+
+We ship the [MySQL connector](http://dev.mysql.com/downloads/connector/j/) (v5.1.39) in the `pyjasper/jasperstarter/jdbc/` directory.
+
+###PostgreSQL
+
+We ship the [PostgreSQL](https://jdbc.postgresql.org/) (v9.4-1203) in the `pyjasper/jasperstarter/jdbc/` directory.
+
+###MSSQL
+
+[Microsoft JDBC Drivers 6.0, 4.2, 4.1, and 4.0 for SQL Server
+](https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774).
 
 ##Performance
 
