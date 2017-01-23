@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # The MIT License (MIT)
 #
-# Copyright (c) 2017 Jadson Bonfim Ribeiro <jadsonbr@outlook.com.br>
 # Copyright (c) 2017 Michell Stuttgart <michellstut@gmail.com>
 #
 
@@ -16,16 +15,10 @@ class TestJasperPy(TestCase):
         self.jasper = JasperPy()
 
     def test_compile(self):
-        """
-        Test of compile method, of class JasperPy.
-        """
         self.assertRaises(NameError, self.jasper.compile, False)
         self.assertEqual(self.jasper.compile(self.input_file), 0)
 
     def test_process(self):
-        """
-        Test of process method, of class JasperPy.
-        """
         self.assertRaises(NameError, self.jasper.process, False)
 
         # test invalid format input. Must be list ['pdf']
@@ -55,9 +48,6 @@ class TestJasperPy(TestCase):
                                 format_list=['pdf', 'odt', 'xls']), 0)
 
     def test_list_parameters(self):
-        """
-        Test of parameters list method, of class JasperPy.
-        """
         self.input_file = 'examples/hello_world_params.jrxml'
         self.assertRaises(NameError, self.jasper.list_parameters, False)
         self.assertEqual(self.jasper.list_parameters(self.input_file),
@@ -71,24 +61,7 @@ class TestJasperPy(TestCase):
                          })
 
     def test_execute(self):
-        """
-        Test of execute method, of class JasperPy.
-        """
         self.assertEqual(self.jasper.execute(), 0)
 
         self.jasper.path_executable = ''
         self.assertRaises(NameError, self.jasper.execute, False)
-
-    def test_compileToFileJasperreportsFunctions(self):
-        """
-        This report uses functions with dependency to jasperreports-functions
-        """
-        self.input_file2 = 'examples/charactersetTestWithStudioBuiltinFunctions.jrxml'
-        self.assertEqual(self.jasper.compile(self.input_file), 0)
-
-    def test_compileToFileJavaScript(self):
-        """
-        This report uses functions with dependency to jasperreports-functions
-        """
-        self.input_file2 = 'examples/charactersetTestWithJavaScript.jrxml'
-        self.assertEqual(self.jasper.compile(self.input_file), 0)

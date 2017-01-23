@@ -53,7 +53,7 @@ Invoke JasperStarter with _process \-h_ to get help on the process command:
 
     $ jasperstarter process -h
 
-Example with reportparameters:
+Example with report parameters:
 
     $ jasperstarter pr report.jasper -t mysql -u myuser -f pdf -H myhost \
      -n mydb -o report -p secret -P CustomerNo=10 StartFrom=2012-10-01
