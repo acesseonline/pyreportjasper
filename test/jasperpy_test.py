@@ -79,16 +79,16 @@ class TestJasperPy(TestCase):
         self.jasper.path_executable = ''
         self.assertRaises(NameError, self.jasper.execute, False)
 
-    # def test_compileToFileJasperreportsFunctions(self):
-    #     """
-    #     This report uses functions with dependency to jasperreports-functions
-    #     """
-    #     self.input_file2 = 'examples/charactersetTestWithStudioBuiltinFunctions.jrxml'
-    #     self.assertEqual(self.jasper.compile(self.input_file), 0)
-    #
-    # def test_compileToFileJavaScript(self):
-    #     """
-    #     This report uses functions with dependency to jasperreports-functions
-    #     """
-    #     self.input_file2 = 'examples/charactersetTestWithJavaScript.jrxml'
-    #     self.assertEqual(self.jasper.compile(self.input_file), 0)
+    def test_compileToFileJasperreportsFunctions(self):
+        """
+        This report uses functions with dependency to jasperreports-functions
+        """
+        self.input_file2 = 'examples/charactersetTestWithStudioBuiltinFunctions.jrxml'
+        self.assertEqual(self.jasper.compile(self.input_file), 0)
+
+    def test_compileToFileJavaScript(self):
+        """
+        This report uses functions with dependency to jasperreports-functions
+        """
+        self.input_file2 = 'examples/charactersetTestWithJavaScript.jrxml'
+        self.assertEqual(self.jasper.compile(self.input_file), 0)
