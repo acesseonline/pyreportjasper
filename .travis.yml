@@ -14,7 +14,6 @@ install:
    - pip install flake8
 
 script:
-  - sudo apt-get install default-jdk
   - flake8 pyjasper/
   - coverage run setup.py test
 
