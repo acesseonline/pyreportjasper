@@ -1,7 +1,7 @@
 # Reports for Python, with JasperReports.
-[![Build Status](https://travis-ci.org/jadsonbr/pyreport.svg?branch=master)](https://travis-ci.org/jadsonbr/pyreport)
-[![Coverage Status](https://coveralls.io/repos/github/jadsonbr/pyreport/badge.svg?branch=master)](https://coveralls.io/github/jadsonbr/pyreport?branch=master)
-[![Code Health](https://landscape.io/github/jadsonbr/pyreport/master/landscape.svg?style=flat)](https://landscape.io/github/jadsonbr/pyreport/master)
+[![Build Status](https://travis-ci.org/jadsonbr/pyreport.svg?branch=develop)](https://travis-ci.org/jadsonbr/pyreport)
+[![Coverage Status](https://coveralls.io/repos/github/jadsonbr/pyreport/badge.svg?branch=develop)](https://coveralls.io/github/jadsonbr/pyreport?branch=develop)
+[![Code Health](https://landscape.io/github/jadsonbr/pyreport/develop/landscape.svg?style=flat)](https://landscape.io/github/jadsonbr/pyreport/develop)
 [![PyPI](https://img.shields.io/pypi/l/pyreportjasper.svg)](https://github.com/jadsonbr/pyreport/blob/master/LICENSE)
 
 **Language**
@@ -12,11 +12,11 @@
 
 Do not forget to grant permission 777 for the directory where is the package.
 
-##Introduction
+## Introduction
 
 This package aims to be a solution to compile and process JasperReports (.jrxml & .jasper files).
 
-###Why?
+### Why?
 
 Did you ever had to create a good looking Invoice with a lot of fields for your great web app or desktop?
 
@@ -24,7 +24,7 @@ I had to, and the solutions out there were not perfect. Generating *HTML* + *CSS
 
 Then I found **JasperReports** the best open source solution for reporting.
 
-###What can I do with this?
+### What can I do with this?
 
 Well, everything. JasperReports is a powerful tool for **reporting** and **BI**.
 
@@ -42,12 +42,12 @@ It is recommended using [Jaspersoft Studio](http://community.jaspersoft.com/proj
 
 Package to generate reports with [JasperReports 6.3.1](http://community.jaspersoft.com/project/jasperreports-library) library through [JasperStarter v3.1](https://sourceforge.net/projects/jasperstarter/files/JasperStarter-3.1/) command-line tool.
 
-##Requirements
+## Requirements
 
 * Java JDK 1.8
 * Python [subprocess.run()](https://docs.python.org/3/library/subprocess.html) function
 
-##Optional
+## Optional
 
 * [Mysql JDBC](http://dev.mysql.com/downloads/connector/j/) (if you want to use database)
 * [PostgreSQL JDBC](https://jdbc.postgresql.org/download.html) (if you want to use database)
@@ -55,12 +55,12 @@ Package to generate reports with [JasperReports 6.3.1](http://community.jasperso
 * [Oracle JDBC](http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html) (if you want to use database)
 * [Jaspersoft Studio](http://community.jaspersoft.com/project/jaspersoft-studio) (to draw and compile your reports)
 
-###Note
+### Note
 
 * The JDBC driver of your database should be place in the `pyjasper/jasperstarter/jdbc/` directory.
 * Using **pyjasper**, you can also access different types of data sources, including CSV, JDBC, JSON, NoSQL, XML, or your own custom data source.
 
-###Java (JDK and JRE)
+### Java (JDK and JRE)
 
 Check if you already have Java installed:
 
@@ -85,7 +85,7 @@ To install on windows visit the link-> [JDK](http://www.oracle.com/technetwork/p
 
 Now run the `javac -version` again and check if the output is ok.
 
-##Installation
+## Installation
 
 Install [PyPI](https://pypi.python.org/pypi/pyreportjasper) if you don't have it.
 ```
@@ -94,9 +94,9 @@ pip install pyreportjasper
 
 and that's it.
 
-##Examples
+## Examples
 
-###The *Hello World* example.
+### The *Hello World* example.
 
 Go to the examples directory in the root of the package 
 Open the `test/examples/hello_world.jrxml` file with Jaspersoft Studio or with your favorite text editor and take a look at the source code.
@@ -121,7 +121,7 @@ def compiling():
 
 This commando will compile the `hello_world.jrxml` source file to a `hello_world.jasper` file.
 
-####Processing
+#### Processing
 
 Now lets process the report that we compile before:
 
@@ -143,7 +143,7 @@ Now check the examples folder! :) Great right? You now have 2 files, `hello_worl
 
 Check the *API* of the  `compile` and `process` functions in the file `pyjasper/jasperpy.py` file.
 
-####Listing Parameters
+#### Listing Parameters
 
 Querying the jasper file to examine parameters available in the given jasper report file:
 
@@ -160,7 +160,7 @@ def listing_parameters():
 
 ```
 
-###Advanced example - using a database
+### Advanced example - using a database
 
 We can also specify parameters for connecting to database:
 
@@ -199,7 +199,7 @@ def advanced_example_using_database():
 For a complete list of locales see [Supported Locales](http://www.oracle.com/technetwork/java/javase/java8locales-2095355.html)
 
 
-###Reports from a XML
+### Reports from a XML
 
 See how easy it is to generate a report with a source an XML file:
 
@@ -236,7 +236,7 @@ def xml_to_pdf():
     
 ```
 
-###Reports from a JSON File
+### Reports from a JSON File
 
 See how easy it is to generate a report with a source an JSON file:
 
@@ -272,7 +272,7 @@ def json_to_pdf():
     print(output + '.pdf')
 ```
 
-###Tests
+### Tests
 
 All tests are in in the `test` directory. To run them
 
@@ -280,17 +280,17 @@ All tests are in in the `test` directory. To run them
 python setup.py test
 ```
 
-##Performance
+## Performance
 
 Depends on the complexity, amount of data and the resources of your machine (let me know your use case).
 
 I have a report that generates a *Invoice* with a DB connection, images and multiple pages and it takes about **3/4 seconds** to process. I suggest that you use a worker to generate the reports in the background.
 
-##Questions?
+## Questions?
 
 Open a [Issue](https://github.com/jadsonbr/pyreport/issues) 
 
-##Contribute
+## Contribute
 
 Contribute to the community Python, feel free to contribute, make a fork!!
 
@@ -298,6 +298,6 @@ Contribute to the community Python, feel free to contribute, make a fork!!
 
 * Michell Stuttgart <michellstut@gmail.com>
 
-##Thanks
+## Thanks
 
 Thanks to [Cenote GmbH](http://www.cenote.de/) for the [JasperStarter](http://jasperstarter.sourceforge.net/) tool.
