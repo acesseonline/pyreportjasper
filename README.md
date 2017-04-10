@@ -135,7 +135,7 @@ def processing():
     output = os.path.dirname(os.path.abspath(__file__)) + '/output/examples'
     jasper = pyjasper.JasperPy()
     jasper.process(
-        input_file, output=output, format_list=["pdf", "rtf"])
+        input_file, output_file=output, format_list=["pdf", "rtf"])
 
 ```
 
@@ -185,7 +185,7 @@ def advanced_example_using_database():
     jasper = pyjasper.JasperPy()
     jasper.process(
         input_file,
-        output=output,
+        output_file=output,
         format_list=["pdf", "rtf", "xml"],
         parameters={'python_version': python_version()},
         db_connection=con,
@@ -220,7 +220,7 @@ def xml_to_pdf():
 
     jasper.process(
         input_file,
-        output=output,
+        output_file=output,
         format_list=["pdf"],
         parameters={},
         db_connection={
@@ -257,7 +257,7 @@ def json_to_pdf():
     jasper = pyjasper.JasperPy()
     jasper.process(
         input_file,
-        output=output,
+        output_file=output,
         format_list=["pdf"],
         parameters={},
         db_connection={
