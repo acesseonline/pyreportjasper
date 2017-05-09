@@ -8,6 +8,9 @@
 
 [![pt_BR](https://img.shields.io/badge/language-pt__BR-green.svg)](docs/pt_BR/README.md)
 
+**Telegram**
+[![Telegram](https://img.shields.io/badge/Telegram-https%3A%2F%2Ft.me%2Fjoinchat%2FAAAAAEQ0GBjuOIO7KgsJhQ-blue.svg)](https://t.me/joinchat/AAAAAEQ0GBjuOIO7KgsJhQ)
+
 **Is using Linux servers?**
 
 Do not forget to grant permission 777 for the directory where is the package.
