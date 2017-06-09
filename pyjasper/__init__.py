@@ -5,7 +5,7 @@
 #
 
 __title__ = 'PyReportJasper'
-__version__ = '0.1.3'
+__version__ = '0.1.7'
 __author__ = 'Jadson Bonfim Ribeiro'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2017 Jadson Bonfim Ribeiro'
