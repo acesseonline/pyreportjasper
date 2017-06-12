@@ -43,7 +43,7 @@ It is recommended using [Jaspersoft Studio](http://community.jaspersoft.com/proj
 * Reports
 * Listings
 
-Package to generate reports with [JasperReports 6.3.1](http://community.jaspersoft.com/project/jasperreports-library) library through [JasperStarter v3.1](https://sourceforge.net/projects/jasperstarter/files/JasperStarter-3.1/) command-line tool.
+Package to generate reports with [JasperReports](http://community.jaspersoft.com/project/jasperreports-library) library through [JasperStarter](https://bitbucket.org/cenote/jasperstarter/src) command-line tool.
 
 ## Requirements
 
