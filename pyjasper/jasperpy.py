@@ -57,8 +57,7 @@ class JasperPy:
         if not input_file:
             raise NameError('No input file!')
 
-        command = EXECUTABLE if self.windows \
-            else self.path_executable + '/' + EXECUTABLE
+        command = self.path_executable + '/' + EXECUTABLE
 
         command += ' compile '
         command += "\"%s\"" % input_file
@@ -82,8 +81,7 @@ class JasperPy:
         else:
             raise NameError("'format_list' value is not list!")
 
-        command = EXECUTABLE if self.windows \
-            else self.path_executable + '/' + EXECUTABLE
+        command = self.path_executable + '/' + EXECUTABLE
 
         command += " --locale %s" % locale
         command += ' process '
