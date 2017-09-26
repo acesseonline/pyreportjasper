@@ -275,6 +275,41 @@ def json_to_pdf():
     print(output + '.pdf')
 ```
 
+### Working with resources (i18n resource bundles, icons or images)
+
+If you need provide resource to report, you can do that by set parameter `resource` in method `jasper.process`. More details [jasper starter manual page](http://jasperstarter.cenote.de/usage.html#Reports_with_resources).
+
+```python
+import os
+from platform import python_version
+import pyjasper
+
+def advanced_example_using_database():
+    input_file = os.path.dirname(os.path.abspath(__file__)) + \
+                 '/examples/hello_world.jrxml'
+    output = os.path.dirname(os.path.abspath(__file__)) + '/output/examples'
+    con = {
+        'driver': 'postgres',
+        'username': 'DB_USERNAME',
+        'password': 'DB_PASSWORD',
+        'host': 'DB_HOST',
+        'database': 'DB_DATABASE',
+        'schema': 'DB_SCHEMA',
+        'port': '5432'
+    }
+    jasper = pyjasper.JasperPy()
+    jasper.process(
+        input_file,
+        output_file=output,
+        format_list=["pdf", "rtf", "xml"],
+        parameters={'python_version': python_version()},
+        db_connection=con,
+        locale='pt_BR',  # LOCALE Ex.:(en_US, de_GE)
+        resource='path/to/my/resource/myresource.jar'
+    )
+
+```
+
 ### Tests
 
 All tests are in in the `test` directory. To run them
