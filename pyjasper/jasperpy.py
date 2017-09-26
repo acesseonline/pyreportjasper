@@ -71,7 +71,7 @@ class JasperPy:
         return self.execute()
 
     def process(self, input_file, output_file=False, format_list=['pdf'],
-                parameters={}, db_connection={}, locale='pt_BR'):
+                parameters={}, db_connection={}, locale='pt_BR', resource=""):
 
         if not input_file:
             raise NameError('No input file!')
@@ -138,6 +138,12 @@ class JasperPy:
 
             if 'json_query' in db_connection:
                 command += ' --json-query ' + db_connection['json_query']
+
+        if resource != "":
+            if (resource == "."):
+                command += " -r "
+            else:
+                command += " -r " + resource
 
         self._command = command
 
