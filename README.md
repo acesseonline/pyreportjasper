@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/jadsonbr/pyreport.svg?branch=master)](https://travis-ci.org/jadsonbr/pyreport)
 [![Coverage Status](https://coveralls.io/repos/github/jadsonbr/pyreport/badge.svg?branch=master)](https://coveralls.io/github/jadsonbr/pyreport?branch=master)
 [![Code Health](https://landscape.io/github/jadsonbr/pyreport/master/landscape.svg?style=flat)](https://landscape.io/github/jadsonbr/pyreport/master)
-[![PyPI](https://img.shields.io/pypi/l/pyreportjasper.svg)](https://github.com/jadsonbr/pyreport/blob/master/LICENSE) [![Telegram](https://img.shields.io/badge/Telegram-https%3A%2F%2Ft.me%2Fjoinchat%2FAAAAAEQ0GBjuOIO7KgsJhQ-blue.svg)](https://t.me/joinchat/AAAAAEQ0GBjuOIO7KgsJhQ)
+[![PyPI](https://img.shields.io/pypi/l/pyreportjasper.svg)](https://github.com/jadsonbr/pyreport/blob/master/LICENSE)
 
 **Language**
 
