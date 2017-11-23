@@ -334,7 +334,7 @@ Contribute to the community Python, feel free to contribute, make a fork!!
 
 ### Contributors
 
-* Michell Stuttgart <michellstut@gmail.com>
+* [Michell Stuttgart](https://github.com/mstuttgart)
 
 ## Thanks
 
