@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/jadsonbr/pyreport.svg?branch=master)](https://travis-ci.org/jadsonbr/pyreport)
 [![Coverage Status](https://coveralls.io/repos/github/jadsonbr/pyreport/badge.svg?branch=master)](https://coveralls.io/github/jadsonbr/pyreport?branch=master)
 [![Code Health](https://landscape.io/github/jadsonbr/pyreport/master/landscape.svg?style=flat)](https://landscape.io/github/jadsonbr/pyreport/master)
-[![PyPI](https://img.shields.io/pypi/l/pyreportjasper.svg)](https://github.com/jadsonbr/pyreport/blob/master/LICENSE) [![Telegram](https://img.shields.io/badge/Telegram-https%3A%2F%2Ft.me%2Fjoinchat%2FAAAAAEQ0GBjuOIO7KgsJhQ-blue.svg)](https://t.me/joinchat/AAAAAEQ0GBjuOIO7KgsJhQ)
+[![PyPI](https://img.shields.io/pypi/l/pyreportjasper.svg)](https://github.com/jadsonbr/pyreport/blob/master/LICENSE)
 
 **Language**
 
@@ -275,6 +275,64 @@ def json_to_pdf():
     print(output + '.pdf')
 ```
 
+
+### Flask Example
+
+Get parameters via URL and filter them if they are valid parameters for the _jrxml_ file:
+
+After runnig you could visit http://localhost:5000/?myString=My%20Beautiful%20String&myInt=1&myDate=2017-01-01&this_parameter=ignored
+
+```python
+# -*- coding: utf-8 -*-
+import os
+from pyjasper.jasperpy import JasperPy
+from flask import Flask, request, make_response
+
+
+app = Flask(__name__)
+input_file =  os.path.dirname(os.path.abspath(__file__)) + \
+                 '/examples/hello_world_params.jrxml'
+jasper = JasperPy()
+
+
+def compiling():
+    jasper.compile(input_file)
+
+def processing(parameters):
+    output_file = os.path.dirname(os.path.abspath(__file__)) + '/output/examples'
+    jasper.process(
+        input_file, output_file, parameters=parameters, format_list=["pdf"])
+
+def filter_parameters(request_args):
+    list_parameters = jasper.list_parameters(input_file)
+    parameters = {}
+    for key in list_parameters:
+      if key in request_args:
+        parameters[key] = request_args[key]
+    return parameters
+
+@app.route('/')
+def my_route():
+  request_args = request.args.to_dict()
+  parameters = filter_parameters(request_args)
+
+  processing(parameters)
+
+  try:
+      with app.open_resource(os.path.dirname(os.path.abspath(__file__)) + '/output/examples/hello_world_params.pdf') as f:
+          content = f.read()
+      resposta = make_response(content)
+      resposta.headers['Content-Type'] = 'application/pdf; charset=utf-8'
+      resposta.headers['Content-Disposition'] = 'inline; filename=hello_world_params.pdf'
+      return resposta
+  except IOError:
+      return make_response("<h1>403 Forbidden</h1>", 403)
+
+if __name__ == '__main__':
+    compiling()
+    app.run(host='0.0.0.0')
+
+```
 ### Working with resources (i18n resource bundles, icons or images)
 
 If you need provide resource to report, you can do that by set parameter `resource` in method `jasper.process`. More details [jasper starter manual page](http://jasperstarter.cenote.de/usage.html#Reports_with_resources).
@@ -334,7 +392,7 @@ Contribute to the community Python, feel free to contribute, make a fork!!
 
 ### Contributors
 
-* Michell Stuttgart <michellstut@gmail.com>
+* [Michell Stuttgart](https://github.com/mstuttgart)
 
 ## Thanks
 
