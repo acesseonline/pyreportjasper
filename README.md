@@ -91,7 +91,33 @@ Install [PyPI](https://pypi.python.org/pypi/pyreportjasper) if you don't have it
 pip install pyreportjasper
 ```
 
-and that's it.
+### Usando o código
+Pyreport is actively developed in GitHub, where code is [always available](https://github.com/jadsonbr/pyreport).
+
+You can clone the public repository:
+```
+git clone git://github.com/jadsonbr/pyreport.git
+```
+
+Download [tar file](https://github.com/jadsonbr/pyreport/tarball/master):
+```
+curl -OL https://github.com/jadsonbr/pyreport/tarball/master
+```
+
+Or, Download the [zip file](https://github.com/jadsonbr/pyreport/zipball/master):
+```
+curl -OL https://github.com/jadsonbr/pyreport/zipball/master
+```
+
+Unzip the downloaded file
+
+Navigate to the unzipped folder
+
+Once you have a copy of the code, you can easily include it in your Pytohn package, or install it in your site-packages directory:
+```
+$ python setup.py install
+```
+
 
 ## Examples
 
@@ -278,7 +304,6 @@ def json_to_pdf():
 ```
 
 
-```
 ### Subreport Example
 
 ```python
