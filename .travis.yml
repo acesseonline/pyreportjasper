@@ -5,6 +5,7 @@ python:
    - "2.7"
    - "3.4"
    - "3.5"
+   - "3.6"
 
 install:
    - pip install coveralls
@@ -12,6 +13,7 @@ install:
 
 script:
   - flake8 pyjasper/
+  - chmod +x /home/travis/build/jadsonbr/pyreport/pyjasper/jasperstarter/bin/jasperstarter
   - coverage run setup.py test
 
 after_success:
