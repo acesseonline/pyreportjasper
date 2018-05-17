@@ -139,7 +139,7 @@ don't have it.
 
     pip install pyreportjasper
 
-Usando o código
+Using the code
 ~~~~~~~~~~~~~~~
 
 Pyreport is actively developed in GitHub, where code is `always
