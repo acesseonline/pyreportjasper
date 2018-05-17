@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # The MIT License (MIT)
 #
-# Copyright (c) 2017 Jadson Bonfim Ribeiro <jadsonbr@outlook.com.br>
+# Copyright (c) 2017 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
 #
 
 from setuptools import setup, find_packages
@@ -20,7 +20,7 @@ setup(
     url='https://github.com/jadsonbr/pyreport',
     license='MIT License',
     author='Jadson Bonfim Ribeiro',
-    author_email='jadsonbr@outlook.com.br',
+    author_email='contato@jadsonbr.com.br',
     keywords='report jasper python',
     description='This package aims to be a solution to compile and process '
                 'JasperReports (.jrxml & .jasper files).',
@@ -42,5 +42,6 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
 )

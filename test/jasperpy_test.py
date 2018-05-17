@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # The MIT License (MIT)
 #
-# Copyright (c) 2017 Michell Stuttgart <michellstut@gmail.com>
+# Copyright (c) 2017 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
 #
-
+import os
 from unittest import TestCase
 from pyjasper.jasperpy import JasperPy
 
@@ -65,3 +65,35 @@ class TestJasperPy(TestCase):
 
         self.jasper.path_executable = ''
         self.assertRaises(NameError, self.jasper.execute, False)
+
+
+    def test_subreports(self):
+        input_file_header = 'examples/subreports/header.jrxml'
+
+        input_file_details = 'examples/subreports/details.jrxml'
+
+        input_file_main = 'examples/subreports/main.jrxml'
+
+        self.input_file = 'examples/subreports/main.jasper'
+
+        data_file = 'examples/subreports/contacts.xml'
+
+
+        self.jasper.compile(input_file_header)
+        self.jasper.compile(input_file_details)
+        self.jasper.compile(input_file_main)
+
+        self.assertEqual(
+            self.jasper.process(
+                self.input_file,
+                format_list=["pdf"],
+                parameters={},
+                db_connection={
+                    'data_file': data_file,
+                    'driver': 'xml',
+                    'xml_xpath': '"/"',
+                },
+                locale='pt_BR',  # LOCALE Ex.:(en_US, de_GE)
+                resource='examples/subreports/'
+            ), 0)
+

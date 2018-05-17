@@ -4,11 +4,6 @@
 [![Code Health](https://landscape.io/github/jadsonbr/pyreport/master/landscape.svg?style=flat)](https://landscape.io/github/jadsonbr/pyreport/master)
 [![PyPI](https://img.shields.io/pypi/l/pyreportjasper.svg)](https://github.com/jadsonbr/pyreport/blob/master/LICENSE)
 
-**Language**
-
-[![pt_BR](https://img.shields.io/badge/language-pt__BR-green.svg)](docs/pt_BR/README.md)
-
-
 
 
 **Is using Linux servers?**
@@ -56,6 +51,7 @@ Package to generate reports with [JasperReports](http://community.jaspersoft.com
 * [PostgreSQL JDBC](https://jdbc.postgresql.org/download.html) (if you want to use database)
 * [SQL Server JDBC](https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774) (if you want to use database)
 * [Oracle JDBC](http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html) (if you want to use database)
+* [MongoDB JDBC](https://mongodb.github.io/mongo-java-driver/) (if you want to use database)
 * [Jaspersoft Studio](http://community.jaspersoft.com/project/jaspersoft-studio) (to draw and compile your reports)
 
 ### Note
@@ -111,6 +107,7 @@ First we need to compile our `JRXML` file into a `JASPER` binary file. We just h
 **Note 1:** You don't need to do this step if you are using *Jaspersoft Studio*. You can compile directly within the program.
 
 ```python
+# -*- coding: utf-8 -*-
 import os
 import pyjasper
 
@@ -129,6 +126,7 @@ This commando will compile the `hello_world.jrxml` source file to a `hello_world
 Now lets process the report that we compile before:
 
 ```python
+# -*- coding: utf-8 -*-
 import os
 import pyjasper
 
@@ -151,6 +149,7 @@ Check the *API* of the  `compile` and `process` functions in the file `pyjasper/
 Querying the jasper file to examine parameters available in the given jasper report file:
 
 ```python
+# -*- coding: utf-8 -*-
 import os
 import pyjasper
 
@@ -168,6 +167,7 @@ def listing_parameters():
 We can also specify parameters for connecting to database:
 
 ```python
+# -*- coding: utf-8 -*-
 import os
 from platform import python_version
 import pyjasper
@@ -207,6 +207,7 @@ For a complete list of locales see [Supported Locales](http://www.oracle.com/tec
 See how easy it is to generate a report with a source an XML file:
 
 ```python
+# -*- coding: utf-8 -*-
 import os
 import pyjasper
 
@@ -244,6 +245,7 @@ def xml_to_pdf():
 See how easy it is to generate a report with a source an JSON file:
 
 ```python
+# -*- coding: utf-8 -*-
 import os
 import pyjasper
 
@@ -273,6 +275,55 @@ def json_to_pdf():
 
     print('Result is the file below.')
     print(output + '.pdf')
+```
+
+
+```
+### Subreport Example
+
+```python
+# -*- coding: utf-8 -*-
+import os
+import pyjasper
+
+def subreport_example():
+
+    input_file_header = os.path.dirname(os.path.abspath(__file__)) + \
+                        '/examples/subreports/header.jrxml'
+
+    input_file_details = os.path.dirname(os.path.abspath(__file__)) + \
+                         '/examples/subreports/details.jrxml'
+
+    input_file_main = os.path.dirname(os.path.abspath(__file__)) + \
+                      '/examples/subreports/main.jrxml'
+
+    input_file = os.path.dirname(os.path.abspath(__file__)) + \
+                 '/examples/subreports/main.jasper'
+
+    data_file = os.path.dirname(os.path.abspath(__file__)) + \
+                '/examples/subreports/contacts.xml'
+
+    output = os.path.dirname(os.path.abspath(__file__)) + '/output/examples/subreports/'
+
+    jasper = pyjasper.JasperPy()
+
+    jasper.compile(input_file_header)
+    jasper.compile(input_file_details)
+    jasper.compile(input_file_main)
+
+    jasper.process(
+                input_file,
+                output_file=output,
+                format_list=["pdf"],
+                parameters={},
+                db_connection={
+                    'data_file': data_file,
+                    'driver': 'xml',
+                    'xml_xpath': '"/"',
+                },
+                locale='pt_BR',  # LOCALE Ex.:(en_US, de_GE)
+                resource='examples/subreports/'
+            )
 ```
 
 
@@ -338,6 +389,7 @@ if __name__ == '__main__':
 If you need provide resource to report, you can do that by set parameter `resource` in method `jasper.process`. More details [jasper starter manual page](http://jasperstarter.cenote.de/usage.html#Reports_with_resources).
 
 ```python
+# -*- coding: utf-8 -*-
 import os
 from platform import python_version
 import pyjasper
@@ -392,7 +444,7 @@ Contribute to the community Python, feel free to contribute, make a fork!!
 
 ### Contributors
 
-* [Michell Stuttgart](https://github.com/mstuttgart)
+* [List of contributors](https://github.com/jadsonbr/pyreport/graphs/contributors)
 
 ## Thanks
 
