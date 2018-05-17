@@ -5,12 +5,16 @@
 #
 
 from setuptools import setup, find_packages
+import io
 import os
 import re
+from collections import OrderedDict
 
+
+with io.open('README.rst', 'rt', encoding='utf8') as f:
+    readme = f.read()
 
 def get_version(package):
-
     init_py = open(os.path.join(package, '__init__.py')).read()
     return re.search("__version__ = ['\"]([^'\"]+)['\"]", init_py).group(1)
 
@@ -18,12 +22,20 @@ setup(
     name='pyreportjasper',
     version=get_version('pyjasper'),
     url='https://github.com/jadsonbr/pyreport',
+    project_urls=OrderedDict((
+        ('Documentation', 'https://github.com/jadsonbr/pyreport/blob/master/README.rst'),
+        ('Code', 'https://github.com/jadsonbr/pyreport'),
+        ('Issue tracker', 'https://github.com/jadsonbr/pyreport/issues'),
+    )),
     license='MIT License',
     author='Jadson Bonfim Ribeiro',
     author_email='contato@jadsonbr.com.br',
     keywords='report jasper python',
     description='This package aims to be a solution to compile and process '
                 'JasperReports (.jrxml & .jasper files).',
+    long_description=readme,
+    zip_safe=False,
+    platforms='any',
     packages=find_packages(),
     install_requires=[
     ],
