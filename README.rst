@@ -3,8 +3,6 @@ Reports for Python, with JasperReports.
 
 |Build Status| |Coverage Status| |Code Health| |PyPI|
 
-.. warning:: As of version 1.0.0 we changed the way to import
-
 **Is using Linux servers?**
 
 Do not forget to grant permission 777 for the directory where is the
