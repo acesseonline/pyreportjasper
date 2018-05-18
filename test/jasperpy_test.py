@@ -5,7 +5,7 @@
 #
 import os
 from unittest import TestCase
-from pyjasper.jasperpy import JasperPy
+from pyreportjasper import JasperPy
 
 
 class TestJasperPy(TestCase):

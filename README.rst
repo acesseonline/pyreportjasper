@@ -3,6 +3,8 @@ Reports for Python, with JasperReports.
 
 |Build Status| |Coverage Status| |Code Health| |PyPI|
 
+.. warning:: As of version 1.0.0 we changed the way to import
+
 **Is using Linux servers?**
 
 Do not forget to grant permission 777 for the directory where is the
@@ -90,8 +92,8 @@ Note
 ~~~~
 
 -  The JDBC driver of your database should be place in the
-   ``pyjasper/jasperstarter/jdbc/`` directory.
--  Using **pyjasper**, you can also access different types of data
+   ``pyreportjasper/jasperstarter/jdbc/`` directory.
+-  Using **pyreportjasper**, you can also access different types of data
    sources, including CSV, JDBC, JSON, NoSQL, XML, or your own custom
    data source.
 
@@ -199,12 +201,12 @@ Studio*. You can compile directly within the program.
 
     # -*- coding: utf-8 -*-
     import os
-    import pyjasper
+    from pyreportjasper import JasperPy
 
     def compiling():
         input_file = os.path.dirname(os.path.abspath(__file__)) + \
                      '/examples/hello_world.jrxml'
-        jasper = pyjasper.JasperPy()
+        jasper = JasperPy()
         jasper.compile(input_file)
 
 This commando will compile the ``hello_world.jrxml`` source file to a
@@ -219,13 +221,13 @@ Now lets process the report that we compile before:
 
     # -*- coding: utf-8 -*-
     import os
-    import pyjasper
+    from pyreportjasper import JasperPy
 
     def processing():
         input_file = os.path.dirname(os.path.abspath(__file__)) + \
                      '/examples/hello_world.jrxml'
         output = os.path.dirname(os.path.abspath(__file__)) + '/output/examples'
-        jasper = pyjasper.JasperPy()
+        jasper = JasperPy()
         jasper.process(
             input_file, output_file=output, format_list=["pdf", "rtf"])
 
@@ -233,7 +235,7 @@ Now check the examples folder! :) Great right? You now have 2 files,
 ``hello_world.pdf`` and ``hello_world.rtf``.
 
 Check the *API* of the ``compile`` and ``process`` functions in the file
-``pyjasper/jasperpy.py`` file.
+``pyreportjasper/jasperpy.py`` file.
 
 Listing Parameters
 ^^^^^^^^^^^^^^^^^^
@@ -245,12 +247,12 @@ jasper report file:
 
     # -*- coding: utf-8 -*-
     import os
-    import pyjasper
+    from pyreportjasper import JasperPy
 
     def listing_parameters():
         input_file = os.path.dirname(os.path.abspath(__file__)) + \
                      '/examples/hello_world_params.jrxml'
-        jasper = pyjasper.JasperPy()
+        jasper = JasperPy()
         output = jasper.list_parameters(input_file)
         print(output)
 
@@ -264,7 +266,7 @@ We can also specify parameters for connecting to database:
     # -*- coding: utf-8 -*-
     import os
     from platform import python_version
-    import pyjasper
+    from pyreportjasper import JasperPy
 
     def advanced_example_using_database():
         input_file = os.path.dirname(os.path.abspath(__file__)) + \
@@ -279,7 +281,7 @@ We can also specify parameters for connecting to database:
             'schema': 'DB_SCHEMA',
             'port': '5432'
         }
-        jasper = pyjasper.JasperPy()
+        jasper = JasperPy()
         jasper.process(
             input_file,
             output_file=output,
@@ -303,7 +305,7 @@ See how easy it is to generate a report with a source an XML file:
 
     # -*- coding: utf-8 -*-
     import os
-    import pyjasper
+    from pyreportjasper import JasperPy
 
     def xml_to_pdf():
         input_file = os.path.dirname(os.path.abspath(__file__)) + \
@@ -314,7 +316,7 @@ See how easy it is to generate a report with a source an XML file:
         data_file = os.path.dirname(os.path.abspath(__file__)) + \
             '/examples/CancelAck.xml'
 
-        jasper = pyjasper.JasperPy()
+        jasper = JasperPy()
 
         jasper.process(
             input_file,
@@ -342,7 +344,7 @@ See how easy it is to generate a report with a source an JSON file:
 
     # -*- coding: utf-8 -*-
     import os
-    import pyjasper
+    from pyreportjasper import JasperPy
 
     def json_to_pdf():
         input_file = os.path.dirname(os.path.abspath(__file__)) + \
@@ -354,7 +356,7 @@ See how easy it is to generate a report with a source an JSON file:
         data_file = os.path.dirname(os.path.abspath(__file__)) + \
             '/examples/contacts.json'
 
-        jasper = pyjasper.JasperPy()
+        jasper = JasperPy()
         jasper.process(
             input_file,
             output_file=output,
@@ -378,7 +380,7 @@ Subreport Example
 
     # -*- coding: utf-8 -*-
     import os
-    import pyjasper
+    from pyreportjasper import JasperPy
 
     def subreport_example():
 
@@ -399,7 +401,7 @@ Subreport Example
 
         output = os.path.dirname(os.path.abspath(__file__)) + '/output/examples/subreports/'
 
-        jasper = pyjasper.JasperPy()
+        jasper = JasperPy()
 
         jasper.compile(input_file_header)
         jasper.compile(input_file_details)
@@ -432,7 +434,7 @@ http://localhost:5000/?myString=My%20Beautiful%20String&myInt=1&myDate=2017-01-0
 
     # -*- coding: utf-8 -*-
     import os
-    from pyjasper.jasperpy import JasperPy
+    from pyreportjasper import JasperPy
     from flask import Flask, request, make_response
 
 
@@ -492,7 +494,7 @@ page <http://jasperstarter.cenote.de/usage.html#Reports_with_resources>`__.
     # -*- coding: utf-8 -*-
     import os
     from platform import python_version
-    import pyjasper
+    from pyreportjasper import JasperPy
 
     def advanced_example_using_database():
         input_file = os.path.dirname(os.path.abspath(__file__)) + \
@@ -507,7 +509,7 @@ page <http://jasperstarter.cenote.de/usage.html#Reports_with_resources>`__.
             'schema': 'DB_SCHEMA',
             'port': '5432'
         }
-        jasper = pyjasper.JasperPy()
+        jasper = JasperPy()
         jasper.process(
             input_file,
             output_file=output,

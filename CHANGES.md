@@ -3,9 +3,13 @@ PyReport Changelog
 
 Here you can see the full list of changes between each PyReportJasper release.
 
-Version 0.1.8
+Version 1.0.0
 -------------
 * Rename pyreport repository for pyreportjasper
+* We change the way we import
+
+Version 0.1.8
+-------------
 * Updated the jasperstarter and jasperreport libraries
 * Added subreport examples
 * Added tests for subreports

@@ -12,8 +12,8 @@ install:
    - pip install flake8
 
 script:
-  - flake8 pyjasper/
-  - chmod +x /home/travis/build/jadsonbr/pyreportjasper/pyjasper/jasperstarter/bin/jasperstarter
+  - flake8 pyreportjasper/
+  - chmod +x /home/travis/build/jadsonbr/pyreportjasper/pyreportjasper/jasperstarter/bin/jasperstarter
   - coverage run setup.py test
 
 after_success:

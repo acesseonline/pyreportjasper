@@ -20,7 +20,7 @@ def get_version(package):
 
 setup(
     name='pyreportjasper',
-    version=get_version('pyjasper'),
+    version=get_version('pyreportjasper'),
     url='https://github.com/jadsonbr/pyreportjasper',
     project_urls=OrderedDict((
         ('Documentation', 'https://github.com/jadsonbr/pyreportjasper/blob/master/README.rst'),
