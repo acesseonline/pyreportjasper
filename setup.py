@@ -21,11 +21,11 @@ def get_version(package):
 setup(
     name='pyreportjasper',
     version=get_version('pyjasper'),
-    url='https://github.com/jadsonbr/pyreport',
+    url='https://github.com/jadsonbr/pyreportjasper',
     project_urls=OrderedDict((
-        ('Documentation', 'https://github.com/jadsonbr/pyreport/blob/master/README.rst'),
-        ('Code', 'https://github.com/jadsonbr/pyreport'),
-        ('Issue tracker', 'https://github.com/jadsonbr/pyreport/issues'),
+        ('Documentation', 'https://github.com/jadsonbr/pyreportjasper/blob/master/README.rst'),
+        ('Code', 'https://github.com/jadsonbr/pyreportjasper'),
+        ('Issue tracker', 'https://github.com/jadsonbr/pyreportjasper/issues'),
     )),
     license='MIT License',
     author='Jadson Bonfim Ribeiro',

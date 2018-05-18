@@ -143,27 +143,27 @@ Using the code
 ~~~~~~~~~~~~~~~
 
 Pyreport is actively developed in GitHub, where code is `always
-available <https://github.com/jadsonbr/pyreport>`__.
+available <https://github.com/jadsonbr/pyreportjasper>`__.
 
 You can clone the public repository:
 
 ::
 
-    git clone git://github.com/jadsonbr/pyreport.git
+    git clone git://github.com/jadsonbr/pyreportjasper.git
 
 Download `tar
-file <https://github.com/jadsonbr/pyreport/tarball/master>`__:
+file <https://github.com/jadsonbr/pyreportjasper/tarball/master>`__:
 
 ::
 
-    curl -OL https://github.com/jadsonbr/pyreport/tarball/master
+    curl -OL https://github.com/jadsonbr/pyreportjasper/tarball/master
 
 Or, Download the `zip
-file <https://github.com/jadsonbr/pyreport/zipball/master>`__:
+file <https://github.com/jadsonbr/pyreportjasper/zipball/master>`__:
 
 ::
 
-    curl -OL https://github.com/jadsonbr/pyreport/zipball/master
+    curl -OL https://github.com/jadsonbr/pyreportjasper/zipball/master
 
 Unzip the downloaded file
 
@@ -540,7 +540,7 @@ suggest that you use a worker to generate the reports in the background.
 Questions?
 ----------
 
-Open a `Issue <https://github.com/jadsonbr/pyreport/issues>`__
+Open a `Issue <https://github.com/jadsonbr/pyreportjasper/issues>`__
 
 Contribute
 ----------
@@ -552,7 +552,7 @@ Contributors
 ~~~~~~~~~~~~
 
 -  `List of
-   contributors <https://github.com/jadsonbr/pyreport/graphs/contributors>`__
+   contributors <https://github.com/jadsonbr/pyreportjasper/graphs/contributors>`__
 
 Thanks
 ------
@@ -560,11 +560,11 @@ Thanks
 Thanks to `Cenote GmbH <http://www.cenote.de/>`__ for the
 `JasperStarter <http://jasperstarter.sourceforge.net/>`__ tool.
 
-.. |Build Status| image:: https://travis-ci.org/jadsonbr/pyreport.svg?branch=master
-   :target: https://travis-ci.org/jadsonbr/pyreport
-.. |Coverage Status| image:: https://coveralls.io/repos/github/jadsonbr/pyreport/badge.svg?branch=master
-   :target: https://coveralls.io/github/jadsonbr/pyreport?branch=master
-.. |Code Health| image:: https://landscape.io/github/jadsonbr/pyreport/master/landscape.svg?style=flat
-   :target: https://landscape.io/github/jadsonbr/pyreport/master
+.. |Build Status| image:: https://travis-ci.org/jadsonbr/pyreportjasper.svg?branch=master
+   :target: https://travis-ci.org/jadsonbr/pyreportjasper
+.. |Coverage Status| image:: https://coveralls.io/repos/github/jadsonbr/pyreportjasper/badge.svg?branch=master
+   :target: https://coveralls.io/github/jadsonbr/pyreportjasper?branch=master
+.. |Code Health| image:: https://landscape.io/github/jadsonbr/pyreportjasper/master/landscape.svg?style=flat
+   :target: https://landscape.io/github/jadsonbr/pyreportjasper/master
 .. |PyPI| image:: https://img.shields.io/pypi/l/pyreportjasper.svg
-   :target: https://github.com/jadsonbr/pyreport/blob/master/LICENSE
+   :target: https://github.com/jadsonbr/pyreportjasper/blob/master/LICENSE
