@@ -1,1 +1,1 @@
-recursive-include pyjasper/jasperstarter *
+recursive-include pyreportjasper/jasperstarter *
