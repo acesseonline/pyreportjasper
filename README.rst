@@ -371,6 +371,35 @@ See how easy it is to generate a report with a source an JSON file:
         print('Result is the file below.')
         print(output + '.pdf')
 
+**Note 3:**
+
+JasperReports can process JSON files using either the `original JSON DataSource
+<http://jasperreports.sourceforge.net/sample.reference/jsondatasource/index.html>`__
+or the `newer JSONQL Data Source
+<http://jasperreports.sourceforge.net/sample.reference/jsonqldatasource/index.html>`__.
+Refer to the JSONQL DataSource documentation for the differences. The example above
+uses the JSON DataSource. To use the enhanced capabilities of the JSONQL DataSource
+instead use:
+
+-   the ``jsonql.jrxml`` input file
+-   the ``jsonql`` driver setting
+-   the ``jsonql_query`` query setting
+
+by changing these three parts of the example:
+
+.. code-block:: python
+
+    ...
+        input_file = os.path.dirname(os.path.abspath(__file__)) + \
+                     '/examples/jsonql.jrxml'
+    ...
+            db_connection={
+    ...
+                'driver': 'jsonql',
+                'jsonql_query': json_query,
+            },
+
+
 Subreport Example
 ~~~~~~~~~~~~~~~~~
 
