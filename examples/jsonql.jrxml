@@ -14,7 +14,7 @@
 	<field name="street" class="java.lang.String">
 		<fieldDescription><![CDATA[street]]></fieldDescription>
 	</field>
-	<field name="city" class="java.lang.Integer">
+	<field name="city" class="java.lang.String">
 		<fieldDescription><![CDATA[city]]></fieldDescription>
 	</field>
 	<field name="phone" class="java.lang.String">
