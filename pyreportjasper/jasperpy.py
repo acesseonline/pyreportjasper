@@ -186,7 +186,7 @@ class JasperPy:
             except AttributeError:
                 output = subprocess.check_output(self.command, shell=True)
             except subprocess.CalledProcessError as e:
-                logger.exception(e.output)
+                logger.exception(str(e.output))
                 raise NameError('Your report has an error and couldn '
                                 '\'t be processed!\ Try to output the command '
                                 'using the attribute `command;` and run it '
