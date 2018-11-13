@@ -2,6 +2,31 @@
 JasperStarter - Running JasperReports from command line
 ========================================================
 
+Release notes - JasperStarter - Version 3.3.0
+---------------------------------------------
+
+Known bugs:
+    * [JAS-120] - JasperReports-6.7.0 Version does not match with reported version from the jar file in 
+      This is an upstream error which causes JasperStarter to put out
+      a wrong JasperReports version number of 6.6.0 instead of 6.7.0
+      if you call: jasperstarter -V
+
+** Bug
+    * [JAS-116] - SSL error
+    * [JAS-121] - Container 'Build' exceeded memory limit.
+    * [JAS-122] - Runtime error if a chart with "chart customizers" is used
+
+** New Feature
+    * [JAS-113] - JSONQL data source support
+
+** Task
+    * [JAS-102] - Pipeline: enable build artifact upload to download section
+    * [JAS-119] - Include JasperReports-6.7.0
+
+** Improvement
+    * [JAS-89] - Accept stdin for datafile input
+
+
 Release Notes - JasperStarter - Version 3.2.1
 ---------------------------------------------
 

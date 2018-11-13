@@ -97,3 +97,20 @@ class TestJasperPy(TestCase):
                 resource='examples/subreports/'
             ), 0)
 
+
+    def test_jsonql(self):
+        self.input_file = 'examples/jsonql/NorthwindOrdersReport.jrxml';
+        data_file = 'examples/data/northwind.json'
+        self.assertEqual(
+            self.jasper.process(
+                self.input_file,
+                format_list=["pdf"],
+                parameters={},
+                # db_connection={
+                #     'data_file': data_file,
+                #     'driver': 'json',
+                #     'json_query': 'Northwind.Customers.Orders',
+                # },
+                locale='en_US',  # LOCALE Ex.:(en_US, de_GE)
+                resource='examples/jsonql/'
+            ), 0)
