@@ -191,9 +191,9 @@ class JasperPy:
             except subprocess.CalledProcessError as e:
                 logger.exception(str(e))
                 raise NameError('Your report has an error and couldn '
-                                '\'t be processed!\ Try to output the command '
-                                'using the attribute `command;` and run it '
-                                'manually in the console!')
+                                r'\'t be processed!\ Try to output the '
+                                'command using the attribute `command;` '
+                                'and run it manually in the console!')
         else:
             raise NameError('Invalid resource directory!')
 
