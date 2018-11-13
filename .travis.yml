@@ -13,7 +13,7 @@ install:
 
 script:
   - flake8 pyreportjasper/
-  - chmod +x /home/travis/build/jadsonbr/pyreportjasper/pyreportjasper/jasperstarter/bin/jasperstarter
+  - chmod +x /home/travis/build/PyReportJasper/pyreportjasper/pyreportjasper/jasperstarter/bin/jasperstarter
   - coverage run setup.py test
 
 after_success:

@@ -1,7 +1,7 @@
 Reports for Python, with JasperReports.
 =======================================
 
-|Build Status| |Coverage Status| |Code Health| |PyPI|
+|Build Status| |Coverage Status| |PyPI|
 
 **Is using Linux servers?**
 
@@ -589,11 +589,9 @@ Thanks
 Thanks to `Cenote GmbH <http://www.cenote.de/>`__ for the
 `JasperStarter <http://jasperstarter.sourceforge.net/>`__ tool.
 
-.. |Build Status| image:: https://travis-ci.org/jadsonbr/pyreportjasper.svg?branch=master
-   :target: https://travis-ci.org/jadsonbr/pyreportjasper
-.. |Coverage Status| image:: https://coveralls.io/repos/github/jadsonbr/pyreportjasper/badge.svg?branch=master
-   :target: https://coveralls.io/github/jadsonbr/pyreportjasper?branch=master
-.. |Code Health| image:: https://landscape.io/github/jadsonbr/pyreportjasper/master/landscape.svg?style=flat
-   :target: https://landscape.io/github/jadsonbr/pyreportjasper/master
+.. |Build Status| image:: https://travis-ci.org/PyReportJasper/pyreportjasper.svg?branch=master
+   :target: https://travis-ci.org/PyReportJasper/pyreportjasper
+.. |Coverage Status| image:: https://coveralls.io/repos/github/PyReportJasper/pyreportjasper/badge.svg?branch=master
+   :target: https://coveralls.io/github/PyReportJasper/pyreportjasper?branch=master
 .. |PyPI| image:: https://img.shields.io/pypi/l/pyreportjasper.svg
-   :target: https://github.com/jadsonbr/pyreportjasper/blob/master/LICENSE
+   :target: https://github.com/PyReportJasper/pyreportjasper/blob/master/LICENSE
