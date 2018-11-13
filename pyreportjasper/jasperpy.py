@@ -137,6 +137,9 @@ class JasperPy:
             if 'json_query' in db_connection:
                 command += ' --json-query ' + db_connection['json_query']
 
+            if 'jsonql_query' in db_connection:
+                command += ' --jsonql-query ' + db_connection['jsonql_query']
+
         if resource != "":
             if (resource == "."):
                 command += " -r "
