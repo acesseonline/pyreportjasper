@@ -69,7 +69,7 @@ Requirements
 
 No support
 ------------
-.. image:: https://github.com/PyReportJasper/pyreportjasper/blob/master/docs/mongodb-not supported.jpg?raw=true
+.. image:: docs/mongodb-not supported.jpg
 
 Optional
 --------
