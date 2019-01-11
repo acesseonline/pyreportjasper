@@ -69,7 +69,7 @@ Requirements
 
 No support
 ------------
-.. image:: docs/mongodb-not supported.jpg
+.. image:: docs/mongodb-not-supported.jpg
 
 Optional
 --------
