@@ -67,6 +67,10 @@ Requirements
    `subprocess.run() <https://docs.python.org/3/library/subprocess.html>`__
    function
 
+No support
+------------
+<p align="left"><img src="https://github.com/PyReportJasper/pyreportjasper/blob/master/docs/mongodb-not supported.jpg?raw=true"></p>
+
 Optional
 --------
 
@@ -80,8 +84,6 @@ Optional
 -  `Oracle
    JDBC <http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html>`__
    (if you want to use database)
--  `MongoDB JDBC <https://mongodb.github.io/mongo-java-driver/>`__ (if
-   you want to use database)
 -  `Jaspersoft
    Studio <http://community.jaspersoft.com/project/jaspersoft-studio>`__
    (to draw and compile your reports)
