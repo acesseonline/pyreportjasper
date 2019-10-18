@@ -4,11 +4,6 @@ sudo: required
 jdk:
   - openjdk8
 
-addons:
-  apt:
-    packages:
-      - oracle-java8-installer
-
 python:
    - "2.7"
    - "3.4"
