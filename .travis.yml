@@ -18,6 +18,9 @@ install:
 
 script:
   - java -version
+  - source ./jdk_switcher.sh
+  - jdk_switcher use openjdk8
+  - java -version
   - flake8 pyreportjasper/
   - chmod +x /home/travis/build/PyReportJasper/pyreportjasper/pyreportjasper/jasperstarter/bin/jasperstarter
   - coverage run setup.py test
