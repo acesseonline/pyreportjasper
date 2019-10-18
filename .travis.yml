@@ -28,7 +28,7 @@ install:
 
 script:
   - java -version
-  - flake8 pyreportjasper/
+#  - flake8 pyreportjasper/
   - chmod +x /home/travis/build/PyReportJasper/pyreportjasper/pyreportjasper/jasperstarter/bin/jasperstarter
   - coverage run setup.py test
 
