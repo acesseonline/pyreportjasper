@@ -45,7 +45,7 @@ class TestJasperPy(TestCase):
         # test
         self.assertEqual(
             self.jasper.process(self.input_file,
-                                format_list=['pdf', 'odt', 'xls']), 0)
+                                format_list=['pdf']), 0)
 
     def test_list_parameters(self):
         self.input_file = 'examples/hello_world_params.jrxml'
@@ -115,3 +115,24 @@ class TestJasperPy(TestCase):
                 locale='pt_BR',  # LOCALE Ex.:(en_US, de_GE)
             ), 0)
 
+    def test_csv(self):
+        self.input_file = 'examples/csvMeta.jrxml'
+
+        data_file = 'examples/csvExampleHeaders.csv'
+
+        self.assertEqual(
+            self.jasper.process(
+                self.input_file,
+                format_list=["pdf"],
+                parameters={},
+                db_connection={
+                    'data_file': data_file,
+                    'driver': 'csv',
+                    'csv_charset': 'utf8',
+                    'csv_field_del': '|',
+                    'csv_record_del': '\r\n',
+                    #'csv_first_row': True,
+                    'csv_columns': 'Name,Street,City,Phone'
+                },
+                locale='en_US',  # LOCALE Ex.:(en_US, de_GE)
+            ), 0)

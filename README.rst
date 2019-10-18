@@ -343,6 +343,48 @@ See how easy it is to generate a report with a source an XML file:
         print(output + '.pdf')
         
 
+Reports from a CSV File
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+See how easy it is to generate a report with a source an CSV file:
+
+.. code-block:: python
+
+    # -*- coding: utf-8 -*-
+    import os
+    from pyreportjasper import JasperPy
+
+    def json_to_pdf():
+        input_file = os.path.dirname(os.path.abspath(__file__)) + \
+                     '/examples/csvMeta.jrxml'
+
+        output = os.path.dirname(os.path.abspath(__file__)) + '/output/_ContactsCSV'
+
+        data_file = os.path.dirname(os.path.abspath(__file__)) + \
+            '/examples/csvExampleHeaders.csv'
+
+        jasper = JasperPy()
+        jasper.process(
+            input_file,
+            output_file=output,
+            format_list=["pdf"],
+            parameters={},
+            db_connection={
+                'data_file': data_file,
+                'driver': 'csv',
+                'csv_charset': 'utf8',
+                'csv_field_del': '|',
+                'csv_record_del': '\r\n',
+                #'csv_first_row': True,
+                'csv_columns': 'Name,Street,City,Phone'
+            },
+            locale='pt_BR'  # LOCALE Ex.:(en_US, de_GE)
+        )
+
+        print('Result is the file below.')
+        print(output + '.pdf')
+
+
 Reports from a JSON File
 ~~~~~~~~~~~~~~~~~~~~~~~~
 

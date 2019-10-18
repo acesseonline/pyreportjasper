@@ -6,7 +6,7 @@
 from .jasperpy import JasperPy
 
 __title__ = 'PyReportJasper'
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 __author__ = 'Jadson Bonfim Ribeiro'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2018 Jadson Bonfim Ribeiro'

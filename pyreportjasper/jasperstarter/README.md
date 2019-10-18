@@ -29,10 +29,11 @@ It has the following features:
   * Integrate in non Java applications (for example PHP, Python)
   * Binary executable on Windows
   * Includes JasperReports so this is the only tool you need to install
+  * "Diskless" operation using stdin and stdout for input data and output.
 
 Requirements:
 
-  * Java 1.6 or higher
+  * Java 1.8 or higher
   * A JDBC 2.1 driver for your database
 
 
@@ -67,6 +68,43 @@ Example with hsql using database type generic:
 For more information take a look in the docs directory of the distibution
 archive or read the [Usage][] page online.
 
+### Python Integration using public API
+
+JasperStarter exposes an API which can be used with [jpy][] to
+provide direct access from Python:
+
+    #
+    # Load the JVM. See the jpy docs for details.
+    #
+    import jpyutil
+    jpyutil.init_jvm(jvm_maxmem='512M', jvm_classpath=['.../jasperstarter.jar'])
+    #
+    # Load the Java types needed.
+    #
+    import jpy
+    Arrays = jpy.get_type('java.util.Arrays')
+    File = jpy.get_type('java.io.File')
+    Report = jpy.get_type('de.cenote.jasperstarter.Report')
+    Config = jpy.get_type('de.cenote.jasperstarter.Config')
+    DsType = jpy.get_type('de.cenote.jasperstarter.types.DsType')
+    #
+    # Create the JasperStarter configuration. See Config.java for details.
+    #
+    config = Config()
+    config.setInput('jsonql.jrxml')
+    config.setOutput('contacts.pdf')
+    config.setDbType(DsType.json)
+    config.setDataFile(File('contacts.json'))
+    config.setJsonQuery('contacts.person')
+    config.setOutputFormats(Arrays.asList([]))
+    #
+    # Run the report. See Report.java for details.
+    #
+    instance = Report(config, File(config.getInput()))
+    instance.fill()
+    instance.exportPdf()
+
+See the examples/python directory for a fuller example.
 
 ### Release Notes
 
@@ -190,3 +228,4 @@ limitations under the License.
 [Usage]:http://jasperstarter.sourceforge.net/usage.html
 [Issues]:https://cenote-issues.atlassian.net/browse/JAS
 [Changes]:changes.html
+[jpy]:https://github.com/bcdev/jpy

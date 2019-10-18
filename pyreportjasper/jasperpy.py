@@ -6,7 +6,6 @@
 
 import os
 import subprocess
-import logging
 import re
 import xml.etree.ElementTree as ET
 
@@ -27,9 +26,6 @@ FORMATS = (
 )
 
 EXECUTABLE = 'jasperstarter'
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
 
 
 class JasperPy:
@@ -56,9 +52,7 @@ class JasperPy:
 
         if not input_file:
             raise NameError('No input file!')
-
         command = self.path_executable + '/' + EXECUTABLE
-
         command += ' compile '
         command += "\"%s\"" % input_file
 
@@ -140,8 +134,23 @@ class JasperPy:
             if 'jsonql_query' in db_connection:
                 command += ' --jsonql-query ' + db_connection['jsonql_query']
 
+            if 'csv_first_row' in db_connection:
+                command += ' --csv-first-row '
+
+            if 'csv_columns' in db_connection:
+                command += ' --csv-columns ' + db_connection['csv_columns']
+
+            if 'csv_record_del' in db_connection:
+                command += ' --csv-record-del="' + db_connection['csv_record_del'] + '"'
+
+            if 'csv_field_del' in db_connection:
+                command += ' --csv-field-del="' + db_connection['csv_field_del'] + '"'
+
+            if 'csv_charset' in db_connection:
+                command += ' --csv-charset=' + db_connection['csv_charset']
+
         if resource != "":
-            if (resource == "."):
+            if resource == ".":
                 command += " -r "
             else:
                 command += " -r " + resource
@@ -185,15 +194,11 @@ class JasperPy:
         if os.path.isdir(self.path_executable):
             try:
                 output = subprocess.run(
-                    self.command, shell=True, check=True).returncode
+                    self.command, shell=True, check=True, encoding='utf-8', stderr=subprocess.PIPE).returncode
             except AttributeError:
                 output = subprocess.check_call(self.command, shell=True)
             except subprocess.CalledProcessError as e:
-                logger.exception(str(e))
-                raise NameError('Your report has an error and couldn '
-                                r'\'t be processed!\ Try to output the '
-                                'command using the attribute `command;` '
-                                'and run it manually in the console!')
+                raise NameError('Your report has an error and couldn\'t be processed!\n' + e.stderr)
         else:
             raise NameError('Invalid resource directory!')
 
