@@ -2,8 +2,12 @@ language: python
 sudo: required
 
 jdk:
-  - oraclejdk8
   - openjdk8
+
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
 
 python:
    - "2.7"
