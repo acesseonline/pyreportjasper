@@ -12,7 +12,7 @@ addons:
       - openjdk-8-jdk
 
 before_install:
-    - source travis_java_install.sh
+    - source ./travis_java_install.sh
 
 python:
    - "2.7"
