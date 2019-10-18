@@ -1,8 +1,18 @@
 language: python
 sudo: required
 
+dist: xenial
+
 jdk:
   - openjdk8
+
+addons:
+  apt:
+    packages:
+      - openjdk-8-jdk
+
+before_install:
+    - source travis_java_install.sh
 
 python:
    - "2.7"
@@ -17,9 +27,6 @@ install:
    - pip install flake8
 
 script:
-  - java -version
-  - source ./jdk_switcher.sh
-  - jdk_switcher use openjdk8
   - java -version
   - flake8 pyreportjasper/
   - chmod +x /home/travis/build/PyReportJasper/pyreportjasper/pyreportjasper/jasperstarter/bin/jasperstarter
