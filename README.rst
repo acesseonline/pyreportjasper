@@ -3,14 +3,6 @@ Reports for Python, with JasperReports.
 
 |Build Status| |Coverage Status| |PyPI|
 
-**Curso criando relatórios profissionais com JasperStudio Community**
-
-Gostaríamos de saber qual a sua maior dificuldade no desenvolvimento de relatórios com JasperStudio ou o que gostaria de ver nesse curso.
-Ajude-nos a montar a grade deste curso para que possamos criar um conteúdo de qualidade e que seja de grande utilidade para todos os interessados.
-
-`Acesse o link e responda. <https://forms.gle/GXn8HNUcG7phstYg9>`__
-
-
 **Is using Linux servers?**
 
 Do not forget to grant permission 777 for the directory where is the
