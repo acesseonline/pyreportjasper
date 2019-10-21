@@ -5,6 +5,12 @@
 __pycache__/
 *.py[cod]
 *$py.class
+
+/examples/*.pdf
+/examples/*.odt
+/examples/*.rtf
+/examples/*.xls
+
 /examples/jsonql.pdf
 /examples/hello_world.odt
 /examples/hello_world.pdf
@@ -13,6 +19,8 @@ __pycache__/
 /examples/hello_world_params.pdf
 /examples/subreports/main.pdf
 
+*.coverage
+htmlcov/
 # C extensions
 *.so
 

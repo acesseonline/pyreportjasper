@@ -3,14 +3,6 @@ Reports for Python, with JasperReports.
 
 |Build Status| |Coverage Status| |PyPI|
 
-**Curso criando relatórios profissionais com JasperStudio Community**
-
-Gostaríamos de saber qual a sua maior dificuldade no desenvolvimento de relatórios com JasperStudio ou o que gostaria de ver nesse curso.
-Ajude-nos a montar a grade deste curso para que possamos criar um conteúdo de qualidade e que seja de grande utilidade para todos os interessados.
-
-`Acesse o link e responda. <https://forms.gle/GXn8HNUcG7phstYg9>`__
-
-
 **Is using Linux servers?**
 
 Do not forget to grant permission 777 for the directory where is the
@@ -152,35 +144,35 @@ don't have it.
 Using the code
 ~~~~~~~~~~~~~~~
 
-Pyreport is actively developed in GitHub, where code is `always
-available <https://github.com/jadsonbr/pyreportjasper>`__.
+Pyreportjasper is actively developed in GitHub, where code is `always
+available <https://github.com/PyReportJasper/pyreportjasper>`__.
 
 You can clone the public repository:
 
 ::
 
-    git clone git://github.com/jadsonbr/pyreportjasper.git
+    git clone git://github.com/PyReportJasper/pyreportjasper.git
 
 Download `tar
-file <https://github.com/jadsonbr/pyreportjasper/tarball/master>`__:
+file <https://github.com/PyReportJasper/pyreportjasper/tarball/master>`__:
 
 ::
 
-    curl -OL https://github.com/jadsonbr/pyreportjasper/tarball/master
+    curl -OL https://github.com/PyReportJasper/pyreportjasper/tarball/master
 
 Or, Download the `zip
-file <https://github.com/jadsonbr/pyreportjasper/zipball/master>`__:
+file <https://github.com/PyReportJasper/pyreportjasper/zipball/master>`__:
 
 ::
 
-    curl -OL https://github.com/jadsonbr/pyreportjasper/zipball/master
+    curl -OL https://github.com/PyReportJasper/pyreportjasper/zipball/master
 
 Unzip the downloaded file
 
 Navigate to the unzipped folder
 
 Once you have a copy of the code, you can easily include it in your
-Pytohn package, or install it in your site-packages directory:
+Python package, or install it in your site-packages directory:
 
 ::
 
@@ -621,7 +613,7 @@ suggest that you use a worker to generate the reports in the background.
 Questions?
 ----------
 
-Open a `Issue <https://github.com/jadsonbr/pyreportjasper/issues>`__
+Open a `Issue <https://github.com/PyReportJasper/pyreportjasper/issues>`__
 
 Contribute
 ----------
@@ -633,7 +625,7 @@ Contributors
 ~~~~~~~~~~~~
 
 -  `List of
-   contributors <https://github.com/jadsonbr/pyreportjasper/graphs/contributors>`__
+   contributors <https://github.com/PyReportJasper/pyreportjasper/graphs/contributors>`__
 
 Thanks
 ------
