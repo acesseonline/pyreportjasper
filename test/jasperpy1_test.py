@@ -1,20 +1,18 @@
 # -*- coding: utf-8 -*-
 # GNU GENERAL PUBLIC LICENSE
 #
-# Copyright (c) 2020 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
+# Copyright (c) 2017 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
 #
-
 import os
 from unittest import TestCase
-from pyreportjasper import JasperPy
+from pyreportjasper import JasperPy1
 
 
-class TestJasperPy(TestCase):
-    EXAMPLES_DIR = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))), 'examples')
+class TestJasperPy1(TestCase):
 
     def setUp(self):
-        self.input_file = os.path.join(self.EXAMPLES_DIR, 'hello_world.jrxml')
-        self.jasper = JasperPy()
+        self.input_file = 'examples/hello_world.jrxml'
+        self.jasper = JasperPy1()
 
     def test_compile(self):
         self.assertRaises(NameError, self.jasper.compile, False)
@@ -45,25 +43,41 @@ class TestJasperPy(TestCase):
         self.assertRaises(NameError, self.jasper.process, **kwargs)
 
         # test
-        kwargs = {
-            'input_file': self.input_file,
-            'format_list': ['pdf']
-        }
-        self.assertEqual(self.jasper.process(**kwargs), 0)
+        self.assertEqual(
+            self.jasper.process(self.input_file,
+                                format_list=['pdf']), 0)
+
+    def test_list_parameters(self):
+        self.input_file = 'examples/hello_world_params.jrxml'
+        self.assertRaises(NameError, self.jasper.list_parameters, False)
+        self.assertEqual(self.jasper.list_parameters(self.input_file),
+                         {
+                             'myString': ['java.lang.String', ''],
+                             'myInt': ['java.lang.Integer', ''],
+                             'myDate': ['java.util.Date', ''],
+                             'myImage': ['java.awt.Image',
+                                         'This is the description'
+                                         ' of parameter myImage']
+                         })
+
+    def test_execute(self):
+        self.assertEqual(self.jasper.execute(), 0)
+
+        self.jasper.path_executable = ''
+        self.assertRaises(NameError, self.jasper.execute, False)
+
 
     def test_subreports(self):
+        input_file_header = 'examples/subreports/header.jrxml'
 
-        input_file_header = os.path.join(self.EXAMPLES_DIR, 'subreports', 'header.jrxml')
+        input_file_details = 'examples/subreports/details.jrxml'
 
-        input_file_details = os.path.join(self.EXAMPLES_DIR, 'subreports', 'details.jrxml')
+        input_file_main = 'examples/subreports/main.jrxml'
 
-        input_file_main = os.path.join(self.EXAMPLES_DIR, 'subreports', 'main.jrxml')
+        self.input_file = 'examples/subreports/main.jasper'
 
-        self.input_file = os.path.join(self.EXAMPLES_DIR, 'subreports', 'main.jasper')
+        data_file = 'examples/subreports/contacts.xml'
 
-        data_file = os.path.join(self.EXAMPLES_DIR, 'subreports', 'contacts.xml')
-
-        resources = os.path.join(self.EXAMPLES_DIR, 'subreports') + os.sep
 
         self.jasper.compile(input_file_header)
         self.jasper.compile(input_file_details)
@@ -77,16 +91,16 @@ class TestJasperPy(TestCase):
                 db_connection={
                     'data_file': data_file,
                     'driver': 'xml',
-                    'xml_xpath': '/',
+                    'xml_xpath': '"/"',
                 },
                 locale='pt_BR',  # LOCALE Ex.:(en_US, de_GE)
-                resource=resources
+                resource='examples/subreports/'
             ), 0)
 
     def test_jsonql(self):
-        self.input_file = os.path.join(self.EXAMPLES_DIR, 'jsonql.jrxml')
+        self.input_file = 'examples/jsonql.jrxml'
 
-        data_file = os.path.join(self.EXAMPLES_DIR, 'contacts.json')
+        data_file = 'examples/contacts.json'
 
         self.assertEqual(
             self.jasper.process(
@@ -97,36 +111,14 @@ class TestJasperPy(TestCase):
                     'data_file': data_file,
                     'driver': 'jsonql',
                     'jsonql_query': 'contacts.person',
-                    'json_locale': 'es_ES'
-                },
-                locale='pt_BR',  # LOCALE Ex.:(en_US, de_GE)
-            ), 0)
-
-    def test_json_process(self):
-        self.input_file = os.path.join(self.EXAMPLES_DIR, 'jsonql.jrxml')
-
-        data_file = os.path.join(self.EXAMPLES_DIR, 'contacts.json')
-
-        self.assertEqual(
-            self.jasper.process_json(
-                self.input_file,
-                format_list=["pdf"],
-                parameters={},
-                db_connection={
-                    'data_file': data_file,
-                    'driver': 'jsonql',
-                    'jsonql_query': 'contacts.person',
-                    'json_locale': 'es_ES',
-                    'json_date_pattern': 'yyyy-MM-dd',
-                    'json_number_pattern': '#,##0.##"'
                 },
                 locale='pt_BR',  # LOCALE Ex.:(en_US, de_GE)
             ), 0)
 
     def test_csv(self):
-        self.input_file = os.path.join(self.EXAMPLES_DIR, 'csvMeta.jrxml')
+        self.input_file = 'examples/csvMeta.jrxml'
 
-        data_file = os.path.join(self.EXAMPLES_DIR, 'csvExampleHeaders.csv')
+        data_file = 'examples/csvExampleHeaders.csv'
 
         self.assertEqual(
             self.jasper.process(
@@ -139,6 +131,7 @@ class TestJasperPy(TestCase):
                     'csv_charset': 'utf8',
                     'csv_field_del': '|',
                     'csv_record_del': '\r\n',
+                    #'csv_first_row': True,
                     'csv_columns': 'Name,Street,City,Phone'
                 },
                 locale='en_US',  # LOCALE Ex.:(en_US, de_GE)

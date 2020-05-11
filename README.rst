@@ -1,7 +1,7 @@
 Reports for Python, with JasperReports.
 =======================================
 
-|Build Status| |Coverage Status| |PyPI|
+|Travis| |Coverage| |License| |Donate|
 
 **Is using Linux servers?**
 
@@ -63,9 +63,8 @@ Requirements
 ------------
 
 -  Java JDK 1.8
--  Python
-   `subprocess.run() <https://docs.python.org/3/library/subprocess.html>`__
-   function
+-  Python `subprocess.run() <https://docs.python.org/3/library/subprocess.html>`__ function
+-  Maven
 
 No support
 ------------
@@ -96,6 +95,7 @@ Note
 -  Using **pyreportjasper**, you can also access different types of data
    sources, including CSV, JDBC, JSON, NoSQL, XML, or your own custom
    data source.
+
 
 Java (JDK and JRE)
 ~~~~~~~~~~~~~~~~~~
@@ -131,6 +131,31 @@ and look for the most appropriate version for your system.
 
 Now run the ``javac -version`` again and check if the output is ok.
 
+Maven
+~~~~~~~~~~~~~~~~~~
+
+Check if you already have Maven installed:
+
+::
+
+    $ mvn -version
+    Maven home: /tmp/apache-maven-3.6.2
+
+If you get:
+
+::
+
+    command not found: mvn
+
+Then install it with: (Ubuntu/Debian)
+
+::
+
+    $ cd ~/Downloads
+    $ wget https://www-us.apache.org/dist/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.tar.gz
+    $ tar -zxf apache-maven-3.6.2-bin.tar.gz /tmp/
+    $ sudo ln -s /tmp/apache-maven-3.6.2/bin/mvn /usr/local/bin/mvn
+
 Installation
 ------------
 
@@ -144,7 +169,7 @@ don't have it.
 Using the code
 ~~~~~~~~~~~~~~~
 
-Pyreportjasper is actively developed in GitHub, where code is `always
+Pyreport is actively developed in GitHub, where code is `always
 available <https://github.com/PyReportJasper/pyreportjasper>`__.
 
 You can clone the public repository:
@@ -172,7 +197,7 @@ Unzip the downloaded file
 Navigate to the unzipped folder
 
 Once you have a copy of the code, you can easily include it in your
-Python package, or install it in your site-packages directory:
+Pytohn package, or install it in your site-packages directory:
 
 ::
 
@@ -237,24 +262,6 @@ Now check the examples folder! :) Great right? You now have 2 files,
 Check the *API* of the ``compile`` and ``process`` functions in the file
 ``pyreportjasper/jasperpy.py`` file.
 
-Listing Parameters
-^^^^^^^^^^^^^^^^^^
-
-Querying the jasper file to examine parameters available in the given
-jasper report file:
-
-.. code-block:: python
-
-    # -*- coding: utf-8 -*-
-    import os
-    from pyreportjasper import JasperPy
-
-    def listing_parameters():
-        input_file = os.path.dirname(os.path.abspath(__file__)) + \
-                     '/examples/hello_world_params.jrxml'
-        jasper = JasperPy()
-        output = jasper.list_parameters(input_file)
-        print(output)
 
 Advanced example - using a database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -288,7 +295,7 @@ We can also specify parameters for connecting to database:
             format_list=["pdf", "rtf", "xml"],
             parameters={'python_version': python_version()},
             db_connection=con,
-            locale='pt_BR'  # LOCALE Ex.:(en_US, de_GE)
+            locale='en_US'  # LOCALE Ex.:(pt_BR, de_GE)
         )
 
 **Note 2:**
@@ -328,7 +335,7 @@ See how easy it is to generate a report with a source an XML file:
                 'driver': 'xml',
                 'xml_xpath': '/CancelResponse/CancelResult/ID',
             },
-            locale='pt_BR'  # LOCALE Ex.:(en_US, de_GE)
+            locale='en_US'  # LOCALE Ex.:(pt_BR, de_GE)
         )
 
         print('Result is the file below.')
@@ -346,7 +353,7 @@ See how easy it is to generate a report with a source an CSV file:
     import os
     from pyreportjasper import JasperPy
 
-    def json_to_pdf():
+    def csv_to_pdf():
         input_file = os.path.dirname(os.path.abspath(__file__)) + \
                      '/examples/csvMeta.jrxml'
 
@@ -370,7 +377,7 @@ See how easy it is to generate a report with a source an CSV file:
                 #'csv_first_row': True,
                 'csv_columns': 'Name,Street,City,Phone'
             },
-            locale='pt_BR'  # LOCALE Ex.:(en_US, de_GE)
+            locale='en_US'  # LOCALE Ex.:(pt_BR, de_GE)
         )
 
         print('Result is the file below.')
@@ -403,13 +410,17 @@ See how easy it is to generate a report with a source an JSON file:
             input_file,
             output_file=output,
             format_list=["pdf"],
-            parameters={},
+            parameters={
+                'JSON_DATE_PATTERN': 'yyyy-MM-dd',
+                'JSON_NUMBER_PATTERN': '#,##0.##',
+                'JSON_LOCALE': 'es_ES'
+            },
             db_connection={
                 'data_file': data_file,
                 'driver': 'json',
                 'json_query': json_query,
             },
-            locale='pt_BR'  # LOCALE Ex.:(en_US, de_GE)
+            locale='en_US'  # LOCALE Ex.:(pt_BR, de_GE)
         )
 
         print('Result is the file below.')
@@ -488,9 +499,15 @@ Subreport Example
                         'driver': 'xml',
                         'xml_xpath': '"/"',
                     },
-                    locale='pt_BR',  # LOCALE Ex.:(en_US, de_GE)
+                    locale='en_US',  # LOCALE Ex.:(pt_BR, de_GE)
                     resource='examples/subreports/'
                 )
+
+Django Example
+~~~~~~~~~~~~~~
+
+`Example Repository. <https://github.com/PyReportJasper/example_django>`__
+
 
 Flask Example
 ~~~~~~~~~~~~~
@@ -518,28 +535,18 @@ http://localhost:5000/?myString=My%20Beautiful%20String&myInt=1&myDate=2017-01-0
     def compiling():
         jasper.compile(input_file)
 
-    def processing(parameters):
+    def processing():
         output_file = os.path.dirname(os.path.abspath(__file__)) + '/output/examples'
-        jasper.process(
-            input_file, output_file, parameters=parameters, format_list=["pdf"])
+        jasper.process(input_file, output_file, format_list=["pdf"])
 
-    def filter_parameters(request_args):
-        list_parameters = jasper.list_parameters(input_file)
-        parameters = {}
-        for key in list_parameters:
-          if key in request_args:
-            parameters[key] = request_args[key]
-        return parameters
 
     @app.route('/')
     def my_route():
-      request_args = request.args.to_dict()
-      parameters = filter_parameters(request_args)
 
-      processing(parameters)
+      processing()
 
       try:
-          with app.open_resource(os.path.dirname(os.path.abspath(__file__)) + '/output/examples/hello_world_params.pdf') as f:
+          with app.open_resource(os.path.dirname(os.path.abspath(__file__)) + '/output/examples/hello_world.pdf') as f:
               content = f.read()
           resposta = make_response(content)
           resposta.headers['Content-Type'] = 'application/pdf; charset=utf-8'
@@ -551,6 +558,7 @@ http://localhost:5000/?myString=My%20Beautiful%20String&myInt=1&myDate=2017-01-0
     if __name__ == '__main__':
         compiling()
         app.run(host='0.0.0.0')
+
 
 Working with resources (i18n resource bundles, icons or images)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -587,7 +595,7 @@ page <http://jasperstarter.cenote.de/usage.html#Reports_with_resources>`__.
             format_list=["pdf", "rtf", "xml"],
             parameters={'python_version': python_version()},
             db_connection=con,
-            locale='pt_BR',  # LOCALE Ex.:(en_US, de_GE)
+            locale='en_US',  # LOCALE Ex.:(pt_BR, de_GE)
             resource='path/to/my/resource/myresource.jar'
         )
 
@@ -633,9 +641,11 @@ Thanks
 Thanks to `Cenote GmbH <http://www.cenote.de/>`__ for the
 `JasperStarter <http://jasperstarter.sourceforge.net/>`__ tool.
 
-.. |Build Status| image:: https://travis-ci.org/PyReportJasper/pyreportjasper.svg?branch=master
+.. |Travis| image:: https://travis-ci.org/PyReportJasper/pyreportjasper.svg?branch=master
    :target: https://travis-ci.org/PyReportJasper/pyreportjasper
-.. |Coverage Status| image:: https://coveralls.io/repos/github/PyReportJasper/pyreportjasper/badge.svg?branch=master
+.. |Coverage| image:: https://coveralls.io/repos/github/PyReportJasper/pyreportjasper/badge.svg?branch=master
    :target: https://coveralls.io/github/PyReportJasper/pyreportjasper?branch=master
-.. |PyPI| image:: https://img.shields.io/pypi/l/pyreportjasper.svg
+.. |License| image:: https://img.shields.io/badge/License-GPLv3-blue.svg
    :target: https://github.com/PyReportJasper/pyreportjasper/blob/master/LICENSE
+.. |Donate| image:: https://img.shields.io/badge/donate-help%20keep-EB4A3B.svg
+   :target: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=V2SUB9RQHYUGE&lc=US&item_name=pyreportjasper&item_number=pyreportjasper&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted

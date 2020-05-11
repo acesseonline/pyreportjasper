@@ -23,11 +23,9 @@ python:
 
 install:
    - pip install coveralls
-#   - pip install flake8
 
 script:
   - java -version
-#  - flake8 pyreportjasper/
   - chmod +x /home/travis/build/PyReportJasper/pyreportjasper/pyreportjasper/jasperstarter/bin/jasperstarter
   - coverage run setup.py test
 

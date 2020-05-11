@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
-# The MIT License (MIT)
+# GNU GENERAL PUBLIC LICENSE
 #
-# Copyright (c) 2018 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
+# Copyright (c) 2020 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
 #
+from .jasperpy1 import JasperPy1
 from .jasperpy import JasperPy
 
 __title__ = 'PyReportJasper'
-__version__ = '1.0.3'
+__version__ = '2.0.0'
 __author__ = 'Jadson Bonfim Ribeiro'
-__license__ = 'MIT'
-__copyright__ = 'Copyright 2018 Jadson Bonfim Ribeiro'
+__license__ = 'GNU GENERAL PUBLIC LICENSE'
+__copyright__ = 'Copyright 2020 Jadson Bonfim Ribeiro'
 __name__ = 'pyreportjasper'
 
 __all__ = [
-    "JasperPy",
+    "JasperPy1", "JasperPy",
 ]
 
 # Version synonym
