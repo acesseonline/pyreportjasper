@@ -5,17 +5,22 @@
 #
 
 import os
+import sys
 from unittest import TestCase
 from pyreportjasper import JasperPy
-import warnings
+
 
 
 def ignore_warnings(test_func):
     def do_test(self, *args, **kwargs):
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore", ResourceWarning)
-            warnings.simplefilter("ignore", DeprecationWarning)
+        if sys.version_info[0] < 3:
             test_func(self, *args, **kwargs)
+        else:
+            import warnings
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", ResourceWarning)
+                warnings.simplefilter("ignore", DeprecationWarning)
+                test_func(self, *args, **kwargs)
     return do_test
 
 
