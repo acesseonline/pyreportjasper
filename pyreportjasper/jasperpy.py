@@ -7,8 +7,9 @@
 import os
 import jpyutil
 import jpy
-import requests
+from requests import Request, Session
 import tempfile
+import json
 
 
 class JasperPy:
@@ -30,6 +31,8 @@ class JasperPy:
     )
 
     _FORMATS_JSON = ('pdf')
+
+    _FORMATS_METHODS_REQUEST = ('GET', 'POST', 'PUT')
 
     def __init__(self, jvm_maxmem='512M', jvm_classpath=None):
         self.WINDOWS = True if os.name == 'nt' else False
@@ -254,128 +257,125 @@ class JasperPy:
     def process_json(self, input_file, output_file=False, format_list=['pdf'],
                 parameters={}, connection={}, locale=False, resource=""):
 
-        tmp = tempfile.NamedTemporaryFile(delete=False)
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            if not input_file:
+                raise NameError('No input file!')
 
-        if not input_file:
-            raise NameError('No input file!')
-
-        if isinstance(format_list, list):
-            if any([key not in self._FORMATS_JSON for key in format_list]):
-                raise NameError('Invalid format output!')
-        else:
-            raise NameError("'format_list' value is not list!")
-
-        try:
-            config = self.jvConfig()
-            config.setInput(input_file)
-            if locale:
-                config.setLocale(locale)
-            if output_file:
-                config.setOutput(output_file)
+            if isinstance(format_list, list):
+                if any([key not in self._FORMATS_JSON for key in format_list]):
+                    raise NameError('Invalid format output!')
             else:
-                list_patch = input_file.split('/')
-                list_name_extesion = list_patch[-1].split('.')
-                name_file = list_name_extesion[0]
-                file_out = os.path.join(os.path.dirname(input_file), name_file + '.jasper')
-                output_file = os.path.join(os.path.dirname(input_file), name_file + '.pdf')
-                config.setOutput(os.path.dirname(input_file))
-            config.setOutputFormats(self.jvArrays.asList(format_list))
-            if len(parameters) > 0:
-                config.setParams(self.jvArrays.asList([k + '=' + v for k, v in parameters.items()]))
-            if 'driver' in connection:
-                if connection['driver'] == 'json':
-                    config.setDbType(self.jvDsType.json)
-                elif connection['driver'] == 'jsonql':
-                    config.setDbType(self.jvDsType.jsonql)
-            else:
-                config.setDbType(self.jvDsType.none)
+                raise NameError("'format_list' value is not list!")
 
-            if len(connection) > 0:
-                if 'data_file' in connection:
-                    config.setDataFile(self.jvFile(connection['data_file']))
-
-                if 'url_file' in connection:
-                    try:
-                        if 'url_params' in connection:
-                            PARAMS = connection['url_params']
-                        else:
-                            PARAMS =  {}
-
-                        if 'url_data_post' in connection:
-                            DATA = connection['url_data_post']
-                        else:
-                            DATA =  {}
-
-                        if 'url_method' in connection:
-                            if connection['url_method'] == 'GET':
-                                req = requests.get(url=connection['url_file'], params=PARAMS)
-                            if connection['url_method'] == 'POST':
-                                req = requests.post(url=connection['url_file'], data=DATA)
-                        else:
-                            req = requests.get(url=connection['url_file'], params=PARAMS)
-
-                        data = req.json()
-                        tmp.write(data)
-
-                    except Exception as e:
-                        raise NameError('Error request: %s' % str(e))
-
-                if 'json_query' in connection:
-                    config.setJsonQuery(connection['json_query'])
-
-                if 'jsonql_query' in connection:
-                    config.setJsonQLQuery(connection['jsonql_query'])
-
-            if os.path.isfile(resource):
-                self.jvApplicationClasspath.add(os.path.dirname(resource))
-            elif os.path.isdir(resource):
-                self.jvApplicationClasspath.add(resource)
-
-            report = self.jvReport(config, self.jvFile(config.getInput()))
-            self.compile(input_file)
-            parameters = self.jvHashMap()
-            if config.hasAskFilter():
-                reportParams = config.getParams()
-                parameters = report.promptForParams(reportParams, parameters, report.jasperReport.getName());
             try:
-                if self.jvDsType.jsonql.equals(config.getDbType()):
-                    db = self.jvDb()
-                    ds = db.getJsonQLDataSource(config)
-                    if 'json_locale' in connection:
-                        parameters.put(self.jvJsonQueryExecuterFactory.JSON_LOCALE,
-                                       self.jvLocale(connection['json_locale']))
-
-                    if 'json_date_pattern' in connection:
-                        parameters.put(self.jvJsonQueryExecuterFactory.JSON_DATE_PATTERN,
-                                       self.jvLocale(connection['json_date_pattern']))
-
-                    if 'json_number_pattern' in connection:
-                        parameters.put(self.jvJsonQueryExecuterFactory.JSON_NUMBER_PATTERN,
-                                       self.jvLocale(connection['json_number_pattern']))
-
-                    if 'json_time_zone' in connection:
-                        parameters.put(self.jvJsonQueryExecuterFactory.JSON_TIME_ZONE,
-                                       self.jvLocale(connection['json_time_zone']))
-
-                    jasperPrint = self.jvJasperFillManager.fillReport(file_out, parameters, ds)
-                    self.jvJasperExportManager.exportReportToPdfFile(jasperPrint, output_file)
-                    if tmp:
-                        os.unlink(tmp.name)
-                        tmp.close()
+                config = self.jvConfig()
+                config.setInput(input_file)
+                if locale:
+                    config.setLocale(locale)
+                if output_file:
+                    config.setOutput(output_file)
                 else:
-                    if tmp:
-                        os.unlink(tmp.name)
-                        tmp.close()
-                    raise NameError('Invalid json input!')
-            except Exception as e:
-                if tmp:
-                    os.unlink(tmp.name)
-                    tmp.close()
-                raise NameError('Error: %s' % str(e))
+                    list_patch = input_file.split('/')
+                    list_name_extesion = list_patch[-1].split('.')
+                    name_file = list_name_extesion[0]
+                    file_out = os.path.join(os.path.dirname(input_file), name_file + '.jasper')
+                    output_file = os.path.join(os.path.dirname(input_file), name_file + '.pdf')
+                    config.setOutput(os.path.dirname(input_file))
+                config.setOutputFormats(self.jvArrays.asList(format_list))
+                if len(parameters) > 0:
+                    config.setParams(self.jvArrays.asList([k + '=' + v for k, v in parameters.items()]))
+                if 'driver' in connection:
+                    if connection['driver'] == 'json':
+                        config.setDbType(self.jvDsType.json)
+                    elif connection['driver'] == 'jsonql':
+                        config.setDbType(self.jvDsType.jsonql)
+                else:
+                    config.setDbType(self.jvDsType.none)
 
-            return 0
-        except Exception as e:
-            if tmp:
-                os.unlink(tmp.name)
-                tmp.close()
-            raise NameError('Error: %s' % str(e))
+                if len(connection) > 0:
+                    if 'data_file' not in connection and 'url_file' not in connection:
+                        raise NameError('No data sources were reported')
+
+                    if 'data_file' in connection:
+                        config.setDataFile(self.jvFile(connection['data_file']))
+
+                    if 'url_file' in connection:
+                        try:
+                            if isinstance(connection['url_method'], str):
+                                if connection['url_method'] not in self._FORMATS_METHODS_REQUEST:
+                                    raise NameError('Invalid method request!')
+                            else:
+                                raise NameError("'url_method' value is not list!")
+
+                            PARAMS = connection['url_params'] if 'url_params' in connection else {}
+                            DATA = connection['url_data'] if 'url_data_post' in connection else {}
+                            HEADER = connection['url_header'] if 'url_header' in connection else {}
+
+                            if 'url_method' in connection:
+                                s = Session()
+                                prepped = Request(
+                                    connection['url_method'],
+                                    connection['url_file'],
+                                    data=DATA,
+                                    headers=HEADER,
+                                    params=PARAMS
+                                ).prepare()
+                                resp = s.send(request=prepped)
+                            if resp.status_code == 200:
+                                data = resp.json()
+                                file_json = os.path.join(tmp_dir, 'data_report.json')
+                                with open(file_json, 'w') as file:
+                                    file.write(json.dumps(data))
+                                config.setDataFile(self.jvFile(file_json))
+                            else:
+                                raise NameError('Error request status code: %s' % str(resp.status_code))
+                        except Exception as e:
+                            raise NameError('Error request: %s' % str(e))
+
+                    if 'json_query' in connection:
+                        config.setJsonQuery(connection['json_query'])
+
+                    if 'jsonql_query' in connection:
+                        config.setJsonQLQuery(connection['jsonql_query'])
+
+                if os.path.isfile(resource):
+                    self.jvApplicationClasspath.add(os.path.dirname(resource))
+                elif os.path.isdir(resource):
+                    self.jvApplicationClasspath.add(resource)
+
+                report = self.jvReport(config, self.jvFile(config.getInput()))
+                self.compile(input_file)
+                parameters = self.jvHashMap()
+                if config.hasAskFilter():
+                    reportParams = config.getParams()
+                    parameters = report.promptForParams(reportParams, parameters, report.jasperReport.getName());
+                try:
+                    if self.jvDsType.jsonql.equals(config.getDbType()):
+                        db = self.jvDb()
+                        ds = db.getJsonQLDataSource(config)
+                        if 'json_locale' in connection:
+                            parameters.put(self.jvJsonQueryExecuterFactory.JSON_LOCALE,
+                                           self.jvLocale(connection['json_locale']))
+
+                        if 'json_date_pattern' in connection:
+                            parameters.put(self.jvJsonQueryExecuterFactory.JSON_DATE_PATTERN,
+                                           self.jvLocale(connection['json_date_pattern']))
+
+                        if 'json_number_pattern' in connection:
+                            parameters.put(self.jvJsonQueryExecuterFactory.JSON_NUMBER_PATTERN,
+                                           self.jvLocale(connection['json_number_pattern']))
+
+                        if 'json_time_zone' in connection:
+                            parameters.put(self.jvJsonQueryExecuterFactory.JSON_TIME_ZONE,
+                                           self.jvLocale(connection['json_time_zone']))
+
+                        jasperPrint = self.jvJasperFillManager.fillReport(file_out, parameters, ds)
+                        self.jvJasperExportManager.exportReportToPdfFile(jasperPrint, output_file)
+                    else:
+                        raise NameError('Invalid json input!')
+                except Exception as e:
+                    raise NameError('Error: %s' % str(e))
+
+                return 0
+            except Exception as e:
+                raise NameError('Error: %s' % str(e))

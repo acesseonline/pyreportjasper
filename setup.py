@@ -11,7 +11,6 @@ import re
 from collections import OrderedDict
 import subprocess
 
-
 def version_available(cmd):
     try:
         # prints version and returns 0 if successulf
@@ -81,6 +80,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'jpy',
+        'requests'
     ],
     dependency_links=[
       'https://github.com/bcdev/jpy/archive/master.zip#egg=jpy',
