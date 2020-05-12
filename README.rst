@@ -452,6 +452,7 @@ by changing these three parts of the example:
                 'jsonql_query': json_query,
             },
 
+
 Reports from a JSON Request URL
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -492,9 +493,6 @@ See how easy it is to generate a report with a source an JSON file:
 
         print('Result is the file below.')
         print(output + '.pdf')
-
-
-
 
 
 Subreport Example
