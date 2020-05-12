@@ -112,8 +112,30 @@ class TestJasperPy(TestCase):
                 self.input_file,
                 format_list=["pdf"],
                 parameters={},
-                db_connection={
+                connection={
                     'data_file': data_file,
+                    'driver': 'jsonql',
+                    'jsonql_query': 'contacts.person',
+                    'json_locale': 'es_ES',
+                    'json_date_pattern': 'yyyy-MM-dd',
+                    'json_number_pattern': '#,##0.##"'
+                },
+                locale='pt_BR',  # LOCALE Ex.:(en_US, de_GE)
+            ), 0)
+
+    def test_json_url(self):
+        self.input_file = os.path.join(self.EXAMPLES_DIR, 'jsonql.jrxml')
+
+        self.assertEqual(
+            self.jasper.process_json(
+                self.input_file,
+                format_list=["pdf"],
+                parameters={},
+                connection={
+                        'url_file': 'https://acesseonline-arquivos-publicos.s3.us-east-2.amazonaws.com/contacts.json',
+                    # 'url_params': {'param1': 'test'},
+                    'url_method': 'GET', # POST
+                    # 'url_data_post': {'Authorization': 'Bearer xxxxxxxxxxxxxxxxxx'},
                     'driver': 'jsonql',
                     'jsonql_query': 'contacts.person',
                     'json_locale': 'es_ES',

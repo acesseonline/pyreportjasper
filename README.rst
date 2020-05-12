@@ -397,28 +397,26 @@ See how easy it is to generate a report with a source an JSON file:
 
     def json_to_pdf():
         input_file = os.path.dirname(os.path.abspath(__file__)) + \
-                     '/examples/json.jrxml'
+                     '/examples/jsonql.jrxml'
 
         output = os.path.dirname(os.path.abspath(__file__)) + '/output/_Contacts'
-        json_query = 'contacts.person'
 
         data_file = os.path.dirname(os.path.abspath(__file__)) + \
             '/examples/contacts.json'
 
         jasper = JasperPy()
-        jasper.process(
+        jasper.process_json(
             input_file,
             output_file=output,
             format_list=["pdf"],
-            parameters={
-                'JSON_DATE_PATTERN': 'yyyy-MM-dd',
-                'JSON_NUMBER_PATTERN': '#,##0.##',
-                'JSON_LOCALE': 'es_ES'
-            },
+            parameters={},
             db_connection={
                 'data_file': data_file,
-                'driver': 'json',
-                'json_query': json_query,
+                'driver': 'jsonql',
+                'json_query': 'contacts.person',
+                'json_locale': 'es_ES',
+                'json_date_pattern': 'yyyy-MM-dd',
+                'json_number_pattern': '#,##0.##'
             },
             locale='en_US'  # LOCALE Ex.:(pt_BR, de_GE)
         )
