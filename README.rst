@@ -1,7 +1,7 @@
 Reports for Python, with JasperReports.
 =======================================
 
-|Travis| |Coverage| |License| |Donate|
+|Travis| |Coverage| |License| |Donate| |PythonVersion|
 
 **Is using Linux servers?**
 
@@ -689,3 +689,5 @@ Thanks to `Cenote GmbH <http://www.cenote.de/>`__ for the
    :target: https://github.com/PyReportJasper/pyreportjasper/blob/master/LICENSE
 .. |Donate| image:: https://img.shields.io/badge/donate-help%20keep-EB4A3B.svg
    :target: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=V2SUB9RQHYUGE&lc=US&item_name=pyreportjasper&item_number=pyreportjasper&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
+.. |PythonVersion| image:: https://img.shields.io/badge/python->3.0-blue
+   :target: https://pypi.org/project/pyreportjasper/

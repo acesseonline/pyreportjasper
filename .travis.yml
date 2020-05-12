@@ -15,7 +15,6 @@ before_install:
     - source ./travis_java_install.sh
 
 python:
-   - "2.7"
    - "3.4"
    - "3.6"
    - "3.7"
