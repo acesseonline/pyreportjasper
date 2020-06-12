@@ -10,6 +10,7 @@ import jpy
 from requests import Request, Session
 import tempfile
 import json
+import glob
 
 
 class JasperPy:
@@ -39,6 +40,7 @@ class JasperPy:
         self.SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
         self.LIBS = os.path.join(self.SCRIPT_DIR, 'jasperstarter', 'lib')
         self.JDBC_DIR = os.path.join(self.SCRIPT_DIR, 'jasperstarter', 'jdbc')
+        self.JDBC_FILE = os.path.join(self.SCRIPT_DIR, 'jasperstarter', 'jdbc', 'postgresql.jar')
         if not os.path.isdir(self.LIBS):
             raise NameError('Unable to find lib in {0}'.format(self.LIBS))
         self.CLASSPATH = os.path.join(self.LIBS, 'jasperstarter.jar')
@@ -198,11 +200,15 @@ class JasperPy:
                 if 'csv_charset' in db_connection:
                     config.setCsvCharset(db_connection['csv_charset'])
 
-            self.jvApplicationClasspath.add(self.JDBC_DIR)
+            self.jvApplicationClasspath.add(self.jvFile(self.JDBC_FILE))
+
             if os.path.isfile(resource):
-                self.jvApplicationClasspath.add(os.path.dirname(resource))
+                self.jvApplicationClasspath.add(self.jvFile(resource))
+                # self.jvApplicationClasspath.add(os.path.dirname(resource))
             elif os.path.isdir(resource):
                 self.jvApplicationClasspath.add(resource)
+                for res_file in glob.glob(os.path.join(resource, '*.jar')):
+                    self.jvApplicationClasspath.add(self.jvFile(res_file))
 
             #
             # Run the report. See Report.java for details.
