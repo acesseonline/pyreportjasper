@@ -35,6 +35,7 @@ class JasperPy:
         self.WINDOWS = True if os.name == 'nt' else False
         self.SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
         self.LIBS = os.path.join(self.SCRIPT_DIR, 'jasperstarter', 'lib')
+        self.JDBC_DIR = os.path.join(self.SCRIPT_DIR, 'jasperstarter', 'jdbc')
         if not os.path.isdir(self.LIBS):
             raise NameError('Unable to find lib in {0}'.format(self.LIBS))
         self.CLASSPATH = os.path.join(self.LIBS, 'jasperstarter.jar')
@@ -194,6 +195,7 @@ class JasperPy:
                 if 'csv_charset' in db_connection:
                     config.setCsvCharset(db_connection['csv_charset'])
 
+            self.jvApplicationClasspath.add(self.JDBC_DIR)
             if os.path.isfile(resource):
                 self.jvApplicationClasspath.add(os.path.dirname(resource))
             elif os.path.isdir(resource):
