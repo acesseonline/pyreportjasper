@@ -1,7 +1,7 @@
 Reports for Python, with JasperReports.
 =======================================
 
-|Travis| |Coverage| |License| |Donate|
+|Travis| |Coverage| |License| |Donate| |PythonVersion|
 
 **Is using Linux servers?**
 
@@ -408,9 +408,9 @@ See how easy it is to generate a report with a source an JSON file:
         jasper.process_json(
             input_file,
             output_file=output,
-            format_list=["pdf"],
+            format_list=["pdf"], # Only PDF is allowed
             parameters={},
-            db_connection={
+            connection={
                 'data_file': data_file,
                 'driver': 'jsonql',
                 'json_query': 'contacts.person',
@@ -446,11 +446,53 @@ by changing these three parts of the example:
         input_file = os.path.dirname(os.path.abspath(__file__)) + \
                      '/examples/jsonql.jrxml'
     ...
-            db_connection={
+            connection={
     ...
                 'driver': 'jsonql',
                 'jsonql_query': json_query,
             },
+
+
+Reports from a JSON Request URL
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+See how easy it is to generate a report with a source an JSON file:
+
+.. code-block:: python
+
+    # -*- coding: utf-8 -*-
+    import os
+    from pyreportjasper import JasperPy
+
+    def json_to_pdf():
+        input_file = os.path.dirname(os.path.abspath(__file__)) + \
+                     '/examples/jsonql.jrxml'
+
+        output = os.path.dirname(os.path.abspath(__file__)) + '/output/_Contacts'
+
+        jasper = JasperPy()
+        jasper.process_json(
+            input_file,
+            output_file=output,
+            format_list=["pdf"],
+            parameters={},
+            connection={
+                'url_file': 'https://acesseonline-arquivos-publicos.s3.us-east-2.amazonaws.com/contacts.json',
+                'url_method': 'GET', # POST, PUT
+                # 'url_params': {'param1': 'test'},
+                # 'url_data': {'data_field': 'abc123'},
+                # 'url_header': {'Authorization': 'Bearer xxxxxxxxxxxxxxxxxx'},
+                'driver': 'jsonql',
+                'jsonql_query': 'contacts.person',
+                'json_locale': 'es_ES',
+                'json_date_pattern': 'yyyy-MM-dd',
+                'json_number_pattern': '#,##0.##"'
+            },
+            locale='en_US'  # LOCALE Ex.:(pt_BR, de_GE)
+        )
+
+        print('Result is the file below.')
+        print(output + '.pdf')
 
 
 Subreport Example
@@ -647,3 +689,5 @@ Thanks to `Cenote GmbH <http://www.cenote.de/>`__ for the
    :target: https://github.com/PyReportJasper/pyreportjasper/blob/master/LICENSE
 .. |Donate| image:: https://img.shields.io/badge/donate-help%20keep-EB4A3B.svg
    :target: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=V2SUB9RQHYUGE&lc=US&item_name=pyreportjasper&item_number=pyreportjasper&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
+.. |PythonVersion| image:: https://img.shields.io/badge/python->3.0-blue
+   :target: https://pypi.org/project/pyreportjasper/
