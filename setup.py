@@ -74,7 +74,8 @@ setup(
     keywords='report jasper python',
     description='This package aims to be a solution to compile and process '
                 'JasperReports (.jrxml & .jasper files).',
-    long_description=readme,
+    long_description=open('README.rst').read(),
+    long_description_content_type="text/x-rst",
     zip_safe=False,
     platforms='Windows, Linux, Darwin',
     packages=find_packages(),

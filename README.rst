@@ -454,7 +454,7 @@ by changing these three parts of the example:
 
 
 Reports from a JSON Request URL
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 See how easy it is to generate a report with a source an JSON file:
 
