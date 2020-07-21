@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# The MIT License (MIT)
+# GNU GENERAL PUBLIC LICENSE
 #
-# Copyright (c) 2017 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
+# Copyright (c) 2020 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
 #
