@@ -84,7 +84,7 @@ setup(
         'requests'
     ],
     dependency_links=[
-      'https://github.com/bcdev/jpy/archive/master.zip#egg=jpy',
+        'https://github.com/bcdev/jpy@master#egg=jpy'
     ],
     test_suite='test',
     package_data={
