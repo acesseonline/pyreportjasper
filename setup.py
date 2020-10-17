@@ -25,30 +25,6 @@ def version_available(cmd):
             # Something else went wrong, raise the exception
             raise
 
-
-def check_java_version_1_8():
-    java_version = str(subprocess.check_output(['java', '-version'], stderr=subprocess.STDOUT))
-    version_number = java_version.splitlines()[0].split()[2].strip('"')
-    major, minor, _ = version_number.split('.')
-    version = '{}.{}'.format(major, minor)
-    if version == '1.8':
-        return True
-    else:
-        return False
-
-
-if not version_available('java'):
-    print('Error: Please install Java 1.8')
-    exit(1)
-
-if check_java_version_1_8() is None:
-    print('Error: Please install Java 1.8')
-    exit(1)
-
-if os.environ.get('JAVA_HOME', None) is None:
-    print('Error: environment variable "JAVA_HOME" must be set to a JDK (== v1.8) installation directory')
-    exit(1)
-
 with io.open('README.rst', 'rt', encoding='utf8') as f:
     readme = f.read()
 

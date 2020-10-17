@@ -11,7 +11,8 @@ import xml.etree.ElementTree as ET
 
 import tempfile
 import jpyutil
-import jpy
+#jpy requires the jvm to be initialized first so don't import it here, import it on line 57
+#import jpy
 import json
 from requests import Request, Session
 
@@ -52,7 +53,8 @@ class JasperPy:
             jpyutil.init_jvm(jvm_maxmem=jvm_maxmem, jvm_classpath=[self.CLASSPATH])
         else:
             jpyutil.init_jvm(jvm_maxmem=jvm_maxmem, jvm_classpath=[self.CLASSPATH, jvm_classpath])
-
+        # import jpy here after init_jvm        
+        import jpy
         self.jvFile = jpy.get_type('java.io.File')
         self.jvArrays = jpy.get_type('java.util.Arrays')
         self.jvReport = jpy.get_type('de.cenote.jasperstarter.Report')
