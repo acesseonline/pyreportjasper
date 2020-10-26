@@ -4,9 +4,10 @@
 # Copyright (c) 2020 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
 #
 from .jasperpy import JasperPy
+from .pyjasperreports import PyJasperReports
 
 __title__ = 'PyReportJasper'
-__version__ = '2.0.2'
+__version__ = '2.0.3'
 __author__ = 'Jadson Bonfim Ribeiro'
 __license__ = 'GNU GENERAL PUBLIC LICENSE'
 __copyright__ = 'Copyright 2020 Jadson Bonfim Ribeiro'
