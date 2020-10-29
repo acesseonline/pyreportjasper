@@ -23,4 +23,4 @@ else
 fi
 
 #SCRIPTPATH="$(dirname $0)"
-java -jar "$HOME_FOLDER/lib/jasperstarter.jar" "$@"
+java -Djava.system.class.loader=org.update4j.DynamicClassLoader -jar "$HOME_FOLDER/lib/jasperstarter.jar" "$@"
