@@ -10,6 +10,8 @@ import os
 import re
 from collections import OrderedDict
 import subprocess
+import sys
+from jpyutil import write_config_files
 
 def version_available(cmd):
     try:
@@ -82,3 +84,5 @@ setup(
         'Programming Language :: Python :: 3.8',
     ],
 )
+
+write_config_files(out_dir=os.path.dirname(sys.modules[write_config_files.__module__].__file__),jvm_properties={'java.system.class.loader':'org.update4j.DynamicClassLoader'})
