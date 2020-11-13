@@ -13,7 +13,6 @@ import subprocess
 
 def version_available(cmd):
     try:
-        # prints version and returns 0 if successulf
         output = subprocess.call([cmd, "-version"])
         return output == 0
     except OSError as e:
@@ -24,6 +23,7 @@ def version_available(cmd):
         else:
             # Something else went wrong, raise the exception
             raise
+
 
 with io.open('README.rst', 'rt', encoding='utf8') as f:
     readme = f.read()
@@ -56,15 +56,12 @@ setup(
     platforms='Windows, Linux, Darwin',
     packages=find_packages(),
     install_requires=[
-        'jpy',
+        'jpype1',
         'requests'
-    ],
-    dependency_links=[
-        'https://github.com/bcdev/jpy/archive/master.zip#egg=jpy'
     ],
     test_suite='test',
     package_data={
-        'package': ['jasperstarter/*'],
+        'package': ['libs/*'],
     },
     include_package_data=True,
     classifiers=[
@@ -73,12 +70,10 @@ setup(
         'Operating System :: OS Independent',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
     ],
 )

@@ -19,7 +19,7 @@ def ignore_warnings(test_func):
     return do_test
 
 
-class TestJasperPy(TestCase):
+class TestPyReportJasper(TestCase):
     EXAMPLES_DIR = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))), 'examples')
 
     @ignore_warnings

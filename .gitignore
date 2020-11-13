@@ -11,14 +11,6 @@ __pycache__/
 /examples/*.rtf
 /examples/*.xls
 
-/old_examples/jsonql.pdf
-/old_examples/hello_world.odt
-/old_examples/hello_world.pdf
-/old_examples/hello_world.rtf
-/old_examples/hello_world.xls
-/old_examples/hello_world_params.pdf
-/old_examples/subreports/main.pdf
-
 *.coverage
 htmlcov/
 # C extensions

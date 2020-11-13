@@ -13,10 +13,10 @@
 				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="3501dac6-be9b-47b1-bf09-8b25fbc6c79f"/>
 				<staticText>
 					<reportElement x="20" y="20" width="349" height="45" forecolor="#FFFFFF" uuid="2464c9ca-82a1-48c9-87ea-b68192294c4a"/>
-					<!--<textElement>-->
-						<!--<font fontName="Arial" size="34" isBold="true"/>-->
-					<!--</textElement>-->
-					<text><![CDATA[PHPjasper Test]]></text>
+<!--					<textElement>-->
+<!--						<font fontName="Arial" size="34" isBold="true"/>-->
+<!--					</textElement>-->
+					<text><![CDATA[PyReportJasper Test]]></text>
 				</staticText>
 			</frame>
 		</band>
