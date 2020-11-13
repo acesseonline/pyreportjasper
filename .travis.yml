@@ -1,0 +1,32 @@
+language: python
+sudo: required
+
+dist: xenial
+
+jdk:
+  - openjdk8
+
+addons:
+  apt:
+    packages:
+      - openjdk-8-jdk
+
+before_install:
+    - source ./travis_java_install.sh
+
+python:
+   - "3.4"
+   - "3.6"
+   - "3.7"
+   - "3.8"
+
+install:
+   - pip install coveralls
+
+script:
+  - java -version
+  - chmod +x /home/travis/build/PyReportJasper/pyreportjasper/pyreportjasper/jasperstarter/bin/jasperstarter
+  - coverage run setup.py test
+
+after_success:
+  - coveralls
