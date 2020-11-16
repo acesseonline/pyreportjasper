@@ -25,7 +25,7 @@ class PyReportJasper:
 
     FORMATS = (
         'pdf',
-        'rtf'
+        'rtf',
         'docx',
         'odt',
         'html',
@@ -40,23 +40,27 @@ class PyReportJasper:
 
     METHODS = ('GET', 'POST', 'PUT')
 
-    def set_up(self, input_file, output_file=False, format_list=['pdf'], parameters={}, db_connection={},
+    def set_up(self, input_file, output_file=False, output_formats=['pdf'], parameters={}, db_connection={},
                locale='pt_BR', resource=None):
         if not input_file:
             raise NameError('No input file!')
-        if isinstance(format_list, list):
-            if any([key not in self.FORMATS for key in format_list]):
+        if isinstance(output_formats, list):
+            if any([key not in self.FORMATS for key in output_formats]):
                 raise NameError('Invalid format!')
         else:
-            raise NameError("'format_list' value is not list!")
+            raise NameError("'output_formats' value is not list!")
         self.config = Config()
+        self.config.input = input_file
         self.config.locale = locale
         self.config.resource = resource
+        self.config.outputFormats = output_formats
         if output_file:
             self.config.output = output_file
+        else:
+            self.config.output = input_file
         self.config.params = parameters
         if len(db_connection) > 0:
-            self.config.dbtype = db_connection['driver']
+            self.config.dbType = db_connection['driver']
             if 'username' in db_connection:
                 self.config.dbUser = db_connection['username']
             if 'password' in db_connection:
@@ -70,9 +74,9 @@ class PyReportJasper:
             if 'jdbc_driver' in db_connection:
                 self.config.dbDriver = db_connection['jdbc_driver']
             if 'jdbc_url' in db_connection:
-                self.config.jdbcDir = db_connection['jdbc_url']
+                self.config.dbUrl = db_connection['jdbc_url']
             if 'jdbc_dir' in db_connection:
-                self.config.dbUrl = db_connection['jdbc_dir']
+                self.config.jdbcDir = db_connection['jdbc_dir']
             if 'db_sid' in db_connection:
                 self.config.dbSid = db_connection['db_sid']
             if 'xml_xpath' in db_connection:
@@ -119,8 +123,55 @@ class PyReportJasper:
             raise error
 
     def process_report(self):
-        # TODO: To implement
-        pass
+        error = None
+        base_input = os.path.splitext(self.config.input)
+        if base_input[-1] == ".jrxml":
+            new_input = base_input[0] + ".jasper"
+            if os.path.isfile(new_input):
+                self.config.input = new_input
+
+        if os.path.isfile(self.config.input):
+            try:
+                report = Report(self.config, self.config.input)
+                report.fill()
+                try:
+                    formats = self.config.outputFormats
+                    for f in formats:
+                        if f == 'pdf':
+                            report.export_pdf()
+                        elif f == 'rtf':
+                            report.export_rtf()
+                        elif f == 'docx':
+                            report.export_docx()
+                        elif f == 'odt':
+                            report.export_odt()
+                        elif f == 'html':
+                            report.export_html()
+                        elif f == 'xml':
+                            report.export_xml()
+                        elif f == 'xls':
+                            report.export_xls()
+                        elif f == 'xlsx':
+                            report.export_xlsx()
+                        elif f == 'csv':
+                            report.export_csv()
+                        elif f == 'ods':
+                            report.export_ods()
+                        elif f == 'pptx':
+                            report.export_pptx()
+                        elif f == 'xhtml':
+                            report.export_xhtml()
+                        else:
+                            raise NameError("Error output format {} not implemented!".format(f))
+                except Exception as ex:
+                    error = NameError("Error export format: {}".format(ex))
+            except Exception as ex:
+                error = NameError('Error fill report: {}'.format(str(ex)))
+        else:
+            error = NameError('Error: not a file: {}'.format(self.config.input))
+        if error:
+            raise error
+
 
     def list_report_params(self):
         # TODO: To implement

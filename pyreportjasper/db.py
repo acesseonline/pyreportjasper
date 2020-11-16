@@ -25,18 +25,23 @@ class Db:
         self.JRXmlDataSource = jpype.JPackage('net').sf.jasperreports.engine.data.JRXmlDataSource
         self.JsonDataSource = jpype.JPackage('net').sf.jasperreports.engine.data.JsonDataSource
         self.JsonQLDataSource = jpype.JPackage('net').sf.jasperreports.engine.data.JsonQLDataSource
+        self.JRLoader = jpype.JPackage('net').sf.jasperreports.engine.util.JRLoader
+        self.File = jpype.JPackage('java').io.File
 
     def get_xml_datasource(self, config: Config):
-        ds = self.JRXmlDataSource(config.get_data_file_input_stream(), config.xmlXpath)
+        ds = self.JRXmlDataSource(self.get_data_file_input_stream(config), config.xmlXpath)
         return jpype.JObject(ds, self.JRXmlDataSource)
 
     def get_json_datasource(self, config: Config):
-        ds = self.JsonDataSource(config.get_data_file_input_stream(), config.jsonQuery)
+        ds = self.JsonDataSource(self.get_data_file_input_stream(config), config.jsonQuery)
         return jpype.JObject(ds, self.JsonDataSource)
 
     def get_jsonql_datasource(self, config: Config):
-        ds = self.JsonQLDataSource(config.get_data_file_input_stream(), config.jsonQLQuery)
+        ds = self.JsonQLDataSource(self.get_data_file_input_stream(config), config.jsonQLQuery)
         return jpype.JObject(ds, self.JsonQLDataSource)
+
+    def get_data_file_input_stream(self, config: Config):
+        return self.JRLoader.getInputStream(self.File(config.dataFile))
 
     def get_connection(self, config: Config):
         dbtype = config.dbType

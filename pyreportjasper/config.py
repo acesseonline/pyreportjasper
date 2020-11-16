@@ -3,8 +3,6 @@
 #
 # Copyright (c) 2020 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
 #
-import jpype
-
 
 class Config:
     askFilter = None
@@ -46,14 +44,14 @@ class Config:
     jvm_maxmem = '512M'
     jvm_classpath = None
 
-    def __init__(self):
-        self.JRLoader = jpype.JPackage('net').sf.jasperreports.engine.util.JRLoader
-
     def has_output(self):
         return False if self.output is None else True
 
     def is_write_jasper(self):
         return bool(self.writeJasper)
 
-    def get_data_file_input_stream(self):
-        return self.JRLoader.getInputStream(self.dataFile)
+    def has_jdbc_dir(self):
+        return True if self.jdbcDir else False
+
+    def has_resource(self):
+        return True if self.resource else False

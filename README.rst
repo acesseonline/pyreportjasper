@@ -55,7 +55,7 @@ DOC, RTF, ODF, etc.
 Requirements
 ------------
 
--  Java JDK >=1.8
+-  Java JDK 9+
 -  Python >=3.5
 -  Lib `jpype1 <https://pypi.org/project/JPype1/>`__
 
@@ -130,4 +130,4 @@ Contributors
    :target: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=V2SUB9RQHYUGE&lc=US&item_name=pyreportjasper&item_number=pyreportjasper&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
 .. |PythonVersion| image:: https://img.shields.io/badge/python-%3E=3.0-blue
    :target: https://pypi.org/project/pyreportjasper/
-.. |Java| image:: https://img.shields.io/badge/java-%3E=8-purple.svg
+.. |Java| image:: https://img.shields.io/badge/java-%3E=9-purple.svg

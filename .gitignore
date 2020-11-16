@@ -10,6 +10,8 @@ __pycache__/
 /examples/*.odt
 /examples/*.rtf
 /examples/*.xls
+/examples/*.jasper
+/examples/*.jrprint
 
 *.coverage
 htmlcov/

@@ -5,6 +5,7 @@
 #
 import os
 import jpype
+import time
 from pyreportjasper.config import Config
 from pyreportjasper.db import Db
 
@@ -75,15 +76,19 @@ class Report:
         self.SimpleCsvExporterConfiguration = jpype.JPackage('net').sf.jasperreports.export.SimpleCsvExporterConfiguration
         self.JRCsvMetadataExporter = jpype.JPackage('net').sf.jasperreports.engine.export.JRCsvMetadataExporter
         self.SimpleCsvMetadataExporterConfiguration = jpype.JPackage('net').sf.jasperreports.export.SimpleCsvMetadataExporterConfiguration
+        self.JRSaver = jpype.JPackage('net').sf.jasperreports.engine.util.JRSaver
+        self.File = jpype.JPackage('java').io.File
         self.input_file = input_file
         self.defaultLocale = self.Locale.getDefault()
-        if self.config.resource is not None:
-            if os.path.isdir(self.config.resource):
-                jpype.addClassPath(os.path.join(self.config.resource, "*"))
-            elif os.path.splitext(self.config.resource)[-1] == '.jar':
-                jpype.addClassPath(self.config.resource)
+        if self.config.has_resource():
+            self.add_jar_class_path(self.config.resource)
+
+        if self.config.has_jdbc_dir():
+            self.add_jar_class_path(self.config.jdbcDir)
+
         try:
-            j_object = self.jvJRLoader.loadObject(input_file)
+            # This fails in case of an jrxml file
+            j_object = self.jvJRLoader.loadObject(self.File(input_file))
             cast_error = True
             try:
                 self.jasper_report = jpype.JObject(j_object, self.JasperReport)
@@ -114,7 +119,9 @@ class Report:
         jr = self.jvJasperCompileManager.compileReport(self.input_file)
         if self.config.is_write_jasper():
             base = os.path.splitext(self.input_file)[0]
-            self.jvJRSaver.saveObject(jr, base + ".jasper")
+            new_input = base + ".jasper"
+            self.JRSaver.saveObject(jr, new_input)
+            self.config.input = new_input
 
     def compile_to_file(self):
         """
@@ -124,7 +131,7 @@ class Report:
         if self.initial_input_type == "JASPER_DESIGN":
             try:
                 base = os.path.splitext(self.input_file)[0]
-                self.jvJRSaver.saveObject(self.jasper_report, base + ".jasper")
+                self.JRSaver.saveObject(self.jasper_report, base + ".jasper")
             except:
                 raise NameError('outputFile {}.jaspe could not be written'.format(base))
         else:
@@ -180,20 +187,20 @@ class Report:
         :param suffix:
         :return: FileOutputStream
         """
-        if os.path.isdir(self.output):
+        if os.path.isdir(self.config.output):
             base = os.path.basename(self.input_file)
             name_file = os.path.splitext(base)[0]
             output_path = os.path.splitext(self.config.output)[0] + name_file + suffix
         else:
             output_path = os.path.splitext(self.config.output)[0] + suffix
         try:
-            output_stream = self.FileOutputStream(output_path)
+            output_stream = self.FileOutputStream(self.File(output_path))
             return output_stream
         except Exception as ex:
             raise NameError('Unable to create outputStream to {}: {}'.format(output_path, str(ex)))
 
     def export_pdf(self):
-        self.JasperExportManager(self.jasper_print, self.get_output_stream('.pdf'))
+        self.JasperExportManager.exportReportToPdfStream(self.jasper_print, self.get_output_stream('.pdf'))
 
     def export_rtf(self):
         exporter = self.JRRtfExporter()
@@ -325,3 +332,13 @@ class Report:
             return self.jasper_report.getMainDataset().getQuery().getText()
         else:
             raise NameError('No query for input type: {}'.format(self.initial_input_type))
+
+    def add_jar_class_path(self, dir_or_jar):
+        try:
+            if os.path.isdir(dir_or_jar):
+                jpype.addClassPath(os.path.join(dir_or_jar, "*"))
+            elif os.path.splitext(dir_or_jar)[-1] == '.jar':
+                jpype.addClassPath(dir_or_jar)
+        except Exception as ex:
+            raise NameError("Error adding class path: {}".format(ex))
+
