@@ -8,8 +8,8 @@ ATTENTION: This file is only for testing during development, after which it will
 import os
 from pyreportjasper import PyReportJasper
 
-examples_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'examples')
-input_file = os.path.join(examples_dir, 'json.jrxml')
+examples_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'test', 'resources')
+input_file = os.path.join(examples_dir, 'reports', 'json.jrxml')
 data_file = os.path.join(examples_dir, 'contacts.json')
 pyreportjasper = PyReportJasper()
 pyreportjasper.set_up(

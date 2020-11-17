@@ -19,9 +19,9 @@
 				<staticText>
 					<reportElement uuid="8b0fa6d5-c0c6-4530-95bb-93c3b34d2fca" x="20" y="20" width="234" height="43" forecolor="#FFFFFF"/>
 					<textElement>
-						<font size="34" isBold="true"/>
+						<font size="30" isBold="true"/>
 					</textElement>
-					<text><![CDATA[JasperStarter]]></text>
+					<text><![CDATA[PyReportJasper]]></text>
 				</staticText>
 				<staticText>
 					<reportElement uuid="84c20b7b-2750-44e1-8f6e-87cc755158c2" x="298" y="43" width="277" height="20" forecolor="#FFFFFF"/>
