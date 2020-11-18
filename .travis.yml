@@ -21,12 +21,20 @@ sudo: required
 jdk:
   - openjdk11
 
+addons:
+  apt:
+    packages:
+      - openjdk-11-jdk
+
 python:
    - "3.5.10"
    - "3.6.12"
    - "3.7.9"
    - "3.8.6"
    - "3.9.0"
+
+before_install:
+  - source travisci/java_install.sh
 
 install:
    - pip install coveralls
@@ -35,9 +43,7 @@ install:
    - pip install requests
 
 script:
-  - export JAVA_HOME=$HOME/openjdk11
-  - export JDK_HOME=$HOME/openjdk11
-  - $TRAVIS_BUILD_DIR/install-jdk.sh --install openjdk11 --target $JAVA_HOME
+  - java -version
   - coverage run setup.py test
 
 after_success:
