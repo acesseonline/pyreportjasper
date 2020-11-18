@@ -11,8 +11,6 @@ import xml.etree.ElementTree as ET
 
 import tempfile
 import jpyutil
-#jpy requires the jvm to be initialized first so don't import it here, import it on line 57
-#import jpy
 import json
 from requests import Request, Session
 
