@@ -21,11 +21,6 @@ sudo: required
 jdk:
   - openjdk11
 
-addons:
-  apt:
-    packages:
-      - openjdk-11-jdk
-
 python:
    - "3.5.10"
    - "3.6.12"
