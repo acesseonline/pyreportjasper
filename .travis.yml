@@ -35,9 +35,9 @@ install:
    - pip install requests
 
 script:
-  - jdk_switcher use openjdk11
   - export JAVA_HOME=$HOME/openjdk11
   - export JDK_HOME=$HOME/openjdk11
+  - $TRAVIS_BUILD_DIR/install-jdk.sh --install openjdk11 --target $JAVA_HOME
   - coverage run setup.py test
 
 after_success:
