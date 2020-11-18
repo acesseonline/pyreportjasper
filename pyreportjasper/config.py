@@ -31,12 +31,12 @@ class Config:
     locale = 'pt_BR'
     output = None
     outputFormats = None
-    params = None
+    params = {}
     printerName = None
     reportName = None
     resource = None
     withPrintDialog = None
-    writeJasper = True
+    writeJasper = False
     copies = None
     outFieldDel = None
     outCharset = None

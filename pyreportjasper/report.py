@@ -116,11 +116,14 @@ class Report:
                 raise NameError('input file: {0} is not a valid jrxml file:'.format(str(ex)))
 
     def compile(self):
-        jr = self.jvJasperCompileManager.compileReport(self.input_file)
+        self.jasper_report = self.jvJasperCompileManager.compileReport(self.input_file)
         if self.config.is_write_jasper():
-            base = os.path.splitext(self.input_file)[0]
+            if self.config.output:
+                base = os.path.splitext(self.config.output)[0]
+            else:
+                base = os.path.splitext(self.input_file)[0]
             new_input = base + ".jasper"
-            self.JRSaver.saveObject(jr, new_input)
+            self.JRSaver.saveObject(self.jasper_report, new_input)
             self.config.input = new_input
 
     def compile_to_file(self):
@@ -130,10 +133,10 @@ class Report:
         """
         if self.initial_input_type == "JASPER_DESIGN":
             try:
-                base = os.path.splitext(self.input_file)[0]
+                base = os.path.splitext(self.config.output)[0]
                 self.JRSaver.saveObject(self.jasper_report, base + ".jasper")
-            except:
-                raise NameError('outputFile {}.jaspe could not be written'.format(base))
+            except Exception as ex:
+                raise NameError('outputFile {}.jasper could not be written: {}'.format(base, ex))
         else:
             raise NameError('input file: {0} is not a valid jrxml file'.format(self.input_file))
 
@@ -153,6 +156,10 @@ class Report:
                 empty_data_source = self.JREmptyDataSource()
                 self.jasper_print = self.jvJasperFillManager.fillReport(self.jasper_report, parameters,
                                                                         empty_data_source)
+            elif self.config.dbType == 'csv':
+                db = Db()
+                ds = db.get_csv_datasource(self.config)
+                self.jasper_print = self.jvJasperFillManager.fillReport(self.jasper_report, parameters, ds)
             elif self.config.dbType == 'xml':
                 if self.config.xmlXpath is None:
                     self.config.xmlXpath = self.get_main_dataset_query()
