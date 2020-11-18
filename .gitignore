@@ -6,18 +6,18 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-/test/resource/reports/*.pdf
-/test/resource/reports/*.odt
-/test/resource/reports/*.rtf
-/test/resource/reports/*.xls
-/test/resource/reports/*.xlsx
-/test/resource/reports/*.html
-/test/resource/reports/*.ods
-/test/resource/reports/*.docx
-/test/resource/reports/*.csv
-/test/resource/reports/*.xml
-/test/resource/reports/*.jasper
-/test/resource/reports/*.jrprint
+/test/resources/reports/*.pdf
+/test/resources/reports/*.odt
+/test/resources/reports/*.rtf
+/test/resources/reports/*.xls
+/test/resources/reports/*.xlsx
+/test/resources/reports/*.html
+/test/resources/reports/*.ods
+/test/resources/reports/*.docx
+/test/resources/reports/*.csv
+/test/resources/reports/*.xml
+/test/resources/reports/*.jasper
+/test/resources/reports/*.jrprint
 
 *.coverage
 htmlcov/

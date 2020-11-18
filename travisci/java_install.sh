@@ -7,12 +7,16 @@ java -version
 
 # install Java 8
 echo ">>>>> Add repository <<<<<"
-sudo add-apt-repository -y ppa:openjdk-r/ppa
+sudo add-apt-repository ppa:linuxuprising/java
 echo ">>>>> Update repository <<<<<"
 sudo apt-get -qq update
-echo ">>>>> Install open jdk 11 <<<<<"
-sudo apt-get install -y openjdk-11-jdk
+echo ">>>>> Install jdk 15 <<<<<"
+sudo apt install -y oracle-java15-installer
 
-# change JAVA_HOME to Java 11
-echo ">>>>> Set variable JAVA_HOME <<<<<"
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+echo ">>>>> Accept licence jdk <<<<<"
+echo oracle-java15-installer shared/accepted-oracle-license-v1-2 select true | sudo /usr/bin/debconf-set-selections
+echo oracle-java15-installer shared/accepted-oracle-licence-v1-2 boolean true | sudo /usr/bin/debconf-set-selections
+
+echo "*********************************"
+java -version
+echo "*********************************"
