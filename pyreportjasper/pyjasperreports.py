@@ -68,11 +68,10 @@ class PyJasperReports:
         self.resource_directory = resource_dir
         
         
-    def compile(self, input_file, output_file=False):
+    def compile(self, input_file, output_file=None):
         jr = self.jvJasperCompileManager.compileReport(input_file)
-        if output_file:
-            base = os.path.splitext(input_file)[0]
-            self.jvJRSaver.saveObject(jr, base + ".jasper");
+        if output_file != None:
+            self.jvJRSaver.saveObject(jr, output_file);
         return jr
 
     def load(self, jasper_file):
@@ -186,4 +185,3 @@ class PyJasperReports:
         exporterOutput = self.jvSimpleXmlExporterOutput(outputFile)
         exporter.setExporterOutput(exporterOutput)
         exporter.exportReport()
-        
