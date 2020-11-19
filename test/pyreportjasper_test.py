@@ -57,8 +57,9 @@ class TestPyReportJasper(TestCase):
         config.input = os.path.join(self.RESOURCES_DIR, 'reports', 'charactersetTestWithStudioBuiltinFunctions.jrxml')
         config.output = os.path.join(self.RESOURCES_DIR, 'reports', 'characterset_test_with_studio_builtin_functions')
         instance = Report(config, config.input)
-        instance.compile_to_file()
-        self.assertEqual(os.path.isfile(config.output + '.jasper'), True)
+        instance.fill()
+        instance.export_jrprint()
+        self.assertEqual(os.path.isfile(config.output + '.jrprint'), True)
 
     @ignore_warnings
     def test_compile_to_file_javascript(self):
@@ -66,8 +67,9 @@ class TestPyReportJasper(TestCase):
         config.input = os.path.join(self.RESOURCES_DIR, 'reports', 'charactersetTestWithJavaScript.jrxml')
         config.output = os.path.join(self.RESOURCES_DIR, 'reports', 'characterset_test_with_javascript')
         instance = Report(config, config.input)
-        instance.compile_to_file()
-        self.assertEqual(os.path.isfile(config.output + '.jasper'), True)
+        instance.fill()
+        instance.export_jrprint()
+        self.assertEqual(os.path.isfile(config.output + '.jrprint'), True)
 
     @ignore_warnings
     def test_fill_javascript(self):
@@ -75,8 +77,9 @@ class TestPyReportJasper(TestCase):
         config.input = os.path.join(self.RESOURCES_DIR, 'reports', 'charactersetTestWithJavaScript.jrxml')
         config.output = os.path.join(self.RESOURCES_DIR, 'reports', 'characterset_test_with_javascript')
         instance = Report(config, config.input)
-        instance.compile_to_file()
-        self.assertEqual(os.path.isfile(config.output + '.jasper'), True)
+        instance.fill()
+        instance.export_jrprint()
+        self.assertEqual(os.path.isfile(config.output + '.jrprint'), True)
 
     @ignore_warnings
     def test_compile_to_file_jasperreports_functions2(self):
@@ -84,8 +87,9 @@ class TestPyReportJasper(TestCase):
         config.input = os.path.join(self.RESOURCES_DIR, 'reports', 'Blank_A4_1.jrxml')
         config.output = os.path.join(self.RESOURCES_DIR, 'reports', 'blank_A4_1')
         instance = Report(config, config.input)
-        instance.compile_to_file()
-        self.assertEqual(os.path.isfile(config.output + '.jasper'), True)
+        instance.fill()
+        instance.export_jrprint()
+        self.assertEqual(os.path.isfile(config.output + '.jrprint'), True)
 
     @ignore_warnings
     def test_export_pdf(self):
@@ -118,14 +122,6 @@ class TestPyReportJasper(TestCase):
         instance.fill()
         instance.export_odt()
         self.assertEqual(os.path.isfile(config.output + '.odt'), True)
-
-    @ignore_warnings
-    def test_export_html(self):
-        config = self.get_config_csv()
-        instance = Report(config, config.input)
-        instance.fill()
-        instance.export_html()
-        self.assertEqual(os.path.isfile(config.output + '.html'), True)
 
     @ignore_warnings
     def test_export_xml(self):
@@ -192,14 +188,6 @@ class TestPyReportJasper(TestCase):
         instance.fill()
         instance.export_pptx()
         self.assertEqual(os.path.isfile(config.output + '.pptx'), True)
-
-    @ignore_warnings
-    def test_export_xhtml(self):
-        config = self.get_config_csv()
-        instance = Report(config, config.input)
-        instance.fill()
-        instance.export_xhtml()
-        self.assertEqual(os.path.isfile(config.output + '.x.html'), True)
 
     @ignore_warnings
     def test_get_report_parameters(self):

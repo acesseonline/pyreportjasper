@@ -61,7 +61,6 @@ class Report:
         self.SimpleOutputStreamExporterOutput = jpype.JPackage('net').sf.jasperreports.export.SimpleOutputStreamExporterOutput
         self.JROdsExporter = jpype.JPackage('net').sf.jasperreports.engine.export.oasis.JROdsExporter
         self.JROdtExporter = jpype.JPackage('net').sf.jasperreports.engine.export.oasis.JROdtExporter
-        self.HtmlExporter = jpype.JPackage('net').sf.jasperreports.engine.export.HtmlExporter
         self.SimpleHtmlExporterOutput = jpype.JPackage('net').sf.jasperreports.export.SimpleHtmlExporterOutput
         self.JRXmlExporter = jpype.JPackage('net').sf.jasperreports.engine.export.JRXmlExporter
         self.SimpleXmlExporterOutput = jpype.JPackage('net').sf.jasperreports.export.SimpleXmlExporterOutput
@@ -226,12 +225,6 @@ class Report:
         exporter.setExporterOutput(self.SimpleOutputStreamExporterOutput(self.get_output_stream('.odt')))
         exporter.exportReport()
 
-    def export_html(self):
-        exporter = self.HtmlExporter()
-        exporter.setExporterInput(self.SimpleExporterInput(self.jasper_print))
-        exporter.setExporterOutput(self.SimpleHtmlExporterOutput(self.get_output_stream(".html")))
-        exporter.exportReport()
-
     def export_xml(self):
         exporter = self.JRXmlExporter()
         exporter.setExporterInput(self.SimpleExporterInput(self.jasper_print))
@@ -306,12 +299,6 @@ class Report:
         exporter = self.JRPptxExporter()
         exporter.setExporterInput(self.SimpleExporterInput(self.jasper_print))
         exporter.setExporterOutput(self.SimpleOutputStreamExporterOutput(self.get_output_stream('.pptx')))
-        exporter.exportReport()
-
-    def export_xhtml(self):
-        exporter = self.HtmlExporter()
-        exporter.setExporterInput(self.SimpleExporterInput(self.jasper_print))
-        exporter.setExporterOutput(self.SimpleHtmlExporterOutput(self.get_output_stream('.x.html')))
         exporter.exportReport()
 
     def export_jrprint(self):

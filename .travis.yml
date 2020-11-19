@@ -3,7 +3,7 @@ language: python
 sudo: required
 
 jdk:
-  - openjdk9
+  - openjdk11
 
 python:
    - "3.5.10"
@@ -11,9 +11,6 @@ python:
    - "3.7.9"
    - "3.8.6"
    - "3.9.0"
-
-#before_install:
-#  - source travisci/java_install.sh
 
 install:
    - pip install coveralls

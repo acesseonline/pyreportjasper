@@ -85,3 +85,6 @@ target/
 main.pygst
 
 *.sublime-workspace
+
+
+/pyreportjasper/_libs

@@ -96,6 +96,12 @@ All tests are in in the ``test`` directory. To run them
 
     python setup.py test
 
+Or with Docker
+
+::
+
+    docker build -f docker_files/python3_8_6-java11.Dockerfile -t pyreportjasper-python38-java11 . && docker run --name pyreportjasper-python38-java11 pyreportjasper-python38-java11
+
 Performance
 -----------
 

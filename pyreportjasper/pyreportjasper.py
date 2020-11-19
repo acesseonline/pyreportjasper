@@ -28,14 +28,12 @@ class PyReportJasper:
         'rtf',
         'docx',
         'odt',
-        'html',
         'xml',
         'xls',
         'xlsx',
         'csv',
         'ods',
         'pptx',
-        'xhtml',
     )
 
     METHODS = ('GET', 'POST', 'PUT')
@@ -145,8 +143,6 @@ class PyReportJasper:
                             report.export_docx()
                         elif f == 'odt':
                             report.export_odt()
-                        elif f == 'html':
-                            report.export_html()
                         elif f == 'xml':
                             report.export_xml()
                         elif f == 'xls':
@@ -159,8 +155,6 @@ class PyReportJasper:
                             report.export_ods()
                         elif f == 'pptx':
                             report.export_pptx()
-                        elif f == 'xhtml':
-                            report.export_xhtml()
                         else:
                             raise NameError("Error output format {} not implemented!".format(f))
                 except Exception as ex:
