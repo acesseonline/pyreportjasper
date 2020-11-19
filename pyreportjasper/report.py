@@ -311,8 +311,11 @@ class Report:
     def export_xhtml(self):
         exporter = self.HtmlExporter()
         exporter.setExporterInput(self.SimpleExporterInput(self.jasper_print))
-        exporter.setExporterOutput(self.SimpleOutputStreamExporterOutput(self.get_output_stream('.x.html')))
+        exporter.setExporterOutput(self.SimpleHtmlExporterOutput(self.get_output_stream('.x.html')))
         exporter.exportReport()
+
+    def export_jrprint(self):
+        self.JRSaver.saveObject(self.jasper_print, self.get_output_stream('.jrprint'))
 
     def get_report_parameters(self):
         """

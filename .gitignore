@@ -16,6 +16,7 @@ __pycache__/
 /test/resources/reports/*.docx
 /test/resources/reports/*.csv
 /test/resources/reports/*.xml
+/test/resources/reports/*.pptx
 /test/resources/reports/*.jasper
 /test/resources/reports/*.jrprint
 
