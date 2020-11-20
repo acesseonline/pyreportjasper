@@ -1,0 +1,88 @@
+name: PyReportJasper Tests
+
+# on: [ push, pull_request ]
+on:
+  push:
+    branches: [ development ]
+  pull_request:
+    branches: [ development ]
+
+jobs:
+  linux_tests:
+    name: Linux - Python ${{ matrix.python-version }}
+    needs: lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.5, 3.6, 3.7, 3.8, 3.9]
+        java-version: [9, 10, 11, 12, 13, 14, 15]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java-version }}
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install coveralls
+          python -m pip install pathlib
+          python -m pip install jpype1
+      - name: Run test targets for ${{ matrix.python-version }}
+        run: python setup.py test
+  windows_tests:
+    name: Windows - Python ${{ matrix.python-version }}
+    needs: linux_tests
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        python-version: [3.5, 3.6, 3.7, 3.8, 3.9]
+        java-version: [9, 10, 11, 12, 13, 14, 15]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java-version }}
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install coveralls
+          python -m pip install pathlib
+          python -m pip install jpype1
+      - name: Run test targets for ${{ matrix.python-version }}
+        run: python setup.py test
+  mac_tests:
+    name: MacOS - Python ${{ matrix.python-version }}
+    needs: [linux_tests, windows_tests]
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        python-version: [3.5, 3.6, 3.7, 3.8, 3.9]
+        java-version: [9, 10, 11, 12, 13, 14, 15]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java-version }}
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install coveralls
+          python -m pip install pathlib
+          python -m pip install jpype1
+      - name: Run test targets for ${{ matrix.python-version }}
+        run: python setup.py test
