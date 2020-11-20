@@ -10,7 +10,6 @@ on:
 jobs:
   linux_tests:
     name: Linux - Python ${{ matrix.python-version }}
-    needs: lint
     runs-on: ubuntu-latest
     strategy:
       matrix:
