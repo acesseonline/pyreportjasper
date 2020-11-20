@@ -1,7 +1,7 @@
 Reports for Python, with JasperReports.
 =======================================
 
-|License| |Donate| |PythonVersion| |Java|
+|License| |Donate| |PythonVersion| |Java| |Test|
 
 New version 2.1.0 in developing
 -------------------------------
@@ -137,3 +137,4 @@ Contributors
 .. |PythonVersion| image:: https://img.shields.io/badge/python-%3E=3.0-blue
    :target: https://pypi.org/project/pyreportjasper/
 .. |Java| image:: https://img.shields.io/badge/java-%3E=9-purple.svg
+.. |Test| image:: https://github.com/PyReportJasper/pyreportjasper/workflows/PyReportJasper%20Tests/badge.svg?branch=development

@@ -30,7 +30,7 @@ jobs:
       - name: Run test targets for ${{ matrix.python-version }}
         run: python setup.py test
   windows_tests:
-    name: Windows - Python ${{ matrix.python-version }} with Java ${{ matrix.java-version }}
+    name: Win - Python ${{ matrix.python-version }} with Java ${{ matrix.java-version }}
     needs: linux_tests
     runs-on: windows-latest
     strategy:
