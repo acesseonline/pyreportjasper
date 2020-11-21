@@ -56,8 +56,7 @@ setup(
     platforms='Windows, Linux, Darwin',
     packages=find_packages(),
     install_requires=[
-        'jpype1',
-        'requests'
+        'jpype1'
     ],
     test_suite='test',
     package_data={

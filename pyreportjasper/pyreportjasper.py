@@ -32,13 +32,15 @@ class PyReportJasper:
         'xls',
         'xlsx',
         'csv',
+        'csv_meta',
         'ods',
         'pptx',
+        'jrprint'
     )
 
     METHODS = ('GET', 'POST', 'PUT')
 
-    def set_up(self, input_file, output_file=False, output_formats=['pdf'], parameters={}, db_connection={},
+    def config(self, input_file, output_file=False, output_formats=['pdf'], parameters={}, db_connection={},
                locale='pt_BR', resource=None):
         if not input_file:
             raise NameError('No input file!')
@@ -58,7 +60,8 @@ class PyReportJasper:
             self.config.output = input_file
         self.config.params = parameters
         if len(db_connection) > 0:
-            self.config.dbType = db_connection['driver']
+            if 'driver' in db_connection:
+                self.config.dbType = db_connection['driver']
             if 'username' in db_connection:
                 self.config.dbUser = db_connection['username']
             if 'password' in db_connection:
@@ -93,8 +96,12 @@ class PyReportJasper:
                 self.config.csvRecordDel = db_connection['csv_record_del']
             if 'csv_field_del' in db_connection:
                 self.config.csvFieldDel = db_connection['csv_field_del']
+            if 'csv_out_field_del' in db_connection:
+                self.config.outFieldDel = db_connection['csv_out_field_del']
             if 'csv_charset' in db_connection:
                 self.config.csvCharset = db_connection['csv_charset']
+            if 'csv_out_charset' in db_connection:
+                self.config.outCharset = db_connection['csv_out_charset']
 
     def compile(self):
         error = None
@@ -151,10 +158,14 @@ class PyReportJasper:
                             report.export_xlsx()
                         elif f == 'csv':
                             report.export_csv()
+                        elif f == 'csv_meta':
+                            report.export_csv_meta()
                         elif f == 'ods':
                             report.export_ods()
                         elif f == 'pptx':
                             report.export_pptx()
+                        elif f == 'jrprint':
+                            report.export_jrprint()
                         else:
                             raise NameError("Error output format {} not implemented!".format(f))
                 except Exception as ex:
@@ -168,5 +179,12 @@ class PyReportJasper:
 
 
     def list_report_params(self):
-        # TODO: To implement
-        pass
+        report = Report(self.config, self.config.input)
+        report.fill()
+        result = report.get_report_parameters()
+        list_param = []
+        i = 0
+        while i < result.length:
+            list_param.append(str(result[i].getName()))
+            i += 1
+        return list_param
