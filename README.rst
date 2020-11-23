@@ -42,7 +42,7 @@ reporting.
 
 .. |PypiVersion| image:: https://img.shields.io/badge/pypi-Coming%20soon-blue.svg
 .. _PypiVersion: https://github.com/PyReportJasper/pyreportjasper/tree/development
-.. |Conda| image:: https://img.shields.io/badge/pypi-Coming%20soon-blue.svg
+.. |Conda| image:: https://img.shields.io/badge/conda-Coming%20soon-blue.svg
 .. _Conda: https://github.com/PyReportJasper/pyreportjasper/tree/development
 
 .. |TestsCI| image:: https://github.com/PyReportJasper/pyreportjasper/workflows/Tests/badge.svg?branch=development
