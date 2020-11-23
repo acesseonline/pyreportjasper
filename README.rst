@@ -1,20 +1,15 @@
-Reports for Python, with JasperReports.
-=======================================
+.. image:: https://acesseonline-arquivos-publicos.s3.us-east-2.amazonaws.com/logo-pyreportjasper.png
+   :scale: 50 %
+   :alt: PyReportJasper logo
+   :align: center
 
-|License| |Donate| |PythonVersion| |Java| |Test|
+PyReportJasper
+==============
 
-New version 2.1.0 in developing
--------------------------------
-Things have changed, wait
-
-Introduction
-------------
+|pyversions|  |javaversions|  |jvm|  |platform|  |license|
 
 This package aims to be a solution to compile and process JasperReports
 (.jrxml & .jasper files).
-
-Why?
-~~~~
 
 Did you ever had to create a good looking Invoice with a lot of fields
 for your great web app or desktop?
@@ -25,12 +20,6 @@ I had to, and the solutions out there were not perfect. Generating
 Then I found **JasperReports** the best open source solution for
 reporting.
 
-What can I do with this?
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Well, everything. JasperReports is a powerful tool for **reporting** and
-**BI**.
-
 **From their website:**
 
     The JasperReports Library is the world's most popular open source
@@ -40,101 +29,30 @@ Well, everything. JasperReports is a powerful tool for **reporting** and
     variety of document formats including HTML, PDF, Excel, OpenOffice
     and Word.
 
-It is recommended using `Jaspersoft
-Studio <http://community.jaspersoft.com/project/jaspersoft-studio>`__ to
-build your reports, connect it to your datasource (ex:JSON, XML, MySQL,
-POSTGRES, SQL Server), loop thru the results and output it to PDF, XLS,
-DOC, RTF, ODF, etc.
 
-*Some examples of what you can do:*
-
--  Invoices
--  Reports
--  Listings
-
-Requirements
-------------
-
--  Java JDK 9+
--  Python >=3.5
--  Lib `jpype1 <https://pypi.org/project/JPype1/>`__
-
-No support
-------------
-.. image:: docs/mongodb-not-supported.jpg
-
-Optional
---------
-
--  `Mysql JDBC <http://dev.mysql.com/downloads/connector/j/>`__ (if you
-   want to use database)
--  `PostgreSQL JDBC <https://jdbc.postgresql.org/download.html>`__ (if
-   you want to use database)
--  `SQL Server
-   JDBC <https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774>`__
-   (if you want to use database)
--  `Oracle
-   JDBC <http://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html>`__
-   (if you want to use database)
--  `Jaspersoft
-   Studio <http://community.jaspersoft.com/project/jaspersoft-studio>`__
-   (to draw and compile your reports)
-
-Note
-~~~~
-
--  Using **pyreportjasper**, you can also access different types of data
-   sources, including CSV, JDBC, JSON, NoSQL, XML, or your own custom
-   data source.
-
-Tests
-~~~~~
-
-All tests are in in the ``test`` directory. To run them
-
-::
-
-    python setup.py test
-
-Or with Docker
-
-::
-
-    docker build -f docker_files/python3_8_6-java11.Dockerfile -t pyreportjasper-python38-java11 . && docker run --name pyreportjasper-python38-java11 pyreportjasper-python38-java11
-
-Performance
------------
-
-Depends on the complexity, amount of data and the resources of your
-machine (let me know your use case).
-
-I have a report that generates a *Invoice* with a DB connection, images
-and multiple pages and it takes about **3/4 seconds** to process. I
-suggest that you use a worker to generate the reports in the background.
-
-Questions?
-----------
-
-Open a `Issue <https://github.com/PyReportJasper/pyreportjasper/issues>`__
-
-Contribute
-----------
-
-Contribute to the community Python, feel free to contribute, make a
-fork!!
-
-Contributors
-~~~~~~~~~~~~
-
--  `List of
-   contributors <https://github.com/PyReportJasper/pyreportjasper/graphs/contributors>`__
+:Code: `GitHub
+ <https://github.com/PyReportJasper/pyreportjasper>`_
+:Issue tracker: `GitHub Issues
+ <https://github.com/PyReportJasper/pyreportjasper/issues>`_
+:Documentation: `Python Docs`_
+:License: `GNU GENERAL PUBLIC LICENSE`_
+:Build status:  |TestsCI|_
+:Version: |PypiVersion|_ |Conda|_
 
 
-.. |License| image:: https://img.shields.io/badge/License-GPLv3-blue.svg
+.. |PypiVersion| image:: https://img.shields.io/badge/pypi-Coming%20soon-blue.svg
+.. _PypiVersion: https://github.com/PyReportJasper/pyreportjasper/tree/development
+.. |Conda| image:: https://img.shields.io/badge/pypi-Coming%20soon-blue.svg
+.. _Conda: https://github.com/PyReportJasper/pyreportjasper/tree/development
+
+.. |TestsCI| image:: https://github.com/PyReportJasper/pyreportjasper/workflows/Tests/badge.svg?branch=development
+.. _TestsCI: https://github.com/PyReportJasper/pyreportjasper/actions?query=workflow%3A%22Tests%22
+.. |pyversions| image:: https://img.shields.io/badge/python-3.5%20or%20higher-blue.svg
+.. |javaversions| image:: https://img.shields.io/badge/java-9%20or%20higher-purple.svg
+.. |jvm| image:: https://img.shields.io/badge/jvm-Open%20%7C%20Oracle%20%7C%20Corretto-purple.svg
+.. |platform| image:: https://img.shields.io/badge/platform-linux%20%7C%20windows%20%7C%20mac-lightgrey
+.. _GNU GENERAL PUBLIC LICENSE: https://github.com/PyReportJasper/pyreportjasper/blob/master/LICENSE
+.. _Python Docs: https://pyreportjasper.readthedocs.io/en/latest/
+.. |license| image:: https://img.shields.io/badge/License-GPLv3-blue.svg
    :target: https://github.com/PyReportJasper/pyreportjasper/blob/master/LICENSE
-.. |Donate| image:: https://img.shields.io/badge/donate-help%20keep-EB4A3B.svg
-   :target: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=V2SUB9RQHYUGE&lc=US&item_name=pyreportjasper&item_number=pyreportjasper&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted
-.. |PythonVersion| image:: https://img.shields.io/badge/python-%3E=3.0-blue
-   :target: https://pypi.org/project/pyreportjasper/
-.. |Java| image:: https://img.shields.io/badge/java-%3E=9-purple.svg
-.. |Test| image:: https://github.com/PyReportJasper/pyreportjasper/workflows/PyReportJasper%20Tests/badge.svg?branch=development
+

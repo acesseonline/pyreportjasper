@@ -20,7 +20,7 @@ def ignore_warnings(test_func):
     return do_test
 
 
-class TestPyReportJasper(TestCase):
+class TestReport(TestCase):
     RESOURCES_DIR = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))), 'test', 'resources')
 
     def get_config_csv(self):

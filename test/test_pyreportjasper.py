@@ -14,7 +14,6 @@ def ignore_warnings(test_func):
     def do_test(self, *args, **kwargs):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", ResourceWarning)
-            warnings.simplefilter("ignore", DeprecationWarning)
             test_func(self, *args, **kwargs)
     return do_test
 
@@ -39,6 +38,22 @@ class TestPyReportJasper(TestCase):
     @ignore_warnings
     def setUp(self):
         self.pyreportjasper = PyReportJasper()
+
+    @ignore_warnings
+    def test_deprecated_export_pdf(self):
+        with self.assertWarns(DeprecationWarning) as cm:
+            input_file = os.path.join(self.RESOURCES_DIR, 'reports', 'csv.jrxml')
+            output_file = os.path.join(self.RESOURCES_DIR, 'reports', 'deprecated_compile_to_file')
+            self.pyreportjasper.process(
+                input_file,
+                output_file,
+                format_list=["pdf"],
+                db_connection=self.get_config_csv()
+            )
+        the_warning = cm.warning
+        self.assertEqual(the_warning.args[0], 'process is deprecated - use config and then process_report instead. '
+                                              'See the documentation https://pyreportjasper.readthedocs.io')
+        self.assertEqual(os.path.isfile(output_file + '.pdf'), True)
 
     @ignore_warnings
     def test_compile_to_file(self):
