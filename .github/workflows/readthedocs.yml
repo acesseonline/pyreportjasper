@@ -22,9 +22,6 @@ jobs:
           python-version: 3.7
 
       - name: Install required packages
-        run: python3 -m pip install --user --upgrade requests
-
-      - name: Install required packages file
         run: python3 -m pip install -r doc-requirements.txt
 
       - name: Build Doc
