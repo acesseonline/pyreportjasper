@@ -16,6 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@master
 
-      - uses: ammaraskar/sphinx-action@master"
+      - uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "docs/"
