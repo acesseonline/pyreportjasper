@@ -28,7 +28,9 @@ jobs:
         run: python3 -m pip install -r doc-requirements.txt
 
       - name: Build Doc
-        run: make html
+        working-directory: ./docs
+        run: |
+          make html
 
       - name: Trigger documentation build
         run: |
