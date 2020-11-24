@@ -31,7 +31,7 @@ jobs:
         uses: ammaraskar/sphinx-action@master
         with:
           docs-folder: "docs/"
-          build-command: "make html"
+          build-command: "sphinx-build -b html . _build"
 
       - name: Trigger documentation build
         run: |
