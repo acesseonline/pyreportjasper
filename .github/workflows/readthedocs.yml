@@ -1,0 +1,40 @@
+# Build documentation of ReadTheDocs
+
+name: Document on ReadTheDocs
+
+on:
+  push:
+    branches: [ development ]
+  pull_request:
+    branches: [ development ]
+
+jobs:
+  document:
+    name: Documentation build on ReadTheDocs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+
+      - name: Setup Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+
+      - name: Install required packages
+        run: python3 -m pip install --user --upgrade requests
+
+      - name: Install required packages file
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Build Doc
+        uses: ammaraskar/sphinx-action@master
+        with:
+          docs-folder: "docs/"
+          build-command: "make html"
+
+      - name: Trigger documentation build
+        run: |
+          python3 .github/workflows/readthedocs.py
+        env:
+          READTHEDOCS_TOKEN: ${{ secrets.readthedocs_token }}

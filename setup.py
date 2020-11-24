@@ -53,7 +53,12 @@ setup(
     long_description=open('README.rst').read(),
     long_description_content_type="text/x-rst",
     zip_safe=False,
-    platforms='Windows, Linux, Darwin',
+    platforms=[
+        'Operating System :: Microsoft :: Windows',
+        'Operating System :: POSIX',
+        'Operating System :: Unix',
+        'Operating System :: MacOS',
+    ],
     packages=find_packages(),
     install_requires=[
         'jpype1'
@@ -64,7 +69,6 @@ setup(
     },
     include_package_data=True,
     classifiers=[
-        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'Topic :: Software Development :: Libraries :: Python Modules',
