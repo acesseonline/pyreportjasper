@@ -253,16 +253,6 @@ Class Config
     :rtype: bool
 
 
-    Example:
-
-    .. code-block:: python
-
-        # Instantiating the class
-        config = Config()
-        # Defining value in a class attribute
-        config.dbType = 'csv'
-
-
 Class Report
 ~~~~~~~~~~~~~
 .. py:class:: Report(config: Config, input_file)
@@ -274,149 +264,100 @@ Class Report
 
     .. py:classmethod:: compile()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Compile the report
 
     .. py:classmethod:: compile_to_file()
 
-    description
+        Emit a .jasper compiled version of the report definition .jrxml file.
 
-    :return: Return description.
-    :rtype: str
     .. py:classmethod:: fill()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Executes the ``fill_internal()`` method
 
     .. py:classmethod:: fill_internal()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Method responsible for filling the report
 
     .. py:classmethod:: get_output_stream(suffix)
 
-    description
+        Return a file-based output stream with the given suffix
 
-    :return: Return description.
-    :rtype: str
+        :param str suffix: File suffix
+
+        :return: Returns an output stream from the input file.
+        :rtype: OutputStream (java)
 
     .. py:classmethod:: export_pdf()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Export the report in ``pdf`` format
 
     .. py:classmethod:: export_rtf()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Export the report in ``rtf`` format
 
     .. py:classmethod:: export_docx()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Export the report in ``docx`` format
 
     .. py:classmethod:: export_odt()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Export the report in ``odt`` format
 
     .. py:classmethod:: export_xml()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Export the report in ``xml`` format
 
     .. py:classmethod:: export_xls()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Export the report in ``xls`` format
 
     .. py:classmethod:: export_xls_meta()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Export the report in ``xls`` Metadata Exporter format
 
     .. py:classmethod:: export_xlsx()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Export the report in ``xlsx`` format
 
     .. py:classmethod:: export_csv()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Export the report in ``csv`` format
 
     .. py:classmethod:: export_csv_meta()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Export the report in ``csv`` Metadata Exporter format
 
     .. py:classmethod:: export_ods()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Export the report in ``ods`` format
 
     .. py:classmethod:: export_pptx()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Export the report in ``pptx`` format
 
     .. py:classmethod:: export_jrprint()
 
-    description
-
-    :return: Return description.
-    :rtype: str
+        Export the report in ``jrprint`` format
 
     .. py:classmethod:: get_report_parameters()
 
-    description
+        Returns a list of all report parameters
 
-    :return: Return description.
-    :rtype: str
+        :return: Returns a list of parameters
+        :rtype: list(str)
 
     .. py:classmethod:: get_main_dataset_query()
 
-    description
+        For JSON, JSONQL and any other data types that need a query to be provided, an obvious default is to use the one written into the report, since that is likely what the report designer debugged/intended to be used. This provides access to the value so it can be used as needed.
 
-    :return: Return description.
-    :rtype: str
+        :return: Return a string of main dataset query.
+        :rtype: str
 
     .. py:classmethod:: add_jar_class_path(dir_or_jar)
 
-    description
+        Method responsible for adding a ``.jar`` to ``class_path`` or a list of ``.jar`` files in an informed directory
 
-    :return: Return description.
-    :rtype: str
+        :param str dir_or_jar: A ``.jar`` file or directory containing one or more ``.jar``
 
 
 
@@ -425,3 +366,51 @@ Class Db
 .. py:class:: Db
 
     Class responsible for managing the report data source
+
+    .. py:classmethod:: get_csv_datasource(config: Config)
+
+        Method responsible for creating a data source from an informed csv file
+
+        :param Config config: Config class instance
+        :return: Returns a data source of type csv
+        :rtype: ``net.sf.jasperreports.engine.data.JRCsvDataSource`` (java)
+
+    .. py:classmethod:: get_xml_datasource(config: Config)
+
+        Method responsible for creating a data source from an informed xml file
+
+        :param Config config: Config class instance
+        :return: Returns a data source of type xml
+        :rtype: ``net.sf.jasperreports.engine.data.JRXmlDataSource`` (java)
+
+    .. py:classmethod:: get_json_datasource(config: Config)
+
+        Method responsible for creating a data source from an informed json file
+
+        :param Config config: Config class instance
+        :return: Returns a data source of type json
+        :rtype: ``net.sf.jasperreports.engine.data.JsonDataSource`` (java)
+
+    .. py:classmethod:: get_jsonql_datasource(config: Config)
+
+        Method responsible for creating a data source from an informed json file
+
+        :param Config config: Config class instance
+        :return: Returns a data source of type jsonql
+        :rtype: ``net.sf.jasperreports.engine.data.JsonQLDataSource`` (java)
+
+    .. py:classmethod:: get_data_file_input_stream(config: Config)
+
+        Get InputStream corresponding to the configured dataFile.
+
+        :param Config config: Config class instance
+        :return: Returns a InputStream
+        :rtype: ``java.io.InputStream`` (java)
+
+    .. py:classmethod:: get_connection(config: Config)
+
+        Method responsible for obtaining a connection to a database
+
+        :return: Returns database connection
+        :rtype: ``java.sql.Connection`` (java)
+
