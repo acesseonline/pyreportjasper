@@ -1,6 +1,50 @@
 API Reference
 =============
 
+Class PyReportJasper
+~~~~~~~~~~~~~~~~~~~~
+.. py:class:: PyReportJasper(*args, **kwargs)
+
+    Class responsible for facilitating the management and export of reports
+
+    .. py:classmethod:: config(input_file, output_file=False, output_formats=['pdf'], parameters={}, db_connection={},locale='pt_BR', resource=None)
+
+        Method responsible for preparing and validating the settings and parameters
+
+    :param str input_file: Input file (.jrxml|.jasper|.jrprint)
+    :param str output_file: Output file or directory
+    :param list output_formats: List with the formats you want to export. Options: ``pdf``, ``rtf``, ``docx``, ``odt``, ``xml``, ``xls``, ``xlsx``, ``csv``, ``csv_meta``, ``ods``, ``pptx``, ``jrprint``
+    :param dict parameters: Dictionary with the parameters your report expects
+    :param dict db_connection: Dictionary with the necessary information to generate the report. Options: ``driver``, ``username``, ``password``, ``host``, ``database``, ``port``, ``jdbc_driver``, ``jdbc_url``, ``jdbc_dir``, ``db_sid``, ``xml_xpath``, ``data_file``, ``json_query``, ``jsonql_query``, ``csv_first_row``, ``csv_columns``, ``csv_record_del``, ``csv_field_del``, ``csv_out_field_del``, ``csv_charset``, ``csv_out_charset``.
+    :param str locale: Set locale  with  two-letter  ISO-639  code  or  a combination of ISO-639 and ISO-3166 like de_DE. For a complete list of locales see `Supported Locales <http://www.oracle.com/technetwork/java/javase/java8locales-2095355.html>`__
+    :param str resource: Directory the files with resources that the report needs for correct generation and export.
+
+
+    .. py:classmethod:: compile(write_jasper=False)
+
+        Compiles the report or all reports into a directory if the input file parameter is a directory
+
+    :param bool write_jasper: Sets whether to write the ``.jasper`` output or not.
+
+
+    .. py:classmethod:: process_report()
+
+        Process the report and export to the formats specified in the config method
+
+    .. py:classmethod:: list_report_params()
+
+        Lists the parameters defined in the report
+
+        :return: Returns a parameter list
+        :rtype: ``list(str)``
+
+    .. py:classmethod:: process(input_file, output_file=False, format_list=['pdf'], parameters={}, db_connection={}, locale='pt_BR', resource="")
+
+        .. warning:: This method still works more in the next versions will be removed.
+
+        .. deprecated:: 2.1.0
+           Use :func:`PyReportJasper.process_report` instead.
+
 Class Config
 ~~~~~~~~~~~~~
 

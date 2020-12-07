@@ -28,6 +28,10 @@ import pyreportjasper
 release = pyreportjasper.__version__
 version = pyreportjasper.__version__
 
+man_pages = [
+    ('index', 'PyReportJasper', 'PyReportJasper Documentation',
+     ['PyReportJasper Project'], 1)
+]
 
 # -- General configuration ---------------------------------------------------
 
@@ -39,6 +43,7 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.autosectionlabel',
     'readthedocs_ext.readthedocs',
+    'guzzle_sphinx_theme'
 ]
 autosectionlabel_prefix_document = True
 
@@ -62,12 +67,28 @@ exclude_patterns = ['_build']
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
+# If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
+html_show_sphinx = False
+
+# If true, "(C) Copyright ..." is shown in the HTML footer. Default is True.
+html_show_copyright = False
+
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'default'
+# import guzzle_sphinx_theme
+# extensions.append("guzzle_sphinx_theme")
+# html_translator_class = 'guzzle_sphinx_theme.HTMLTranslator'
+# html_theme_path = guzzle_sphinx_theme.html_theme_path()
+# html_theme = 'guzzle_sphinx_theme'
+# html_show_sourcelink = False
+# html_sidebars = {
+#     '**': ['logo-text.html',
+#            'globaltoc.html',
+#            'searchbox.html']
+# }
 
 html_logo = 'logo.png'
 
@@ -84,7 +105,7 @@ html_context = {
 
 # on_rtd is whether we are on readthedocs.org, this line of code grabbed from docs.readthedocs.org
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
-
+html_theme = 'default'
 if not on_rtd:  # only import and set the theme if we're building docs locally
     import sphinx_rtd_theme
     html_theme = 'sphinx_rtd_theme'

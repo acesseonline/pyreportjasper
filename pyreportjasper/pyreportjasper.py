@@ -104,10 +104,11 @@ class PyReportJasper:
             if 'csv_out_charset' in db_connection:
                 self.config.outCharset = db_connection['csv_out_charset']
 
-    def compile(self):
+    def compile(self, write_jasper=False):
         error = None
         if os.path.isfile(self.config.input):
             try:
+                self.config.writeJasper = write_jasper
                 report = Report(self.config, self.config.input)
                 report.compile()
             except Exception as ex:
@@ -127,6 +128,8 @@ class PyReportJasper:
 
         if error:
             raise error
+        else:
+            return True
 
     def process_report(self):
         error = None
@@ -177,6 +180,8 @@ class PyReportJasper:
             error = NameError('Error: not a file: {}'.format(self.config.input))
         if error:
             raise error
+        else:
+            return True
 
     def list_report_params(self):
         report = Report(self.config, self.config.input)
