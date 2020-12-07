@@ -41,7 +41,7 @@ setup(
     url='https://github.com/PyReportJasper/pyreportjasper',
     download_url='https://pypi.python.org/pypi/pyreportjasper/' + get_version('pyreportjasper'),
     project_urls=OrderedDict((
-        ('Documentation', 'https://github.com/PyReportJasper/pyreportjasper/blob/master/README.rst'),
+        ('Documentation', 'https://pyreportjasper.readthedocs.io/en/master/'),
         ('Code', 'https://github.com/PyReportJasper/pyreportjasper'),
         ('Issue tracker', 'https://github.com/PyReportJasper/pyreportjasper/issues'),
     )),

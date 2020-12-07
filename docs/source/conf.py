@@ -42,8 +42,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.autosectionlabel',
-    'readthedocs_ext.readthedocs',
-    'guzzle_sphinx_theme'
+    'readthedocs_ext.readthedocs'
 ]
 autosectionlabel_prefix_document = True
 
