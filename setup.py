@@ -11,6 +11,7 @@ import re
 from collections import OrderedDict
 import subprocess
 
+
 def version_available(cmd):
     try:
         output = subprocess.call([cmd, "-version"])
@@ -38,7 +39,7 @@ setup(
     name='pyreportjasper',
     version=get_version('pyreportjasper'),
     url='https://github.com/PyReportJasper/pyreportjasper',
-    download_url='https://pypi.python.org/pypi/jpy/' + get_version('pyreportjasper'),
+    download_url='https://pypi.python.org/pypi/pyreportjasper/' + get_version('pyreportjasper'),
     project_urls=OrderedDict((
         ('Documentation', 'https://github.com/PyReportJasper/pyreportjasper/blob/master/README.rst'),
         ('Code', 'https://github.com/PyReportJasper/pyreportjasper'),
