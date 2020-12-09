@@ -3,7 +3,7 @@
 
 package:
   name: "{{ name|lower }}"
-  version: "{{ version }}"
+  version: {{ GIT_DESCRIBE_TAG }}
 
 #source:
 #  git_rev: 2.1.0
@@ -11,17 +11,21 @@ package:
 source:
   path: ..
 
+build:
+  number: {{ GIT_DESCRIBE_NUMBER }}
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
 requirements:
   build:
-    - python
+    - python {{ python }}
     - jpype1
   run:
-    - python
+    - python >=3.5
     - jpype1
 
-test:
-  imports:
-    - pyreportjasper
+#test:
+#  imports:
+#    - pyreportjasper
 
 about:
   home: https://pyreportjasper.readthedocs.io
