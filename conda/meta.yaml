@@ -1,32 +1,19 @@
 {% set name = "pyreportjasper" %}
-{% set version = "2.1.0" %}
 
 package:
   name: "{{ name|lower }}"
   version: {{ GIT_DESCRIBE_TAG }}
 
-#source:
-#  git_rev: 2.1.0
-#  git_url: https://github.com/acesseonline/pyreportjasper.git
 source:
   path: ..
-
-#build:
-#  number: {{ GIT_DESCRIBE_NUMBER }}
-#  script: python setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
     - python {{ python }}
-#    - python {{ python }}
     - jpype1
   run:
     - python
     - jpype1
-
-#test:
-#  imports:
-#    - pyreportjasper
 
 about:
   home: https://pyreportjasper.readthedocs.io

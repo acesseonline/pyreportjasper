@@ -40,10 +40,10 @@ reporting.
 :Version: |PypiVersion|_ |Conda|_
 
 
-.. |PypiVersion| image:: https://img.shields.io/badge/pypi-Coming%20soon-blue.svg
-.. _PypiVersion: https://github.com/acesseonline/pyreportjasper/tree/development
-.. |Conda| image:: https://img.shields.io/badge/conda-Coming%20soon-blue.svg
-.. _Conda: https://github.com/acesseonline/pyreportjasper/tree/development
+.. |PypiVersion| image:: https://img.shields.io/pypi/v/pyreportjasper?style=flat-square
+.. _PypiVersion: https://pypi.org/project/pyreportjasper/
+.. |Conda| image:: https://anaconda.org/acesseonline/pyreportjasper/badges/version.svg
+.. _Conda: https://anaconda.org/acesseonline/pyreportjasper
 
 .. |TestsCI| image:: https://github.com/acesseonline/pyreportjasper/workflows/Tests/badge.svg?branch=master
 .. _TestsCI: https://github.com/acesseonline/pyreportjasper/actions?query=workflow%3ATests
