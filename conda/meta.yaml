@@ -11,16 +11,17 @@ package:
 source:
   path: ..
 
-build:
-  number: {{ GIT_DESCRIBE_NUMBER }}
-  script: python setup.py install --single-version-externally-managed --record=record.txt
+#build:
+#  number: {{ GIT_DESCRIBE_NUMBER }}
+#  script: python setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
     - python {{ python }}
+#    - python {{ python }}
     - jpype1
   run:
-    - python >=3.5
+    - python
     - jpype1
 
 #test:
