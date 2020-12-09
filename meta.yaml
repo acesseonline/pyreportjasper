@@ -9,7 +9,7 @@ package:
 #  git_rev: 2.1.0
 #  git_url: https://github.com/acesseonline/pyreportjasper.git
 source:
-  path: ..
+  path: .
 
 requirements:
   build:
