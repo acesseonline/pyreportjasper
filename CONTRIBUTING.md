@@ -1,6 +1,6 @@
 # Contributing
 
-If you want to add an issue or pull request, please ensure that the [existing issues](https://github.com/PyReportJasper/pyreportjasper/issues?utf8=✓&q=) don't already cover your question or contribution.
+If you want to add an issue or pull request, please ensure that the [existing issues](https://github.com/acesseonline/pyreportjasper/issues?utf8=✓&q=) don't already cover your question or contribution.
 
 To get started contributing code to the `pyreportjasper` project:
 
@@ -16,7 +16,7 @@ pip install -U pip
 
 Clone the repository (alternatively, if you plan on making a pull request and are not in the Mapbox organization, use the [github page](https://github.com/mapbox/mapbox-sdk-py) to create your own fork)
 ```
-git clone git@github.com:PyReportJasper/pyreportjasper.git
+git clone git@github.com:acesseonline/pyreportjasper.git
 cd pyreportjasper
 ```
 

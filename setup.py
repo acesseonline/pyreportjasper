@@ -38,12 +38,12 @@ def get_version(package):
 setup(
     name='pyreportjasper',
     version=get_version('pyreportjasper'),
-    url='https://github.com/PyReportJasper/pyreportjasper',
+    url='https://github.com/acesseonline/pyreportjasper',
     download_url='https://pypi.python.org/pypi/pyreportjasper/' + get_version('pyreportjasper'),
     project_urls=OrderedDict((
         ('Documentation', 'https://pyreportjasper.readthedocs.io/en/master/'),
-        ('Code', 'https://github.com/PyReportJasper/pyreportjasper'),
-        ('Issue tracker', 'https://github.com/PyReportJasper/pyreportjasper/issues'),
+        ('Code', 'https://github.com/acesseonline/pyreportjasper'),
+        ('Issue tracker', 'https://github.com/acesseonline/pyreportjasper/issues'),
     )),
     license='GPLv3',
     author='Jadson Bonfim Ribeiro',

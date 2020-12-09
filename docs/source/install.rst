@@ -53,7 +53,7 @@ your operating system and pip version.
 
 To install from the current github master use: ::
 
-  pip install git@github.com:PyReportJasper/pyreportjasper.git
+  pip install git@github.com:acesseonline/pyreportjasper.git
 
 More details on installing from git can be found at `Pip install
 <https://pip.pypa.io/en/stable/reference/pip_install/#git>`__.  The git version
@@ -68,7 +68,7 @@ PyReportJasper can be built entirely from source.
 **1. Get the PyReportJasper source**
 
 The PyReportJasper source may be acquired from either
-`github <https://github.com/PyReportJasper/pyreportjasper>`__ or
+`github <https://github.com/acesseonline/pyreportjasper>`__ or
 from `PyPi <https://pypi.org/project/pyreportjasper/>`__.
 
 **2. Build the source with desired options**
@@ -97,7 +97,7 @@ happens, preform the following steps:
      export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
 
 2. If that setup.py still fails please create an Issue `on
-   github <https://github.com/PyReportJasper/pyreportjasper/issues?state=open>`__ and
+   github <https://github.com/acesseonline/pyreportjasper/issues?state=open>`__ and
    post the relevant logs.
 
 .. _below:
