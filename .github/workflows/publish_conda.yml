@@ -1,4 +1,4 @@
-name: Publish Conda Package
+name: Publish - Conda Package
 
 on:
   release:
@@ -12,5 +12,5 @@ jobs:
     - name: publish-to-conda
       uses: acesseonline/conda-package-publish-action@master
       with:
-        subdir: 'conda'
+        subDir: 'conda'
         AnacondaToken: ${{ secrets.ANACONDA_TOKEN }}
