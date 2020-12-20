@@ -20,3 +20,7 @@ about:
   license: GPL3
   license_family: GPL3
   summary: This package aims to be a solution to compile and process JasperReports (.jrxml & .jasper files).
+
+extra:
+  recipe-maintainers:
+    - acesseonline
