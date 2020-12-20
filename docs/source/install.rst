@@ -18,6 +18,10 @@ and windows on conda-forge.
 
     conda install -c conda-forge pyreportjasper
 
+3. Or install from the acesseonline software channel::
+
+    conda install -c acesseonline pyreportjasper
+
 Source Install
 --------------
 
