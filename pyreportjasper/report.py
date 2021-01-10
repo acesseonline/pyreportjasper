@@ -77,10 +77,20 @@ class Report:
         self.SimpleCsvMetadataExporterConfiguration = jpype.JPackage('net').sf.jasperreports.export.SimpleCsvMetadataExporterConfiguration
         self.JRSaver = jpype.JPackage('net').sf.jasperreports.engine.util.JRSaver
         self.File = jpype.JPackage('java').io.File
+        self.ApplicationClasspath = jpype.JPackage('br').com.acesseonline.classpath.ApplicationClasspath
         self.input_file = input_file
         self.defaultLocale = self.Locale.getDefault()
         if self.config.has_resource():
             self.add_jar_class_path(self.config.resource)
+        if self.config.has_resource():
+            if os.path.isdir(self.config.resource):
+                try:
+                    res = self.File(self.config.resource)
+                    self.ApplicationClasspath.add(res)
+                except Exception as ex:
+                    raise NameError(
+                        'It was not possible to add the path {0} to the Class Path: ERROR: {1}'\
+                        .format(self.config.resource, str(ex)))
 
         if self.config.has_jdbc_dir():
             self.add_jar_class_path(self.config.jdbcDir)
