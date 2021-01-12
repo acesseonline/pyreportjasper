@@ -89,4 +89,5 @@ main.pygst
 
 /pyreportjasper/_libs
 /sub
+/__libs
 teste.py
