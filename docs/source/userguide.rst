@@ -75,6 +75,10 @@ Studio*. You can compile directly within the program.
         input_file = os.path.join(REPORTS_DIR, 'csv.jrxml')
         output_file = os.path.join(REPORTS_DIR, 'csv')
         pyreportjasper = PyReportJasper()
+        pyreportjasper.config(
+          input_file,
+          output_file,
+        )
         pyreportjasper.compile(write_jasper=True)
 
 This commando will compile the ``csv.jrxml`` source file to a
