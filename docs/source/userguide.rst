@@ -86,7 +86,7 @@ This commando will compile the ``csv.jrxml`` source file to a
 
 Processing
 ----------
-Now lets process the report that we compile before:
+Now let’s process the report that we compile before:
 
 .. code-block:: python
    :emphasize-lines: 15
