@@ -25,21 +25,22 @@ class Report:
             raise NameError('Library directory not found at {0}'.format(self.LIB_PATH))
         self.config = config
         if not jpype.isJVMStarted():
+            classpath = [
+                os.path.join(self.LIB_PATH, "*"),
+                os.path.join(self.JDBC_PATH, "*"),
+            ]
+
+            if self.config.resource:
+                classpath.append(os.path.join(self.config.resource, "*"))
+
+            if self.config.jvm_classpath:
+                classpath.append(self.config.jvm_classpath)
+
             if self.config.jvm_classpath is None:
                 jpype.startJVM("-Djava.system.class.loader=org.update4j.DynamicClassLoader",
                                "-Xmx{}".format(self.config.jvm_maxmem),
-                               classpath=[
-                                   os.path.join(self.LIB_PATH, "*"),
-                                   os.path.join(self.JDBC_PATH, "*"),
-                               ])
-            else:
-                jpype.startJVM("-Djava.system.class.loader=org.update4j.DynamicClassLoader",
-                               "-Xmx{}".format(self.config.jvm_maxmem),
-                               classpath=[
-                                   self.LIB_PATH,
-                                   self.JDBC_PATH,
-                                   self.config.jvm_classpath,
-                               ])
+                               classpath=classpath)
+
         self.Locale = jpype.JPackage('java').util.Locale
         self.jvJRLoader = jpype.JPackage('net').sf.jasperreports.engine.util.JRLoader
         self.JasperReport = jpype.JPackage('net').sf.jasperreports.engine.JasperReport
