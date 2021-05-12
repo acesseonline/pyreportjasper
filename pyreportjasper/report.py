@@ -30,7 +30,7 @@ class Report:
                 os.path.join(self.JDBC_PATH, "*"),
             ]
 
-            if self.config.resource:
+            if self.config.resource and os.path.isdir(self.config.resource):
                 classpath.append(os.path.join(self.config.resource, "*"))
 
             if self.config.jvm_classpath:
