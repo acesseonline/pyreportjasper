@@ -172,7 +172,7 @@ See how easy it is to generate a report with a source an XML file:
       output_file = os.path.join(REPORTS_DIR, 'cancel_ack2')
       data_file = os.path.join(RESOURCES_DIR, 'CancelAck.xml')
       pyreportjasper = PyReportJasper()
-      self.pyreportjasper.config(
+      pyreportjasper.config(
          input_file,
          output_file,
          output_formats=["pdf"],
@@ -182,7 +182,7 @@ See how easy it is to generate a report with a source an XML file:
              'xml_xpath': '/CancelResponse/CancelResult/ID',
          }
       )
-      self.pyreportjasper.process_report()
+      pyreportjasper.process_report()
       print('Result is the file below.')
       print(output_file + '.pdf')
 
@@ -205,7 +205,7 @@ See how easy it is to generate a report with a source an CSV file:
       output_file = os.path.join(REPORTS_DIR, 'csv')
       conn = {
          'driver': 'csv',
-         'data_file': os.path.join(self.RESOURCES_DIR, 'csvExampleHeaders.csv'),
+         'data_file': os.path.join(RESOURCES_DIR, 'csvExampleHeaders.csv'),
          'csv_charset': 'utf-8',
          'csv_out_charset': 'utf-8',
          'csv_field_del': '|',
@@ -215,13 +215,13 @@ See how easy it is to generate a report with a source an CSV file:
          'csv_columns': "Name,Street,City,Phone".split(",")
       }
       pyreportjasper = PyReportJasper()
-      self.pyreportjasper.config(
+      pyreportjasper.config(
          input_file,
          output_file,
          output_formats=["pdf"],
          db_connection=conn
       )
-      self.pyreportjasper.process_report()
+      pyreportjasper.process_report()
       print('Result is the file below.')
       print(output_file + '.pdf')
 
@@ -244,17 +244,17 @@ See how easy it is to generate a report with a source an JSON file:
       output_file = os.path.join(REPORTS_DIR, 'json')
       conn = {
          'driver': 'json',
-         'data_file': os.path.join(self.RESOURCES_DIR, 'contacts.json'),
+         'data_file': os.path.join(RESOURCES_DIR, 'contacts.json'),
          'json_query': 'contacts.person'
       }
       pyreportjasper = PyReportJasper()
-      self.pyreportjasper.config(
+      pyreportjasper.config(
          input_file,
          output_file,
          output_formats=["pdf"],
          db_connection=conn
       )
-      self.pyreportjasper.process_report()
+      pyreportjasper.process_report()
       print('Result is the file below.')
       print(output_file + '.pdf')
 
@@ -274,16 +274,16 @@ Reports from a JSONQL
       output_file = os.path.join(REPORTS_DIR, 'jsonql')
       conn = {
          'driver': 'jsonql',
-         'data_file': os.path.join(self.RESOURCES_DIR, 'contacts.json'),
+         'data_file': os.path.join(RESOURCES_DIR, 'contacts.json'),
          'json_query': 'contacts.person'
       }
       pyreportjasper = PyReportJasper()
-      self.pyreportjasper.config(
+      pyreportjasper.config(
          input_file,
          output_file,
          output_formats=["pdf"],
          db_connection=conn
       )
-      self.pyreportjasper.process_report()
+      pyreportjasper.process_report()
       print('Result is the file below.')
       print(output_file + '.pdf')
