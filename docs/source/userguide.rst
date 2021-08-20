@@ -172,7 +172,6 @@ See how easy it is to generate a report with a source an XML file:
       output_file = os.path.join(REPORTS_DIR, 'cancel_ack2')
       data_file = os.path.join(RESOURCES_DIR, 'CancelAck.xml')
       pyreportjasper = PyReportJasper()
-      
       pyreportjasper.config(
          input_file,
          output_file,
