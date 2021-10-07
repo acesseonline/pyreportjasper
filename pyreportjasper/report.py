@@ -223,6 +223,7 @@ class Report:
         exporter = self.JRRtfExporter()
         exporter.setExporterInput(self.SimpleExporterInput(self.jasper_print))
         exporter.setExporterOutput(self.SimpleWriterExporterOutput(self.get_output_stream('.rtf')))
+        exporter.exportReport()
 
     def export_docx(self):
         exporter = self.JRDocxExporter()
