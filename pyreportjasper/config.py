@@ -28,6 +28,7 @@ class Config:
     xmlXpath = None
     jsonQuery = None
     jsonQLQuery = None
+    jsonLocale = None
     locale = 'pt_BR'
     output = None
     outputFormats = None

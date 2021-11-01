@@ -182,6 +182,8 @@ class Report:
                     self.config.jsonQuery = self.get_main_dataset_query()
                 db = Db()
                 ds = db.get_json_datasource(self.config)
+                if self.config.jsonLocale:
+                    ds.setLocale(self.LocaleUtils.toLocale(self.config.jsonLocale))
                 self.jasper_print = self.jvJasperFillManager.fillReport(self.jasper_report, parameters, ds)
             elif self.config.dbType == 'jsonql':
                 if self.config.jsonQLQuery is None:
