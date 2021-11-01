@@ -79,6 +79,15 @@ class Report:
         self.JRSaver = jpype.JPackage('net').sf.jasperreports.engine.util.JRSaver
         self.File = jpype.JPackage('java').io.File
         self.ApplicationClasspath = jpype.JPackage('br').com.acesseonline.classpath.ApplicationClasspath
+
+        if self.config.useJaxen:
+            self.DefaultJasperReportsContext = jpype.JPackage('net').sf.jasperreports.engine.DefaultJasperReportsContext
+            self.context = self.DefaultJasperReportsContext.getInstance();
+            self.JRPropertiesUtil = jpype.JPackage('net').sf.jasperreports.engine.JRPropertiesUtil
+            self.JRPropertiesUtil.getInstance(self.context).setProperty("net.sf.jasperreports.xpath.executer.factory",
+                "net.sf.jasperreports.engine.util.xml.JaxenXPathExecuterFactory");
+
+
         self.input_file = input_file
         self.defaultLocale = self.Locale.getDefault()
         if self.config.has_resource():

@@ -41,6 +41,7 @@ class Config:
     copies = None
     outFieldDel = None
     outCharset = None
+    useJaxen = True
 
     jvm_maxmem = '512M'
     jvm_classpath = None
