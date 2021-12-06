@@ -1,4 +1,5 @@
 /venv
+/.venv
 /__pycache__
 /dist
 # Byte-compiled / optimized / DLL files
@@ -90,4 +91,11 @@ main.pygst
 /pyreportjasper/_libs
 /pyreportjasper/__libs
 /sub
+teste.py
+
+.env
+/.vscode
+/.history
+PYREPORTJASPER.code-workspace
+
 teste.py
