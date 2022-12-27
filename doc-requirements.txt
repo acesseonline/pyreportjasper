@@ -1,5 +1,5 @@
 Pygments==2.7.4
-setuptools==41.0.1
+setuptools==65.5.1
 docutils==0.14
 mock==1.0.1
 commonmark==0.8.1
