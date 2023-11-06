@@ -148,6 +148,8 @@ class PyReportJasper:
                     for f in formats:
                         if f == 'pdf':
                             report.export_pdf()
+                        elif f == 'html':
+                            report.export_html()
                         elif f == 'rtf':
                             report.export_rtf()
                         elif f == 'docx':
