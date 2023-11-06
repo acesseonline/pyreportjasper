@@ -25,6 +25,7 @@ class PyReportJasper:
     )
 
     FORMATS = (
+        'html',
         'pdf',
         'rtf',
         'docx',
