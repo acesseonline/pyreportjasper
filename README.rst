@@ -47,7 +47,7 @@ reporting.
 
 .. |TestsCI| image:: https://github.com/acesseonline/pyreportjasper/workflows/Tests/badge.svg?branch=master
 .. _TestsCI: https://github.com/acesseonline/pyreportjasper/actions?query=workflow%3ATests
-.. |pyversions| image:: https://img.shields.io/badge/python-3.5%20or%20higher-blue.svg
+.. |pyversions| image:: https://img.shields.io/badge/python-3.8%20or%20higher-blue.svg
 .. |javaversions| image:: https://img.shields.io/badge/java-9%20or%20higher-purple.svg
 .. |jvm| image:: https://img.shields.io/badge/jvm-Open%20%7C%20Oracle%20%7C%20Corretto-purple.svg
 .. |platform| image:: https://img.shields.io/badge/platform-linux%20%7C%20windows%20%7C%20mac-lightgrey

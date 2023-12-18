@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # GNU GENERAL PUBLIC LICENSE
 #
-# Copyright (c) 2020 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
+# 2023 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
 #
 
 from setuptools import setup, find_packages
@@ -74,10 +74,11 @@ setup(
         'Operating System :: OS Independent',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',        
+        'Programming Language :: Python :: 3.11',        
+        'Programming Language :: Python :: 3.12',        
+        'Programming Language :: Python :: 3.13',        
     ],
 )

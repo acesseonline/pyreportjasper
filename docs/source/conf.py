@@ -12,6 +12,7 @@
 #
 import os
 import sys
+from datetime import date
 sys.path.insert(0, os.path.abspath(__file__ + "/../../../"))
 sys.path.insert(0, os.path.abspath('..'))
 sys.path.insert(0, os.path.abspath('.'))
@@ -20,7 +21,7 @@ sys.path.insert(0, os.path.abspath('.'))
 # -- Project information -----------------------------------------------------
 
 project = 'PyReportJasper'
-copyright = '2020, Jadson Bonfim Ribeiro'
+copyright = '{}, Jadson Bonfim Ribeiro'.format(str(date.today().year))
 author = 'Jadson Bonfim Ribeiro'
 
 # The full version, including alpha/beta/rc tags
