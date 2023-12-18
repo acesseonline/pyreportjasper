@@ -1,4 +1,4 @@
-Pygments==2.7.4
+Pygments==2.15.0
 setuptools==65.5.1
 docutils==0.14
 mock==1.0.1
