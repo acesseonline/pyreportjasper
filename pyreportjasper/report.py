@@ -38,6 +38,7 @@ class Report:
 
             if self.config.jvm_classpath is None:
                 jpype.startJVM("-Djava.system.class.loader=org.update4j.DynamicClassLoader",
+                               "-Dlog4j.configurationFile={}".format(os.path.join(self.LIB_PATH, 'log4j2.xml')),
                                "-Xmx{}".format(self.config.jvm_maxmem),
                                classpath=classpath)
 
