@@ -7,10 +7,10 @@
 from .pyreportjasper import PyReportJasper
 
 __title__ = 'PyReportJasper'
-__version__ = '2.1.3'
+__version__ = '2.1.2'
 __author__ = 'Jadson Bonfim Ribeiro'
 __license__ = 'GNU GENERAL PUBLIC LICENSE'
-__copyright__ = 'Copyright 2023 J BONFIM RIBEIRO'
+__copyright__ = 'Copyright 2021 J BONFIM RIBEIRO'
 __name__ = 'pyreportjasper'
 
 __all__ = [
