@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9, '3.10', 3.11, 3.12, 3.13]
+        python-version: [3.8, 3.9, '3.10', 3.11, 3.13]
         java-version: [9, 10, 11, 12, 13, 14, 15, 17, 21]
     steps:
       - uses: actions/checkout@v4
@@ -39,7 +39,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9, '3.10', 3.11, 3.12, 3.13]
+        python-version: [3.8, 3.9, '3.10', 3.11, 3.13]
         java-version: [9, 10, 11, 12, 13, 14, 15, 17, 21]
     steps:
       - uses: actions/checkout@v4
@@ -62,7 +62,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9, '3.10', 3.11, 3.12, 3.13]
+        python-version: [3.8, 3.9, '3.10', 3.11, 3.13]
         java-version: [9, 10, 11, 12, 13, 14, 15, 17, 21]
     steps:
       - uses: actions/checkout@v4
