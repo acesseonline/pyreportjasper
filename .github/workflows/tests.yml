@@ -23,7 +23,7 @@ jobs:
       - name: Set up JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v4
         with:
-          distribution: 'oracle'
+          distribution: 'dragonwell'
           java-version: ${{ matrix.java-version }}
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -47,7 +47,7 @@ jobs:
       - name: Set up JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v4
         with:
-          distribution: 'oracle'
+          distribution: 'dragonwell'
           java-version: ${{ matrix.java-version }}
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -71,7 +71,7 @@ jobs:
       - name: Set up JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v4
         with:
-          distribution: 'oracle'
+          distribution: 'dragonwell'
           java-version: ${{ matrix.java-version }}
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
