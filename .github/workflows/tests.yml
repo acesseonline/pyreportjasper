@@ -23,7 +23,7 @@ jobs:
       - name: Set up JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v3
         with:
-          distribution: corretto
+          distribution: temurin
           architecture: x64
           java-package: jdk
           java-version: ${{ matrix.java-version }}
@@ -49,7 +49,7 @@ jobs:
       - name: Set up JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v3
         with:
-          distribution: corretto
+          distribution: temurin
           architecture: x64
           java-package: jdk        
           java-version: ${{ matrix.java-version }}
@@ -75,7 +75,7 @@ jobs:
       - name: Set up JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v3
         with:
-          distribution: corretto
+          distribution: temurin
           architecture: x64
           java-package: jdk        
           java-version: ${{ matrix.java-version }}
