@@ -21,8 +21,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK ${{ matrix.java-version }}
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
+          distribution: correto
+          architecture: x64
+          java-package: jdk
           java-version: ${{ matrix.java-version }}
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -44,8 +47,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK ${{ matrix.java-version }}
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
+          distribution: correto
+          architecture: x64
+          java-package: jdk        
           java-version: ${{ matrix.java-version }}
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -67,8 +73,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK ${{ matrix.java-version }}
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
+          distribution: correto
+          architecture: x64
+          java-package: jdk        
           java-version: ${{ matrix.java-version }}
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
