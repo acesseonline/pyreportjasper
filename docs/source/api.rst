@@ -335,6 +335,10 @@ Class Report
 
         Export the report in ``pdf`` format
 
+    .. py:classmethod:: export_html()
+
+        Export the report in ``html`` format        
+
     .. py:classmethod:: export_rtf()
 
         Export the report in ``rtf`` format

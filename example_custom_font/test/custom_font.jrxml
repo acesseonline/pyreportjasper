@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" 
+name="CustomFont" pageWidth="595" pageHeight="200" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" 
+uuid="0eb3df49-8342-4b94-9567-9afe83ee4297">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<staticText>
+				<reportElement x="127" y="30" width="100" height="30" uuid="a4cf64e9-d6c3-4ce9-9039-79800533550a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="myfont" size="11.5"/>
+				</textElement>
+				<text><![CDATA[caskaydia - Regular]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="30" width="100" height="30" uuid="ea00d75c-4bc9-44cd-9385-45f9f5dacaf0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="myfont" size="11.5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[caskaydia - Bold]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="127" y="70" width="100" height="30" uuid="52ca47a2-6c40-4163-a3b2-26098001a2d4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="myfont" size="11.5" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[caskaydia - Italic]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="70" width="100" height="30" uuid="fb69e717-6483-4039-a012-4e3d6cd1404c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="myfont" size="11.5" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[caskaydia - Bold Italic]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

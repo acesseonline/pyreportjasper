@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+	<fontFamily name="myfontcustom">
+		<normal><![CDATA[fonts/myfontcustom/CaskaydiaCoveNerdFont-Regular.ttf]]></normal>
+		<bold><![CDATA[fonts/myfontcustom/CaskaydiaCoveNerdFont-Bold.ttf]]></bold>
+		<italic><![CDATA[fonts/myfontcustom/CaskaydiaCoveNerdFont-Italic.ttf]]></italic>
+		<boldItalic><![CDATA[fonts/myfontcustom/CaskaydiaCoveNerdFont-BoldItalic.ttf]]></boldItalic>
+		<pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+		<exportFonts/>
+	</fontFamily>
+</fontFamilies>
