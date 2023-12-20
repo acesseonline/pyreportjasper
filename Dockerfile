@@ -34,4 +34,4 @@ ENV PYTHONUNBUFFERED=1
 
 COPY . .
 
-CMD ["python", "-m", "unittest", "discover", "./test", "-p", "*.py"]
+CMD ["python", "-m", "unittest", "discover", "./tests", "-p", "*.py"]

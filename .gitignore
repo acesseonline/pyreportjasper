@@ -7,19 +7,19 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-/test/resources/reports/*.pdf
-/test/resources/reports/*.odt
-/test/resources/reports/*.rtf
-/test/resources/reports/*.xls
-/test/resources/reports/*.xlsx
-/test/resources/reports/*.html
-/test/resources/reports/*.ods
-/test/resources/reports/*.docx
-/test/resources/reports/*.csv
-/test/resources/reports/*.xml
-/test/resources/reports/*.pptx
-/test/resources/reports/*.jasper
-/test/resources/reports/*.jrprint
+/tests/resources/reports/*.pdf
+/tests/resources/reports/*.odt
+/tests/resources/reports/*.rtf
+/tests/resources/reports/*.xls
+/tests/resources/reports/*.xlsx
+/tests/resources/reports/*.html
+/tests/resources/reports/*.ods
+/tests/resources/reports/*.docx
+/tests/resources/reports/*.csv
+/tests/resources/reports/*.xml
+/tests/resources/reports/*.pptx
+/tests/resources/reports/*.jasper
+/tests/resources/reports/*.jrprint
 
 *.coverage
 htmlcov/

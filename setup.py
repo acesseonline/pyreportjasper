@@ -64,7 +64,7 @@ setup(
     install_requires=[
         'jpype1'
     ],
-    test_suite='test',
+    test_suite='tests',
     package_data={
         'package': ['libs/*'],
     },

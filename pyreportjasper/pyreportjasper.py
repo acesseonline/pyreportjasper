@@ -43,7 +43,7 @@ class PyReportJasper:
     METHODS = ('GET', 'POST', 'PUT')
 
     def config(self, input_file, output_file=False, output_formats=['pdf'], parameters={}, db_connection={},
-               locale='pt_BR', resource=None):
+               locale='pt_BR', resource=None, subreports=None):
         if not input_file:
             raise NameError('No input file!')
         if isinstance(output_formats, list):
@@ -53,6 +53,7 @@ class PyReportJasper:
             raise NameError("'output_formats' value is not list!")
         self.config = Config()
         self.config.input = input_file
+        self.config.subreports = subreports if subreports else {}
         self.config.locale = locale
         self.config.resource = resource
         self.config.outputFormats = output_formats
@@ -62,48 +63,35 @@ class PyReportJasper:
             self.config.output = input_file
         self.config.params = parameters
         if len(db_connection) > 0:
-            if 'driver' in db_connection:
-                self.config.dbType = db_connection['driver']
-            if 'username' in db_connection:
-                self.config.dbUser = db_connection['username']
-            if 'password' in db_connection:
-                self.config.dbPasswd = db_connection['password']
-            if 'host' in db_connection:
-                self.config.dbHost = db_connection['host']
-            if 'database' in db_connection:
-                self.config.dbName = db_connection['database']
-            if 'port' in db_connection:
-                self.config.dbPort = db_connection['port']
-            if 'jdbc_driver' in db_connection:
-                self.config.dbDriver = db_connection['jdbc_driver']
-            if 'jdbc_url' in db_connection:
-                self.config.dbUrl = db_connection['jdbc_url']
-            if 'jdbc_dir' in db_connection:
-                self.config.jdbcDir = db_connection['jdbc_dir']
-            if 'db_sid' in db_connection:
-                self.config.dbSid = db_connection['db_sid']
-            if 'xml_xpath' in db_connection:
-                self.config.xmlXpath = db_connection['xml_xpath']
-            if 'data_file' in db_connection:
-                self.config.dataFile = db_connection['data_file']
-            if 'json_query' in db_connection:
-                self.config.jsonQuery = db_connection['json_query']
-            if 'jsonql_query' in db_connection:
-                self.config.jsonQLQuery = db_connection['jsonql_query']
-            if 'csv_first_row' in db_connection:
-                self.config.csvFirstRow = True
-            if 'csv_columns' in db_connection:
-                self.config.csvColumns = db_connection['csv_columns']
-            if 'csv_record_del' in db_connection:
-                self.config.csvRecordDel = db_connection['csv_record_del']
-            if 'csv_field_del' in db_connection:
-                self.config.csvFieldDel = db_connection['csv_field_del']
-            if 'csv_out_field_del' in db_connection:
-                self.config.outFieldDel = db_connection['csv_out_field_del']
-            if 'csv_charset' in db_connection:
-                self.config.csvCharset = db_connection['csv_charset']
-            if 'csv_out_charset' in db_connection:
-                self.config.outCharset = db_connection['csv_out_charset']
+            mapping = {
+                'driver': 'dbType',
+                'username': 'dbUser',
+                'password': 'dbPasswd',
+                'host': 'dbHost',
+                'database': 'dbName',
+                'port': 'dbPort',
+                'jdbc_driver': 'dbDriver',
+                'jdbc_url': 'dbUrl',
+                'jdbc_dir': 'jdbcDir',
+                'db_sid': 'dbSid',
+                'xml_xpath': 'xmlXpath',
+                'data_file': 'dataFile',
+                'data_url': 'data_url',
+                'json_query': 'jsonQuery',
+                'jsonql_query': 'jsonQLQuery',
+                'csv_columns': 'csvColumns',
+                'csv_record_del': 'csvRecordDel',
+                'csv_field_del': 'csvFieldDel',
+                'csv_out_field_del': 'outFieldDel',
+                'csv_charset': 'csvCharset',
+                'csv_out_charset': 'outCharset'
+            }
+
+            for key, value in db_connection.items():
+                if key in mapping:
+                    setattr(self.config, mapping[key], value)
+                elif key == 'csv_first_row':
+                    self.config.csvFirstRow = True
 
     def compile(self, write_jasper=False):
         error = None
@@ -132,6 +120,11 @@ class PyReportJasper:
         else:
             return True
 
+    def instantiate_report(self):
+        report = Report(self.config, self.config.input)
+        report.fill()
+        return report        
+
     def process_report(self):
         error = None
         base_input = os.path.splitext(self.config.input)
@@ -142,37 +135,28 @@ class PyReportJasper:
 
         if os.path.isfile(self.config.input):
             try:
-                report = Report(self.config, self.config.input)
-                report.fill()
+                report = self.instantiate_report()
                 try:
-                    formats = self.config.outputFormats
-                    for f in formats:
-                        if f == 'pdf':
-                            report.export_pdf()
-                        elif f == 'html':
-                            report.export_html()
-                        elif f == 'rtf':
-                            report.export_rtf()
-                        elif f == 'docx':
-                            report.export_docx()
-                        elif f == 'odt':
-                            report.export_odt()
-                        elif f == 'xml':
-                            report.export_xml()
-                        elif f == 'xls':
-                            report.export_xls()
-                        elif f == 'xlsx':
-                            report.export_xlsx()
-                        elif f == 'csv':
-                            report.export_csv()
-                        elif f == 'csv_meta':
-                            report.export_csv_meta()
-                        elif f == 'ods':
-                            report.export_ods()
-                        elif f == 'pptx':
-                            report.export_pptx()
-                        elif f == 'jrprint':
-                            report.export_jrprint()
+                    formats_functions = {
+                        'pdf': report.export_pdf,
+                        'html': report.export_html,
+                        'rtf': report.export_rtf,
+                        'docx': report.export_docx,
+                        'odt': report.export_odt,
+                        'xml': report.export_xml,
+                        'xls': report.export_xls,
+                        'xlsx': report.export_xlsx,
+                        'csv': report.export_csv,
+                        'csv_meta': report.export_csv_meta,
+                        'ods': report.export_ods,
+                        'pptx': report.export_pptx,
+                        'jrprint': report.export_jrprint
+                    }
+
+                    for f in self.config.outputFormats:
+                        export_function = formats_functions.get(f)
+                        if export_function:
+                            export_function()
                         else:
                             raise NameError("Error output format {} not implemented!".format(f))
                 except Exception as ex:
@@ -183,8 +167,7 @@ class PyReportJasper:
             error = NameError('Error: not a file: {}'.format(self.config.input))
         if error:
             raise error
-        else:
-            return True
+        return True
 
     def list_report_params(self):
         report = Report(self.config, self.config.input)

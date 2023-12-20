@@ -20,6 +20,7 @@ class Config:
     input = None
     jdbcDir = None
     dataFile = None
+    dataURL = None
     csvFirstRow = None
     csvColumns = None
     csvRecordDel = None
@@ -42,6 +43,7 @@ class Config:
     outFieldDel = None
     outCharset = None
     useJaxen = True
+    subreports = {}
 
     jvm_maxmem = '512M'
     jvm_classpath = None

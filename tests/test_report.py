@@ -21,7 +21,7 @@ def ignore_warnings(test_func):
 
 
 class TestReport(TestCase):
-    RESOURCES_DIR = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))), 'test', 'resources')
+    RESOURCES_DIR = os.path.join(os.path.dirname(os.path.abspath(os.path.dirname(__file__))), 'tests', 'resources')
 
     def get_config_csv(self):
         config = Config()

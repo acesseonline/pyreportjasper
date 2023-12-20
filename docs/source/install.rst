@@ -83,7 +83,7 @@ Compile PyReportJasper using the included ``setup.py`` script: ::
 
 **3. Test PyReportJasper with (optional):** ::
 
-    python -m unittest discover ./test -p '*.py'
+    python -m unittest discover ./tests -p '*.py'
 
 **4. Install PyReportJasper with:** ::
 

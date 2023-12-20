@@ -4,7 +4,9 @@
 # 2023 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
 #
 
+import os
 import jpype
+import pathlib
 import jpype.imports
 
 from pyreportjasper.config import Config
@@ -29,6 +31,8 @@ class Db:
         self.JRLoader = jpype.JPackage('net').sf.jasperreports.engine.util.JRLoader
         self.StringEscapeUtils = jpype.JPackage('org').apache.commons.lang.StringEscapeUtils
         self.File = jpype.JPackage('java').io.File
+        self.URL = jpype.JPackage('java').net.URL
+        self.ByteArrayInputStream = jpype.JPackage('java').io.ByteArrayInputStream
 
     def get_csv_datasource(self, config: Config):
         ds = self.JRCsvDataSource(self.get_data_file_input_stream(config), config.csvCharset)
@@ -44,7 +48,10 @@ class Db:
         return jpype.JObject(ds, self.JRXmlDataSource)
 
     def get_json_datasource(self, config: Config):
-        ds = self.JsonDataSource(self.get_data_file_input_stream(config), config.jsonQuery)
+        if config.dataURL:
+            ds = self.JsonDataSource(self.get_data_url_input_stream(config), config.jsonQuery)
+        else:
+            ds = self.JsonDataSource(self.get_data_file_input_stream(config), config.jsonQuery)        
         return jpype.JObject(ds, self.JsonDataSource)
 
     def get_jsonql_datasource(self, config: Config):
@@ -52,7 +59,21 @@ class Db:
         return jpype.JObject(ds, self.JsonQLDataSource)
 
     def get_data_file_input_stream(self, config: Config):
-        return self.JRLoader.getInputStream(self.File(config.dataFile))
+        data_file = config.dataFile
+        bytes_data_file = None
+        if isinstance(data_file, str) or isinstance(data_file, pathlib.PurePath):
+            if not os.path.isfile(data_file):
+                raise NameError('dataFile is not file')
+            with open(data_file, 'rb') as file:
+                bytes_data_file = file.read()        
+        elif isinstance(data_file, bytes):
+            bytes_data_file = data_file
+        else:
+            raise NameError('dataFile does not have a valid type. Please enter the file path or its bytes')        
+        return self.ByteArrayInputStream(bytes_data_file)
+    
+    def get_data_url_input_stream(self, config: Config):
+        return self.JRLoader.getInputStream(self.URL(config.dataURL))         
 
     def get_connection(self, config: Config):
         dbtype = config.dbType

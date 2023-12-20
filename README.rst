@@ -50,7 +50,7 @@ reporting.
 .. |pyversions| image:: https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue.svg
 .. |javaversions| image:: https://img.shields.io/badge/java-%3E=9%20and%20%3C=20-blue.svg
 .. |jvm| image:: https://img.shields.io/badge/jvm-Open%20%7C%20Oracle%20%7C%20Corretto-blue.svg
-.. |platform| image:: https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Mac-lightgrey
+.. |platform| image:: https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Mac-blue
 .. _GNU GENERAL PUBLIC LICENSE: https://github.com/acesseonline/pyreportjasper/blob/master/LICENSE
 .. _Python Docs: https://pyreportjasper.readthedocs.io/en/latest/
 .. |license| image:: https://img.shields.io/badge/License-GPLv3-blue.svg

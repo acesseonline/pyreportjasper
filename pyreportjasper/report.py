@@ -5,7 +5,7 @@
 #
 import os
 import jpype
-import time
+import pathlib
 from pyreportjasper.config import Config
 from pyreportjasper.db import Db
 
@@ -39,11 +39,14 @@ class Report:
             if self.config.jvm_classpath is None:
                 jpype.startJVM("-Djava.system.class.loader=org.update4j.DynamicClassLoader",
                                "-Dlog4j.configurationFile={}".format(os.path.join(self.LIB_PATH, 'log4j2.xml')),
-                               "--illegal-access=warn",
+                               "-XX:InitialHeapSize=512M",
+                               "-XX:CompressedClassSpaceSize=64M",
+                               "-XX:MaxMetaspaceSize=128M",                            
                                "-Xmx{}".format(self.config.jvm_maxmem),
                                classpath=classpath)
 
         self.Locale = jpype.JPackage('java').util.Locale
+        self.String = jpype.JPackage('java').lang.String
         self.jvJRLoader = jpype.JPackage('net').sf.jasperreports.engine.util.JRLoader
         self.JasperReport = jpype.JPackage('net').sf.jasperreports.engine.JasperReport
         self.JasperPrint = jpype.JPackage('net').sf.jasperreports.engine.JasperPrint
@@ -81,6 +84,8 @@ class Report:
         self.SimpleCsvMetadataExporterConfiguration = jpype.JPackage('net').sf.jasperreports.export.SimpleCsvMetadataExporterConfiguration
         self.JRSaver = jpype.JPackage('net').sf.jasperreports.engine.util.JRSaver
         self.File = jpype.JPackage('java').io.File
+        self.ByteArrayInputStream = jpype.JPackage('java').io.ByteArrayInputStream
+        self.ByteArrayOutputStream = jpype.JPackage('java').io.ByteArrayOutputStream
         self.ApplicationClasspath = jpype.JPackage('br').com.acesseonline.classpath.ApplicationClasspath
 
         if self.config.useJaxen:
@@ -90,8 +95,17 @@ class Report:
             self.JRPropertiesUtil.getInstance(self.context).setProperty("net.sf.jasperreports.xpath.executer.factory",
                 "net.sf.jasperreports.engine.util.xml.JaxenXPathExecuterFactory");
 
-
-        self.input_file = input_file
+        if isinstance(input_file, str) or isinstance(input_file, pathlib.PurePath):
+            if not os.path.isfile(input_file):
+                raise NameError('input_file is not file.')
+            with open(input_file, 'rb') as file:
+                self.input_file = file.read()        
+        elif isinstance(input_file, bytes):
+            self.input_file = input_file
+        else:
+            raise NameError('input_file does not have a valid type. Please enter the file path or its bytes')
+                
+        # self.input_file = input_file
         self.defaultLocale = self.Locale.getDefault()
         if self.config.has_resource():
             self.add_jar_class_path(self.config.resource)
@@ -110,7 +124,7 @@ class Report:
 
         try:
             # This fails in case of an jrxml file
-            j_object = self.jvJRLoader.loadObject(self.File(input_file))
+            j_object = self.jvJRLoader.loadObject(self.ByteArrayInputStream(self.input_file))
             cast_error = True
             try:
                 self.jasper_report = jpype.JObject(j_object, self.JasperReport)
@@ -131,14 +145,26 @@ class Report:
                 raise NameError('input file: {0} is not of a valid type'.format(self.input_file))
         except Exception:
             try:
-                self.jasper_design = self.JRXmlLoader.load(input_file)
+                self.jasper_design = self.JRXmlLoader.load(self.ByteArrayInputStream(self.input_file))
                 self.initial_input_type = 'JASPER_DESIGN'
                 self.compile()
             except Exception as ex:
                 raise NameError('input file: {0} is not a valid jrxml file:'.format(str(ex)))
 
+        self.jasper_subreports = {}
+        for subreport_name, subreport_file in self.config.subreports.items():
+            try:
+                subreport_jasper_design = self.JRXmlLoader.load(self.ByteArrayInputStream(subreport_file))
+                self.jasper_subreports[subreport_name] = self.jvJasperCompileManager.compileReport(
+                    subreport_jasper_design)
+            except Exception:
+                raise NameError('input file: {0} is not a valid jrxml file'.format(subreport_name))        
+
     def compile(self):
-        self.jasper_report = self.jvJasperCompileManager.compileReport(self.input_file)
+        # TODO: Avoid WARNING at first loading when compiling design into report.
+        # Illegal reflective access by net.sf.jasperreports.engine.util.ClassUtils
+        # to constructor com.sun.org.apache.xerces.internal.util.XMLGrammarPoolImpl()
+        self.jasper_report = self.jvJasperCompileManager.compileReport(self.jasper_design)
         if self.config.is_write_jasper():
             if self.config.output:
                 base = os.path.splitext(self.config.output)[0]
@@ -169,6 +195,10 @@ class Report:
         parameters = self.HashMap()
         for key in self.config.params:
             parameters.put(key, self.config.params[key])
+            
+        # /!\ NOTE: Sub-reports are loaded after params to avoid them to be override
+        for subreport_key, subreport in self.jasper_subreports.items():
+            parameters.put(subreport_key, subreport)
         try:
             if self.config.locale:
                 self.config.locale = self.LocaleUtils.toLocale(self.config.locale)
@@ -230,8 +260,22 @@ class Report:
         except Exception as ex:
             raise NameError('Unable to create outputStream to {}: {}'.format(output_path, str(ex)))
 
+    def get_output_stream_pdf(self):
+        output_stream = self.ByteArrayOutputStream()
+        self.JasperExportManager.exportReportToPdfStream(self.jasper_print, output_stream)
+        return output_stream
+
+    def fetch_pdf_report(self):
+        output_stream_pdf = self.get_output_stream_pdf()
+        res = self.String(output_stream_pdf.toByteArray(), 'ISO-8859-1')
+        return bytes(str(res), 'ISO-8859-1')
+    
     def export_pdf(self):
-        self.JasperExportManager.exportReportToPdfStream(self.jasper_print, self.get_output_stream('.pdf'))
+        output_stream = self.get_output_stream('.pdf')
+        output_stream_pdf = self.get_output_stream_pdf()
+        output_stream_pdf.writeTo(output_stream)
+        output_stream_pdf.flush() # if no buffer used, it can be ignored.
+        output_stream_pdf.close()       
 
     def export_html(self):
         exporter = self.HtmlExporter()
