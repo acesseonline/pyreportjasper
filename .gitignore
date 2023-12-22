@@ -99,3 +99,9 @@ teste.py
 PYREPORTJASPER.code-workspace
 
 teste.py
+
+.idea/
+_build/
+jacoco/
+wheelhouse/
+vc*.pdb

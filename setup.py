@@ -48,6 +48,8 @@ setup(
     license='GPLv3',
     author='Jadson Bonfim Ribeiro',
     author_email='contato@jadsonbr.com.br',
+    maintainer='Jadson Bonfim Ribeiro',
+    maintainer_email='contato@jadsonbr.com.br',    
     keywords='report jasper python',
     description='This package aims to be a solution to compile and process '
                 'JasperReports (.jrxml & .jasper files).',
@@ -60,6 +62,7 @@ setup(
         'Operating System :: Unix',
         'Operating System :: MacOS',
     ],
+    python_requires=">=3.7",
     packages=find_packages(),
     install_requires=[
         'jpype1'

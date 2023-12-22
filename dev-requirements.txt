@@ -1,0 +1,3 @@
+setuptools==65.5.1
+requests
+jpype1
