@@ -45,11 +45,11 @@ reporting.
 .. |Conda| image:: https://anaconda.org/acesseonline/pyreportjasper/badges/version.svg
 .. _Conda: https://anaconda.org/acesseonline/pyreportjasper
 
-.. |TestsCI| image:: https://github.com/acesseonline/pyreportjasper/workflows/Tests/badge.svg?branch=master
+.. |TestsCI| image:: https://github.com/acesseonline/pyreportjasper/actions/workflows/tests.yml/badge.svg?branch=master
 .. _TestsCI: https://github.com/acesseonline/pyreportjasper/actions?query=workflow%3ATests
 .. |pyversions| image:: https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue.svg
 .. |javaversions| image:: https://img.shields.io/badge/java-%3E=9%20and%20%3C=20-blue.svg
-.. |jvm| image:: https://img.shields.io/badge/jvm-Open%20%7C%20Oracle%20%7C%20Corretto-blue.svg
+.. |jvm| image:: https://img.shields.io/badge/jvm-OpenJDK%20%7C%20Oracle%20%7C%20Corretto%20%7C%20Temurin-blue.svg
 .. |platform| image:: https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Mac-blue
 .. _GNU GENERAL PUBLIC LICENSE: https://github.com/acesseonline/pyreportjasper/blob/master/LICENSE
 .. _Python Docs: https://pyreportjasper.readthedocs.io/en/latest/
