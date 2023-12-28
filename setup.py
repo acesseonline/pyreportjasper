@@ -3,23 +3,12 @@
 #
 # 2023 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
 #
-
-from setuptools.command.build_ext import build_ext
-from setuptools import setup, find_packages, Extension
+from setuptools import setup, find_packages
 import io
 import os
 import re
 from collections import OrderedDict
 import subprocess
-
-
-class PyReportJasperExtension(Extension):
-    def __init__(self):
-        super().__init__("pyreportjasper.extension", sources=[])
-
-class PyReportJasperExtensionBuild(build_ext):
-    def run(self) -> None:
-        return
 
 
 def version_available(cmd):
@@ -97,9 +86,7 @@ setup(
         'package': ['libs/*'],
     },
     include_package_data=True,
-    cmdclass={
-        "build_ext": PyReportJasperExtensionBuild,
-    },
+    has_ext_modules=lambda : True,
     classifiers=[
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',

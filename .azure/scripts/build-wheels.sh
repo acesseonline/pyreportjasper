@@ -12,7 +12,7 @@ for PYBIN in "${pys[@]}"; do
     echo "Compile $PYBIN"
     ls -l /io/dist
     "${PYBIN}/pip" install jpype1
-    "${PYBIN}/pip" wheel /io/dist/$package_name-*.tar.gz -w /io/wheelhouse/ -v    
+    "${PYBIN}/pip" wheel /io/dist/$package_name-*.tar.gz -w /io/wheelhouse/ -v
 done
 echo "=============="
 
