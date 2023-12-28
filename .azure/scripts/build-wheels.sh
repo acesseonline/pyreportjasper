@@ -16,12 +16,12 @@ for PYBIN in "${pys[@]}"; do
 done
 echo "=============="
 
-# Bundle external shared libraries into the wheels
-for whl in wheelhouse/$package_name-*.whl; do
-    echo "Audit $whl"
-    auditwheel repair --plat $PLAT "$whl" -w /io/wheelhouse/
-done
-echo "=============="
+# # Bundle external shared libraries into the wheels
+# for whl in wheelhouse/$package_name-*.whl; do
+#     echo "Audit $whl"
+#     auditwheel repair --plat $PLAT "$whl" -w /io/wheelhouse/
+# done
+# echo "=============="
 
 # Install packages and test
 for PYBIN in "${pys[@]}"; do
