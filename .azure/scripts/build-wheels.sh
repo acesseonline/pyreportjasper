@@ -11,7 +11,7 @@ pys=(${pys[@]//*36*/})
 for PYBIN in "${pys[@]}"; do
     echo "Compile $PYBIN"
     ls -l /io/dist
-    "${PYBIN}/pip" install -r jpype1
+    "${PYBIN}/pip" install jpype1
     "${PYBIN}/pip" wheel /io/dist/$package_name-*.tar.gz -w wheelhouse/ -v
 done
 echo "=============="
