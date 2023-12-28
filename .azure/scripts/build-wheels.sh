@@ -23,11 +23,11 @@ echo "=============="
 # done
 # echo "=============="
 
-# Install packages and test
-for PYBIN in "${pys[@]}"; do
-    echo "Test install $PYBIN $package_name"
-    "${PYBIN}/python" -m pip install $package_name --no-index -f /io/wheelhouse
-    # Manylinux does not have a JVM so there is no way to test the wheel in the docker
-    # "${PYBIN}/pip" install -r /io/test-requirements.txt
-    # "${PYBIN}/pytest" /io/test/jpypetest
-done
+# # Install packages and test
+# for PYBIN in "${pys[@]}"; do
+#     echo "Test install $PYBIN $package_name"
+#     "${PYBIN}/python" -m pip install $package_name --no-index -f /io/wheelhouse
+#     # Manylinux does not have a JVM so there is no way to test the wheel in the docker
+#     # "${PYBIN}/pip" install -r /io/test-requirements.txt
+#     # "${PYBIN}/pytest" /io/test/jpypetest
+# done

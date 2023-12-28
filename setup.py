@@ -67,6 +67,21 @@ setup(
     install_requires=[
         'jpype1'
     ],
+    extras_require={
+        # 'tests': [
+        #     'pytest',
+        # ],
+        'docs': [
+            'readthedocs-sphinx-ext',
+            'sphinx',
+            'sphinx-rtd-theme',
+            'recommonmark',
+            'commonmark',
+            'mock',
+            'docutils',
+            'Pygments'
+        ],
+    },    
     test_suite='tests',
     package_data={
         'package': ['libs/*'],
