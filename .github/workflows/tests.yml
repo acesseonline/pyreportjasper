@@ -7,14 +7,14 @@ on:
       - develop
       - 'release/**'
       - 'hotfix/**'
-      # - 'feature/**'
+      - 'feature/**'
   pull_request:
     branches:
       - master
       - develop
       - 'release/**'
       - 'hotfix/**'
-      # - 'feature/**'
+      - 'feature/**'
 
 jobs:
   linux_tests:
