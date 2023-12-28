@@ -86,7 +86,7 @@ setup(
         'package': ['libs/*'],
     },
     include_package_data=True,
-    has_ext_modules=lambda : True,
+    has_ext_modules=lambda : True, # Disable to compile for pypi. https://peps.python.org/pep-0513/#rationale 
     classifiers=[
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
