@@ -22,10 +22,10 @@ case $PYTHON_VERSION in
 3.11)
   FULL_VERSION=3.11.7
   INSTALLER_NAME=python-$FULL_VERSION-macos11.pkg
-#   ;;
-# 3.12)
-#   FULL_VERSION=3.12.0
-#   INSTALLER_NAME=python-$FULL_VERSION-macos11.pkg
+  ;;
+3.12)
+  FULL_VERSION=3.12.0
+  INSTALLER_NAME=python-$FULL_VERSION-macos11.pkg
 esac
 
 URL=https://www.python.org/ftp/python/$FULL_VERSION/$INSTALLER_NAME
