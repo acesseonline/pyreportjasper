@@ -125,7 +125,7 @@ class PyReportJasper:
         report.fill()
         return report        
 
-    def process_report(self):
+    def process_report(self, html_configurations=None):
         error = None
         base_input = os.path.splitext(self.config.input)
         if base_input[-1] == ".jrxml":
@@ -139,7 +139,7 @@ class PyReportJasper:
                 try:
                     formats_functions = {
                         'pdf': report.export_pdf,
-                        'html': report.export_html,
+                        'html': lambda: report.export_html(html_configurations),
                         'rtf': report.export_rtf,
                         'docx': report.export_docx,
                         'odt': report.export_odt,
