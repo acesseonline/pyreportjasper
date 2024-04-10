@@ -8,6 +8,10 @@ import jpype
 import pathlib
 from pyreportjasper.config import Config
 from pyreportjasper.db import Db
+from jpype.types import *
+from enum import Enum
+
+
 
 
 class Report:
@@ -16,6 +20,13 @@ class Report:
     defaultLocale = None
     initial_input_type = None
     output = None
+    
+    TypeJava = Enum('TypeJava', [('Array', 'JArray'), ('Class', 'JClass'),
+                             ('Boolean', 'JBoolean'), ('Byte', 'JByte'),
+                             ('Char', 'JChar'), ('Short', 'JShort'),
+                             ('Int', 'JInt'), ('Long', 'JLong'),
+                             ('Float', 'JFloat'), ('Double', 'JDouble'),
+                             ('String', 'JString'), ('Object', 'JObject')])    
 
     def __init__(self, config: Config, input_file):
         self.SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -154,9 +165,9 @@ class Report:
         self.jasper_subreports = {}
         for subreport_name, subreport_file in self.config.subreports.items():
             try:
-                subreport_jasper_design = self.JRXmlLoader.load(self.ByteArrayInputStream(subreport_file))
-                self.jasper_subreports[subreport_name] = self.jvJasperCompileManager.compileReport(
-                    subreport_jasper_design)
+                with open(subreport_file, 'rb') as subreport_file_bytes:
+                    subreport_jasper_design = self.JRXmlLoader.load(self.ByteArrayInputStream(subreport_file_bytes.read()))
+                    self.jasper_subreports[subreport_name] = self.jvJasperCompileManager.compileReport(subreport_jasper_design)
             except Exception:
                 raise NameError('input file: {0} is not a valid jrxml file'.format(subreport_name))        
 
@@ -190,11 +201,26 @@ class Report:
 
     def fill(self):
         self.fill_internal()
+        
+    def get_type_instance_java(self, value):
+        for type_instance in TypeJava:
+            if type_instance.name == value:
+                return getattr(jpype.types, type_instance.value)
 
     def fill_internal(self):
         parameters = self.HashMap()
         for key in self.config.params:
-            parameters.put(key, self.config.params[key])
+            if isinstance(self.config.params[key], dict):
+                param_dict = self.config.params[key]
+                type_var = param_dict.get('type')
+                if isinstance(type_var, TypeJava):
+                    type_java_class = self.get_type_instance_java(type_var)
+                    value_java = type_java_class(param_dict.get('value'))
+                    parameters.put(key, value_java)
+                else:
+                    print('{} parameter does not have an TypeJava type'.format(key))
+            else:
+                parameters.put(key, self.config.params[key])
             
         # /!\ NOTE: Sub-reports are loaded after params to avoid them to be override
         for subreport_key, subreport in self.jasper_subreports.items():
@@ -267,8 +293,8 @@ class Report:
 
     def fetch_pdf_report(self):
         output_stream_pdf = self.get_output_stream_pdf()
-        res = self.String(output_stream_pdf.toByteArray(), 'ISO-8859-1')
-        return bytes(str(res), 'ISO-8859-1')
+        res = self.String(output_stream_pdf.toByteArray(), 'UTF-8')
+        return bytes(str(res), 'UTF-8')
     
     def export_pdf(self):
         output_stream = self.get_output_stream('.pdf')

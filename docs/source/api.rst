@@ -7,7 +7,7 @@ Class PyReportJasper
 
     Class responsible for facilitating the management and export of reports
 
-    .. py:classmethod:: config(input_file, output_file=False, output_formats=['pdf'], parameters={}, db_connection={},locale='pt_BR', resource=None)
+    .. py:classmethod:: config(input_file, output_file=False, output_formats=['pdf'], parameters={}, db_connection={},locale='en_US', resource=None)
 
         Method responsible for preparing and validating the settings and parameters
 
@@ -38,7 +38,7 @@ Class PyReportJasper
         :return: Returns a parameter list
         :rtype: ``list(str)``
 
-    .. py:classmethod:: process(input_file, output_file=False, format_list=['pdf'], parameters={}, db_connection={}, locale='pt_BR', resource="")
+    .. py:classmethod:: process(input_file, output_file=False, format_list=['pdf'], parameters={}, db_connection={}, locale='en_US', resource="")
 
         .. warning:: This method still works more in the next versions will be removed.
 

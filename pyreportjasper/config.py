@@ -30,7 +30,7 @@ class Config:
     jsonQuery = None
     jsonQLQuery = None
     jsonLocale = None
-    locale = 'pt_BR'
+    locale = 'en_US'
     output = None
     outputFormats = None
     params = {}
