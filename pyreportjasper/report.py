@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
 # GNU GENERAL PUBLIC LICENSE
 #
-# 2023 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
+# 2024 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
 #
 import os
 import jpype
 import pathlib
 from pyreportjasper.config import Config
 from pyreportjasper.db import Db
+import jpype.imports
 from jpype.types import *
 from enum import Enum
-
-
 
 
 class Report:
@@ -21,12 +20,27 @@ class Report:
     initial_input_type = None
     output = None
     
-    TypeJava = Enum('TypeJava', [('Array', 'JArray'), ('Class', 'JClass'),
-                             ('Boolean', 'JBoolean'), ('Byte', 'JByte'),
-                             ('Char', 'JChar'), ('Short', 'JShort'),
-                             ('Int', 'JInt'), ('Long', 'JLong'),
-                             ('Float', 'JFloat'), ('Double', 'JDouble'),
-                             ('String', 'JString'), ('Object', 'JObject')])    
+    TypeJava = Enum('TypeJava', [
+                             ('BigInteger', 'java.math.BigInteger'),
+                             ('Array', 'java.lang.reflect.Array'),
+                             ('ArrayList', 'java.util.ArrayList'),
+                             ('String', 'java.lang.String'),
+                             ('Integer', 'java.lang.Integer'),
+                             ('Boolean', 'java.lang.Boolean'),
+                             ('Float', 'java.lang.Float'), 
+                             ('Date', 'java.util.Date'),
+                             #TODO: Not yet implemented
+                            #  ('List', 'java.util.List'),
+                            #  ('Currency', 'java.util.Currency'),
+                            #  ('Image', 'java.awt.Image'),                             
+                            #  ('Byte', 'java.lang.Byte'),
+                            #  ('Character', 'java.lang.Character'), 
+                            #  ('Short', 'java.lang.Short'),                             
+                            #  ('Long', 'java.lang.Long'),
+                            #  ('Float', 'java.lang.Float'), 
+                            #  ('Double', 'java.lang.Double'),                             
+                        ])
+  
 
     def __init__(self, config: Config, input_file):
         self.SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -167,6 +181,12 @@ class Report:
             try:
                 with open(subreport_file, 'rb') as subreport_file_bytes:
                     subreport_jasper_design = self.JRXmlLoader.load(self.ByteArrayInputStream(subreport_file_bytes.read()))
+                    ext_sub_report = os.path.splitext(subreport_file)[-1]
+                    sub_report_without_ext = os.path.splitext(subreport_file)[0]
+                    jasper_file_subreport = str(sub_report_without_ext) + '.jasper'
+                    if ext_sub_report == '.jrxml':
+                        print("Compiling: {}".format(subreport_file))
+                        self.jvJasperCompileManager.compileReportToFile(subreport_file, jasper_file_subreport)                    
                     self.jasper_subreports[subreport_name] = self.jvJasperCompileManager.compileReport(subreport_jasper_design)
             except Exception:
                 raise NameError('input file: {0} is not a valid jrxml file'.format(subreport_name))        
@@ -201,11 +221,6 @@ class Report:
 
     def fill(self):
         self.fill_internal()
-        
-    def get_type_instance_java(self, value):
-        for type_instance in TypeJava:
-            if type_instance.name == value:
-                return getattr(jpype.types, type_instance.value)
 
     def fill_internal(self):
         parameters = self.HashMap()
@@ -213,10 +228,63 @@ class Report:
             if isinstance(self.config.params[key], dict):
                 param_dict = self.config.params[key]
                 type_var = param_dict.get('type')
-                if isinstance(type_var, TypeJava):
-                    type_java_class = self.get_type_instance_java(type_var)
-                    value_java = type_java_class(param_dict.get('value'))
-                    parameters.put(key, value_java)
+                if isinstance(type_var, self.TypeJava):
+                    type_instance_java = type_var.value
+                    type_name = type_var.name
+                    if type_instance_java:
+                        if type_name == 'BigInteger':
+                            value_java = jpype.JClass(type_instance_java)(str(param_dict.get('value')))
+                        
+                        elif type_name == 'Array':
+                            list_values = param_dict.get('value')
+                            first_val = list_values[0]
+                            if type(first_val) == int:
+                                IntArrayCls = JArray(JInt)
+                                int_array = IntArrayCls(list_values)
+                                value_java = int_array
+                            elif type(first_val) == str:
+                                StrArrayCls = JArray(JString)
+                                str_array = StrArrayCls(list_values)
+                                value_java = str_array 
+                            else:
+                                raise NameError('Array type only accepts Int and Str')
+                        elif type_name == 'ArrayList':
+                            from java.util import ArrayList # pyright: ignore[reportMissingImports]
+                            value_java = ArrayList()
+                            list_values = param_dict.get('value')
+                            for itm in list_values:
+                                if type(itm) == int:
+                                    value_java.add(JInt(itm))
+                                elif type(itm) == str:
+                                    value_java.add(JString(itm))
+                                elif type(itm) == bool:
+                                    value_java.add(JBoolean(itm))
+                                elif type(itm) == float:
+                                    value_java.add(JFloat(itm))
+                                else:
+                                    raise NameError('ArrayList type only accepts int, str, bool and float')
+                        elif type_name == 'String':
+                            value_java = jpype.JClass(type_instance_java)(param_dict.get('value'))
+                        elif type_name == 'Integer':
+                            value_java = jpype.JClass(type_instance_java)(str(param_dict.get('value')))
+                        elif type_name == 'Boolean':
+                            if not isinstance(param_dict.get('value'), bool):
+                                raise NameError('The value of the name parameter {} is not of type bool'.format(key))
+                            value_java = jpype.JClass(type_instance_java)(param_dict.get('value'))
+                        elif type_name == 'Float':
+                            if not isinstance(param_dict.get('value'), float):
+                                raise NameError('The value of the name parameter {} is not of type float'.format(key))
+                            value_java = jpype.JClass(type_instance_java)(param_dict.get('value'))
+                        elif type_name == 'Date':                          
+                            from java.util import Calendar, Date # pyright: ignore[reportMissingImports]
+                            from java.text import DateFormat, SimpleDateFormat # pyright: ignore[reportMissingImports]
+                            
+                            format_in = param_dict.get('format_input', 'yyyy-MM-dd') # Ex.: "dd/MM/yyyy"
+                            sdf = SimpleDateFormat(format_in)
+                            value_java = sdf.parse(param_dict.get('value')) # Output of type: java.util.Date
+                        parameters.put(key, value_java)
+                    else:
+                        raise NameError('Instance JAVA not locate')                    
                 else:
                     print('{} parameter does not have an TypeJava type'.format(key))
             else:

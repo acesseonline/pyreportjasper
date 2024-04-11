@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 # GNU GENERAL PUBLIC LICENSE
 #
-# 2023 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
+# 2024 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
 #
 
 import os
 import warnings
 from pyreportjasper.config import Config
 from pyreportjasper.report import Report
-
-
-TypeJava = Report.TypeJava
 
 
 class PyReportJasper:
@@ -44,6 +41,8 @@ class PyReportJasper:
     )
 
     METHODS = ('GET', 'POST', 'PUT')
+    
+    TypeJava = Report.TypeJava
 
     def config(self, input_file, output_file=False, output_formats=['pdf'], parameters={}, db_connection={},
                locale='en_US', resource=None, subreports=None):
