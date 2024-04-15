@@ -105,6 +105,7 @@ class Report:
         self.SimpleXlsxReportConfiguration = jpype.JPackage('net').sf.jasperreports.export.SimpleXlsxReportConfiguration
         self.JRCsvExporter = jpype.JPackage('net').sf.jasperreports.engine.export.JRCsvExporter
         self.SimpleCsvExporterConfiguration = jpype.JPackage('net').sf.jasperreports.export.SimpleCsvExporterConfiguration
+        self.SimpleHtmlExporterConfiguration = jpype.JPackage('net').sf.jasperreports.export.SimpleHtmlExporterConfiguration
         self.JRCsvMetadataExporter = jpype.JPackage('net').sf.jasperreports.engine.export.JRCsvMetadataExporter
         self.SimpleCsvMetadataExporterConfiguration = jpype.JPackage('net').sf.jasperreports.export.SimpleCsvMetadataExporterConfiguration
         self.JRSaver = jpype.JPackage('net').sf.jasperreports.engine.util.JRSaver
@@ -371,11 +372,14 @@ class Report:
         output_stream_pdf.flush() # if no buffer used, it can be ignored.
         output_stream_pdf.close()       
 
-    def export_html(self):
+    def export_html(self,html_configurations=None):
         exporter = self.HtmlExporter()
         exporter.setExporterInput(self.SimpleExporterInput(self.jasper_print))
         output_stream = self.SimpleHtmlExporterOutput(self.get_output_stream(".html"))
         exporter.setExporterOutput(output_stream)
+        configuration = self.SimpleHtmlExporterConfiguration()
+        configuration.setHtmlHeader(html_configurations)
+        exporter.setConfiguration(configuration)
         exporter.exportReport()
 
     def export_rtf(self):
