@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # GNU GENERAL PUBLIC LICENSE
 #
-# 2023 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
+# 2024 Jadson Bonfim Ribeiro <contato@jadsonbr.com.br>
 #
 
 import os
@@ -41,9 +41,11 @@ class PyReportJasper:
     )
 
     METHODS = ('GET', 'POST', 'PUT')
+    
+    TypeJava = Report.TypeJava
 
     def config(self, input_file, output_file=False, output_formats=['pdf'], parameters={}, db_connection={},
-               locale='pt_BR', resource=None, subreports=None):
+               locale='en_US', resource=None, subreports=None):
         if not input_file:
             raise NameError('No input file!')
         if isinstance(output_formats, list):
@@ -103,7 +105,7 @@ class PyReportJasper:
             except Exception as ex:
                 error = NameError('Error compile file: {}'.format(str(ex)))
         elif os.path.isdir(self.config.input):
-            list_files_dir = [arq for arq in self.config.input if os.path.isfile(arq)]
+            list_files_dir = [arq for arq in os.listdir(str(self.config.input)) if os.path.isfile(arq)]
             list_jrxml = [arq for arq in list_files_dir if arq.lower().endswith(".jrxml")]
             for file in list_jrxml:
                 try:
@@ -119,6 +121,27 @@ class PyReportJasper:
             raise error
         else:
             return True
+        
+    def compile_all_jrxml_dir(self, dir):
+        if os.path.isdir(dir):
+            list_files_dir = [arq for arq in os.listdir(str(dir)) if os.path.isfile(arq)]
+            list_jrxml = [arq for arq in list_files_dir if arq.lower().endswith(".jrxml")]
+            for file in list_jrxml:
+                try:
+                    file_imput = os.path.join(dir, file)
+                    with open(file_imput, 'rb') as file_bytes:
+                        self.config.writeJasper = True
+                        print("Compiling: {}".format(file_imput))
+                        report = Report(self.config, file_imput)
+                        report.input_file = file_imput
+                        report.jasper_design = report.JRXmlLoader.load(report.ByteArrayInputStream(file_bytes.read()))
+                        report.initial_input_type = 'JASPER_DESIGN'
+                        report.compile_to_file()
+                except Exception as ex:
+                    error = NameError('Error compile file: {}'.format(str(ex)))
+                    print(error)
+        else:
+            print("Value entered as a parameter is not a directory")
 
     def instantiate_report(self):
         report = Report(self.config, self.config.input)
@@ -181,7 +204,7 @@ class PyReportJasper:
         return list_param
 
     def process(self, input_file, output_file=False, format_list=['pdf'],
-                parameters={}, db_connection={}, locale='pt_BR', resource=""):
+                parameters={}, db_connection={}, locale='en_US', resource=""):
         warnings.warn("process is deprecated - use config and then process_report instead. See the documentation "
                       "https://pyreportjasper.readthedocs.io",
                       DeprecationWarning)
