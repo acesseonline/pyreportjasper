@@ -16,6 +16,7 @@ class Config:
     dbType = None
     dbUrl = None
     dbUser = None
+    dbOracleMultitenant = False
     verbose = None
     input = None
     jdbcDir = None
@@ -46,7 +47,7 @@ class Config:
     subreports = {}
 
     jvm_opts = ()
-    jvm_maxmem = '512M'
+    jvm_maxmem = '1G'
     jvm_classpath = None
 
     def has_output(self):

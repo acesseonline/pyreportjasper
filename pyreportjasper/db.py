@@ -19,6 +19,7 @@ class Db:
     JRXmlDataSource = None
     JsonDataSource = None
     JsonQLDataSource = None
+    HikariDataSource = None
 
     def __init__(self):
         self.Connection = jpype.JPackage('java').sql.Connection
@@ -33,6 +34,55 @@ class Db:
         self.File = jpype.JPackage('java').io.File
         self.URL = jpype.JPackage('java').net.URL
         self.ByteArrayInputStream = jpype.JPackage('java').io.ByteArrayInputStream
+        self.HikariDataSource = jpype.JPackage('com.zaxxer.hikari').HikariDataSource
+        self.HikariConfig = jpype.JPackage('com.zaxxer.hikari').HikariConfig
+        self.config_pool = None
+
+    def initialize_pool(self, config: Config):
+        dbtype = config.dbType
+        host = config.dbHost
+        user = config.dbUser
+        passwd = config.dbPasswd
+        driver = None
+        dbname = None
+        port = None
+        sid = None
+        connect_string = None
+        multitenant = None
+
+        if dbtype == "mysql":
+            driver = config.dbDriver
+            port = config.dbPort or 3306
+            dbname = config.dbName
+            connect_string = f"jdbc:mysql://{host}:{port}/{dbname}?useSSL=false"
+        elif dbtype == "postgres":
+            driver = config.dbDriver
+            port = config.dbPort or 5434
+            dbname = config.dbName
+            connect_string = f"jdbc:postgresql://{host}:{port}/{dbname}"
+        elif dbtype == "oracle":
+            driver = config.dbDriver
+            port = config.dbPort or 1521
+            sid = config.dbSid
+            multitenant = config.dbOracleMultitenant
+            connect_string = (
+                f"jdbc:oracle:thin:@{host}:{port}/{sid}" if multitenant else f"jdbc:oracle:thin:@{host}:{port}:{sid}"
+            )
+        elif dbtype == "generic":
+            driver = config.dbDriver
+            connect_string = config.dbUrl
+
+        self.Class.forName(driver)
+        hikari_config = self.HikariConfig()
+        hikari_config.setJdbcUrl(connect_string)
+        hikari_config.setUsername(user)
+        hikari_config.setPassword(passwd)
+        hikari_config.setMaximumPoolSize(10)  # Máximo de conexiones en el pool
+        hikari_config.setMinimumIdle(2)  # Mínimo de conexiones en el pool
+        hikari_config.setIdleTimeout(30000)  # Tiempo de espera para conexiones inactivas (ms)
+        hikari_config.setConnectionTimeout(10000)  # Tiempo de espera para obtener una conexión (ms)
+
+        self.config_pool = self.HikariDataSource(hikari_config)
 
     def get_csv_datasource(self, config: Config):
         ds = self.JRCsvDataSource(self.get_data_file_input_stream(config), config.csvCharset)
@@ -51,7 +101,7 @@ class Db:
         if config.dataURL:
             ds = self.JsonDataSource(self.get_data_url_input_stream(config), config.jsonQuery)
         else:
-            ds = self.JsonDataSource(self.get_data_file_input_stream(config), config.jsonQuery)        
+            ds = self.JsonDataSource(self.get_data_file_input_stream(config), config.jsonQuery)
         return jpype.JObject(ds, self.JsonDataSource)
 
     def get_jsonql_datasource(self, config: Config):
@@ -63,48 +113,19 @@ class Db:
         bytes_data_file = None
         if isinstance(data_file, str) or isinstance(data_file, pathlib.PurePath):
             if not os.path.isfile(data_file):
-                raise NameError('dataFile is not file')
-            with open(data_file, 'rb') as file:
-                bytes_data_file = file.read()        
+                raise NameError("dataFile is not file")
+            with open(data_file, "rb") as file:
+                bytes_data_file = file.read()
         elif isinstance(data_file, bytes):
             bytes_data_file = data_file
         else:
-            raise NameError('dataFile does not have a valid type. Please enter the file path or its bytes')        
+            raise NameError("dataFile does not have a valid type. Please enter the file path or its bytes")
         return self.ByteArrayInputStream(bytes_data_file)
-    
+
     def get_data_url_input_stream(self, config: Config):
-        return self.JRLoader.getInputStream(self.URL(config.dataURL))         
+        return self.JRLoader.getInputStream(self.URL(config.dataURL))
 
-    def get_connection(self, config: Config):
-        dbtype = config.dbType
-        host = config.dbHost
-        user = config.dbUser
-        passwd = config.dbPasswd
-        driver = None
-        dbname = None
-        port = None
-        sid = None
-        connect_string = None
-
-        if dbtype == "mysql":
-            driver = config.dbDriver
-            port = config.dbPort or 3306
-            dbname = config.dbName
-            connect_string = "jdbc:mysql://{}:{}/{}?useSSL=false".format(host, port, dbname)
-        elif dbtype == "postgres":
-            driver = config.dbDriver
-            port = config.dbPort or 5434
-            dbname = config.dbName
-            connect_string = "jdbc:postgresql://{}:{}/{}".format(host, port, dbname)
-        elif dbtype == "oracle":
-            driver = config.dbDriver
-            port = config.dbPort or 1521
-            sid = config.dbSid
-            connect_string = "jdbc:oracle:thin:@{}:{}:{}".format(host, port, sid)
-        elif dbtype == "generic":
-            driver = config.dbDriver
-            connect_string = config.dbUrl
-
-        self.Class.forName(driver)
-        conn = self.DriverManager.getConnection(connect_string, user, passwd)
-        return conn
+    def get_connection(self):
+        if self.config_pool is None:
+            raise NameError("El pool de conexiones no está inicializado.")
+        return self.config_pool.getConnection()

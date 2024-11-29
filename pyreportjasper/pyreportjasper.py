@@ -37,7 +37,8 @@ class PyReportJasper:
         'csv_meta',
         'ods',
         'pptx',
-        'jrprint'
+        'jrprint',
+        'stream_pdf'
     )
 
     METHODS = ('GET', 'POST', 'PUT')
@@ -76,6 +77,7 @@ class PyReportJasper:
                 'jdbc_url': 'dbUrl',
                 'jdbc_dir': 'jdbcDir',
                 'db_sid': 'dbSid',
+                'db_multitenant': 'dbOracleMultitenant',
                 'xml_xpath': 'xmlXpath',
                 'data_file': 'dataFile',
                 'data_url': 'data_url',
@@ -175,15 +177,20 @@ class PyReportJasper:
                         'csv_meta': report.export_csv_meta,
                         'ods': report.export_ods,
                         'pptx': report.export_pptx,
-                        'jrprint': report.export_jrprint
+                        'jrprint': report.export_jrprint,
+                        'stream_pdf': report.fetch_pdf_report
                     }
 
                     for f in self.config.outputFormats:
                         export_function = formats_functions.get(f)
                         if export_function:
-                            export_function()
+                            if f == 'stream_pdf':
+                               pdf_bytes =export_function()
+                            else:
+                                export_function()
                         else:
                             raise NameError("Error output format {} not implemented!".format(f))
+                    return pdf_bytes
                 except Exception as ex:
                     error = NameError("Error export format: {}".format(ex))
             except Exception as ex:
